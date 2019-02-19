@@ -1,0 +1,31 @@
+version: '3'
+services:
+  jsp-helloworld:
+    build: ./view-templates/jsp-helloworld
+    volumes:
+    - .:/springboot-tutorials
+    - ~/.m2:/root/.m2
+    working_dir: /springboot-tutorials
+    ports:
+    - 8080:8080
+    command: bash -c "mvn -N clean install && cd view-templates/jsp-helloworld && mvn clean spring-boot:run"
+
+  freemarker-helloworld:
+    build: ./view-templates/freemarker-helloworld
+    volumes:
+    - .:/springboot-tutorials
+    - ~/.m2:/root/.m2
+    working_dir: /springboot-tutorials
+    ports:
+    - 8080:8080
+    command: bash -c "mvn -N clean install && cd view-templates/freemarker-helloworld && mvn clean spring-boot:run"
+
+  thymeleaf-helloworld:
+    build: ./view-templates/thymeleaf-helloworld
+    volumes:
+    - .:/springboot-tutorials
+    - ~/.m2:/root/.m2
+    working_dir: /springboot-tutorials
+    ports:
+    - 8080:8080
+    command: bash -c "mvn -N clean install && cd view-templates/thymeleaf-helloworld && mvn clean spring-boot:run"

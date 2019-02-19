@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Stock List</title>
+    <link href="/stocklist.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Page Content -->
+<div class="container">
+
+    <!-- component template -->
+    <script type="text/x-template" id="grid-template">
+        <table>
+            <thead>
+            <tr>
+                <th v-for="key in columns"
+                    @click="sortBy(key)"
+                    :class="{ active: sortKey == key }">
+                    {{ key | capitalize }}
+                    <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+          </span>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="entry in filteredData">
+                <td v-for="key in columns">
+                    {{entry[key]}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </script>
+
+    <!-- demo root element -->
+    <div id="demo">
+        <form id="search">
+            <input placeholder="Search" name="query" v-model="searchQuery">
+        </form>
+        <demo-grid
+                :data="gridData"
+                :columns="gridColumns"
+                :filter-key="searchQuery">
+        </demo-grid>
+    </div>
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Hello Koding &copy; <script>document.write(new Date().getFullYear())</script></p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+<script src="https://unpkg.com/axios@0.17.1/dist/axios.min.js"></script>
+<script src="/stocklist.js"></script>
+
+</body>
+</html>

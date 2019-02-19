@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nested-properties:
+    build: ./files-handling/nested-properties-file
+    volumes:
+    - .:/springboot-tutorials
+    - ~/.m2:/root/.m2
+    working_dir: /springboot-tutorials
+    ports:
+    - 8080:8080
+    command: bash -c "mvn -N clean install && cd files-handling/nested-properties-file && mvn clean spring-boot:run"
