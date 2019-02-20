@@ -35,5 +35,6 @@
         <module>restful-api</module>
         <module>full-stack</module>
         <module>files-handling</module>
+        <module>security</module>
     </modules>
 </project>
