@@ -17,5 +17,6 @@
 
     <modules>
         <module>nested-properties-file</module>
+        <module>uploading-files</module>
     </modules>
 </project>
