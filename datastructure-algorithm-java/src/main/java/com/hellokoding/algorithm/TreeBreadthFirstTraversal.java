@@ -6,7 +6,7 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class TreeBreadthFirstTraversal extends BSTByLinkedList {
-    void breathFirstTraversal(Node root) {
+    void breadthFirstTraversal(Node root) {
         Queue<Node> queue = new ArrayDeque<>();
         queue.offer(root);
 
@@ -30,6 +30,6 @@ public class TreeBreadthFirstTraversal extends BSTByLinkedList {
         tree.insert(1);
         tree.insert(9);
 
-        tree.breathFirstTraversal(tree.root);
+        tree.breadthFirstTraversal(tree.root);
     }
 }
