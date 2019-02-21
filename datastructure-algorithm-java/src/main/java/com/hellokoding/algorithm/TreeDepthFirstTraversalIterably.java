@@ -45,7 +45,20 @@ public class TreeDepthFirstTraversalIterably extends BSTByLinkedList {
         Deque<Node> stack = new ArrayDeque<>();
 
         while (node != null) {
-            stack.push(node.right);
+            stack.push(node);
+            node = node.left;
+        }
+
+        Node lastVisitedNode = null;
+        while (!stack.isEmpty()) {
+            node = stack.peek();
+
+            if (node.right != null && node.right != lastVisitedNode) {
+                stack.push(node.right);
+            } else {
+                System.out.println(node);
+                lastVisitedNode = stack.pop();
+            }
         }
     }
 
