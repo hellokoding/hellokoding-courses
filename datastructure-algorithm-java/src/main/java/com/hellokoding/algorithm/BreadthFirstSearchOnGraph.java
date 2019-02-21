@@ -5,8 +5,8 @@ import com.hellokoding.datastructure.UndirectedGraphByAdjacencyList;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class BreathFirstSearchOnGraph {
-    public void breathFirstSearch(UndirectedGraphByAdjacencyList g, int startingVertex) {
+public class BreadthFirstSearchOnGraph {
+    public void breadthFirstSearch(UndirectedGraphByAdjacencyList g, int startingVertex) {
         boolean[] visited = new boolean[g.getV()];
         Queue<Integer> queue = new ArrayDeque<>();
 
@@ -34,6 +34,6 @@ public class BreathFirstSearchOnGraph {
         graph.addEdge(1, 3);
         graph.addEdge(2, 4);
 
-        new BreathFirstSearchOnGraph().breathFirstSearch(graph, 0);
+        new BreadthFirstSearchOnGraph().breadthFirstSearch(graph, 0);
     }
 }
