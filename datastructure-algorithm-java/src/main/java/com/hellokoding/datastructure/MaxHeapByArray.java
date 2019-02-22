@@ -16,7 +16,7 @@ public class MaxHeapByArray {
         heap[j] = tmp;
     }
 
-    private void heapify(int k) {
+    private void heapifyDown(int k) {
         int largest = k;
         int leftIndex = 2*k;
         int rightIndex = 2*k + 1;
@@ -31,7 +31,14 @@ public class MaxHeapByArray {
 
         if (largest != k) {
             swap(k, largest);
-            heapify(largest);
+            heapifyDown(largest);
+        }
+    }
+
+    private void heapifyUp(int k) {
+        while (heap[k] > heap[k/2]) {
+            swap(k , k/2);
+            k = k/2;
         }
     }
 
@@ -43,18 +50,13 @@ public class MaxHeapByArray {
 
     public void push(int x) {
         heap[++size] = x;
-
-        int k = size;
-        while (heap[k] > heap[k/2]) {
-            swap(k , k/2);
-            k = k/2;
-        }
+        heapifyUp(size);
     }
 
     public int pop() {
         int head = heap[1];
         heap[1] = heap[size--];
-        heapify(1);
+        heapifyDown(1);
 
         return head;
     }
