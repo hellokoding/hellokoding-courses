@@ -40,6 +40,12 @@ public class PriorityQueueTest {
         Assert.assertEquals("C", books.peek().title);
     }
 
+    @Test(expected = NullPointerException.class)
+    public void whenAddNull_thenThrowException(){
+        PriorityQueue<BookNonComparable> books = new PriorityQueue<>();
+        books.add(null);
+    }
+
     public static class BookComparable implements Comparable<BookComparable> {
         String title;
 
@@ -66,7 +72,7 @@ public class PriorityQueueTest {
 
         @Override
         public String toString() {
-            return this.title.toString();
+            return this.title;
         }
     }
 }
