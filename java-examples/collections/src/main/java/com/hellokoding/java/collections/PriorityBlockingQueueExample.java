@@ -6,11 +6,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PriorityBlockingQueueExample {
     private static AtomicInteger seq = new AtomicInteger(0);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         PriorityBlockingQueue<BookComparable> q = new PriorityBlockingQueue<>(10);
 
-        new Thread(new Consumer(q)).start();
-        new Thread(new Producer(q)).start();
+        Thread t1 = new Thread(new Producer(q));
+        Thread t2 = new Thread(new Consumer(q));
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
     }
 
     static class Producer implements Runnable {
@@ -21,12 +27,17 @@ public class PriorityBlockingQueueExample {
         public void run() {
             for (int i = 0; i < 10; i++) {
                 queue.put(produce());
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
         BookComparable produce() {
             BookComparable bookComparable = new BookComparable();
-            System.out.println("Put " + bookComparable);
+            System.out.printf("Put %s %s", bookComparable, System.lineSeparator());
 
             return bookComparable;
         }
@@ -39,14 +50,17 @@ public class PriorityBlockingQueueExample {
 
         public void run() {
             try {
-                while (true) { consume(queue.take()); }
+                while (true) {
+                    consume(queue.take());
+                    Thread.sleep(10);
+                }
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
         }
 
-        void consume(BookComparable x) {
-            System.out.println("Take " + x);
+        void consume(BookComparable bookComparable) {
+            System.out.printf("Take %s %s", bookComparable, System.lineSeparator());
         }
     }
 
