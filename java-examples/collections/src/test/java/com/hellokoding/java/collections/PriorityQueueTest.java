@@ -46,7 +46,7 @@ public class PriorityQueueTest {
         books.add(null);
     }
 
-    public static class BookComparable implements Comparable<BookComparable> {
+    static class BookComparable implements Comparable<BookComparable> {
         String title;
 
         BookComparable(String title) {
@@ -59,7 +59,7 @@ public class PriorityQueueTest {
         }
     }
 
-    public static class BookNonComparable {
+    static class BookNonComparable {
         String title;
 
         BookNonComparable(String title) {
