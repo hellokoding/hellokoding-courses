@@ -11,12 +11,15 @@ public class PriorityBlockingQueueExample {
 
         Thread t1 = new Thread(new Producer(q));
         Thread t2 = new Thread(new Consumer(q));
+        Thread t3 = new Thread(new Consumer(q));
 
         t1.start();
         t2.start();
+        t3.start();
 
         t1.join();
         t2.join();
+        t3.join();
     }
 
     static class Producer implements Runnable {
@@ -25,13 +28,13 @@ public class PriorityBlockingQueueExample {
         Producer(PriorityBlockingQueue<BookComparable> q) { queue = q; }
 
         public void run() {
-            for (int i = 0; i < 10; i++) {
-                queue.put(produce());
-                try {
+            try {
+                for (int i = 0; i < 10; i++) {
+                    queue.put(produce());
                     Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch(InterruptedException ex){
+                System.out.println(ex);
             }
         }
 

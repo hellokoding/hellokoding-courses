@@ -7,14 +7,20 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BlockingQueueExample {
     private static AtomicInteger seq = new AtomicInteger(0);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         BlockingQueue q = new ArrayBlockingQueue(10);
-        Producer p = new Producer(q);
-        Consumer c1 = new Consumer(q);
-        Consumer c2 = new Consumer(q);
-        new Thread(p).start();
-        new Thread(c1).start();
-        new Thread(c2).start();
+
+        Thread t1 = new Thread(new Producer(q));
+        Thread t2 = new Thread(new Consumer(q));
+        Thread t3 = new Thread(new Consumer(q));
+
+        t1.start();
+        t2.start();
+        t3.start();
+
+        t1.join();
+        t2.join();
+        t3.join();
     }
 
     static class Producer implements Runnable {
@@ -24,14 +30,15 @@ public class BlockingQueueExample {
             try {
                 for (int i = 0; i < 10; i++) {
                     queue.put(produce());
+                    Thread.sleep(10);
                 }
             } catch (InterruptedException ex) {System.out.println(ex);}
         }
         Book produce() {
-            Book bookNonComparable = new Book();
-            System.out.println("Put " + bookNonComparable);
+            Book book = new Book();
+            System.out.printf("Put %s %s", book, System.lineSeparator());
 
-            return bookNonComparable;
+            return book;
         }
     }
 
@@ -40,12 +47,17 @@ public class BlockingQueueExample {
         Consumer(BlockingQueue q) { queue = q; }
         public void run() {
             try {
-                while (true) { consume(queue.take()); }
+                while (true) {
+                    consume(queue.take());
+                    Thread.sleep(10);
+                }
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
         }
-        void consume(Object x) {System.out.println(x);}
+        void consume(Object x) {
+            System.out.printf("Take %s %s", x, System.lineSeparator());
+        }
     }
 
     static class Book {
