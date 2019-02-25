@@ -1,3 +1,3 @@
-### Hello Koding Example and Tutorial Series on Data Structure, Algorithm, Java, Spring Boot, JPA and Hibernate, RESTful API, Security
+### HelloKoding Free Coding Courses with Hands-On Experienced Tutorial and Example Series
 
-https://hellokoding.com/tag/series/
+https://hellokoding.com/tag/courses/
