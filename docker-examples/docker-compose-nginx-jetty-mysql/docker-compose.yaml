@@ -1,0 +1,36 @@
+version: '3'
+services:
+  nginx:
+   container_name: some-nginx
+   image: nginx:1.13
+   restart: always
+   ports:
+   - 80:80
+   - 443:443
+   volumes:
+   - ./nginx-site-enabled:/etc/nginx/sites-enabled
+   networks:
+   - front
+ 
+  jetty:
+   container_name: some-jetty
+   image: jetty:9.4-jre8
+   restart: always
+   networks:
+   - front
+   - back
+
+  mysql:
+   container_name: some-mysql
+   image: mysql/mysql-server:5.7
+   environment:
+    MYSQL_ROOT_PASSWORD: hellokoding
+   ports:
+   - "3306:3306"
+   restart: always
+   networks:
+   - back
+
+networks:
+  front:
+  back:
