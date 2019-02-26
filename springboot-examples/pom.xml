@@ -31,7 +31,6 @@
 
     <modules>
         <module>jpa-hibernate</module>
-        <module>view-templates</module>
         <module>restful-api</module>
         <module>full-stack</module>
         <module>files-handling</module>
