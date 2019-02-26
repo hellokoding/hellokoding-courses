@@ -32,7 +32,6 @@
     <modules>
         <module>jpa-hibernate</module>
         <module>restful-api</module>
-        <module>full-stack</module>
         <module>files-handling</module>
     </modules>
 </project>
