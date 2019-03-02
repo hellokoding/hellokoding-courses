@@ -1,21 +1,21 @@
 package com.hellokoding.algorithm;
 
 public class BinarySearch {
-    public static boolean binarySearch(int target, int[] nums) {
-        int floorIndex = -1;
-        int ceilingIndex = nums.length;
+    public static int binarySearch(int T, int[] A) {
+        int N = A.length;
+        int L = 0;
+        int R = N - 1;
 
-        while (floorIndex + 1 < ceilingIndex) {
-            int distance = ceilingIndex - floorIndex;
-            int halfDistance = distance / 2;
-            int guessIndex = floorIndex + halfDistance;
-            int guessValue = nums[guessIndex];
-
-            if (guessValue == target) return true;
-            if (guessValue > target) ceilingIndex = guessIndex;
-            else floorIndex = guessIndex;
+        while (L <= R) {
+            int M = (int)Math.floor((L+R)/2);
+            if (A[M] < T)
+                L = M + 1;
+            else if (A[M] > T)
+                R = M - 1;
+            else
+                return M;
         }
 
-        return false;
+        return -1;
     }
 }
