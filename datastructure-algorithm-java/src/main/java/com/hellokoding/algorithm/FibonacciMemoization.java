@@ -1,18 +1,23 @@
 package com.hellokoding.algorithm;
 
 public class FibonacciMemoization {
-    int fibonacci(int[] m, int n) {
-        if (m[n] == 0) {
-            if (n < 2) m[n] = n;
-            else m[n] = fibonacci(m, n-1) + fibonacci(m, n-2);
+    int[] cache;
+
+    FibonacciMemoization(int[] cache){
+        this.cache = cache;
+    }
+
+    int fibonacci(int n) {
+        if (cache[n] == 0) {
+            if (n < 2) cache[n] = n;
+            else cache[n] = fibonacci(n-1) + fibonacci( n-2);
         }
 
-        return m[n];
+        return cache[n];
     }
 
     public static void main(String[] args) {
         int n = 10;
-        int[] m = new int[n+1];
-        System.out.println(new FibonacciMemoization().fibonacci(m, n));
+        System.out.println(new FibonacciMemoization(new int[n+1]).fibonacci(n));
     }
 }
