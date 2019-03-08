@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubArrayCount {
-    public static void printSubArrayCount(int[] A, int N, int S) {
+public class SubarrayCount {
+    public static void printSubarrayCount(int[] A, int N, int S) {
         Map<Integer, Integer> map = new HashMap<>();
         int currentSum = 0;
         int count = 0;
@@ -26,6 +26,7 @@ public class SubArrayCount {
         }
 
         System.out.println(count);
+
     }
 
     public static void main (String[] args) throws IOException {
@@ -36,7 +37,7 @@ public class SubArrayCount {
             int[] A = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
             int S = Integer.parseInt(br.readLine());
 
-            printSubArrayCount(A, N, S);
+            printSubarrayCount(A, N, S);
         }
     }
 }
