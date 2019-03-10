@@ -1,21 +1,18 @@
 package com.hellokoding.algorithm;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 public class SubarrayGivenSumBruteforce {
     public static int[] findSubarray(int[] A, int sum) {
-        int N = A.length;
-
-        for(int i = 0; i < N; i++) {
+        for(int i = 0; i < A.length; i++) {
 
             int currentSum = A[i];
 
-            for(int j = i + 1; j <= N; j++) {
+            for(int j = i + 1; j <= A.length; j++) {
 
                 if (currentSum == sum) {
                     return Arrays.copyOfRange(A, i, j);
-                } else if (currentSum > sum || j == N) {
+                } else if (currentSum > sum || j == A.length) {
                     break;
                 }
 
@@ -26,7 +23,7 @@ public class SubarrayGivenSumBruteforce {
         return null;
     }
 
-    public static void main (String[] args) throws IOException{
+    public static void main (String[] args) {
         int[] A = {4, -9, 0, 11, 6, -20, 1, 7};
         System.out.println(Arrays.toString(findSubarray(A, 8)));
     }
