@@ -2,7 +2,7 @@ package com.hellokoding.algorithm;
 
 import java.io.IOException;
 
-public class SubarrayGivenSum {
+public class SubarrayGivenSumBruteforce {
     public static void findSubarray(int[] A, int sum) {
         int N = A.length;
 
