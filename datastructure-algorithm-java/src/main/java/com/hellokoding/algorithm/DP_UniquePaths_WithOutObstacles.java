@@ -25,7 +25,6 @@ public class DP_UniquePaths_WithOutObstacles {
 
     public static void main(String[] args) {
         DP_UniquePaths_WithOutObstacles uniquePaths = new DP_UniquePaths_WithOutObstacles();
-        int[][] A = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
-        System.out.println(uniquePaths.countUniquePaths(A));
+        System.out.println(uniquePaths.countUniquePaths(new int[3][3]));
     }
 }
