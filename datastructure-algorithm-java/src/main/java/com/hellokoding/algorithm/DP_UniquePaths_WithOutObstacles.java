@@ -1,7 +1,9 @@
 package com.hellokoding.algorithm;
 
-public class DP_UniquePaths {
-    int countUniquePaths(int rows, int cols) {
+public class DP_UniquePaths_WithOutObstacles {
+    int countUniquePaths(int[][] A) {
+        int rows = A.length;
+        int cols = A[0].length;
         int[][] cache = new int[rows][cols];
 
         for (int i = 0; i < rows; i++) {
@@ -22,7 +24,8 @@ public class DP_UniquePaths {
     }
 
     public static void main(String[] args) {
-        DP_UniquePaths uniquePaths = new DP_UniquePaths();
-        System.out.println(uniquePaths.countUniquePaths(3, 3));
+        DP_UniquePaths_WithOutObstacles uniquePaths = new DP_UniquePaths_WithOutObstacles();
+        int[][] A = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
+        System.out.println(uniquePaths.countUniquePaths(A));
     }
 }
