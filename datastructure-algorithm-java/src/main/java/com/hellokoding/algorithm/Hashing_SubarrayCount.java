@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SubarrayCount {
+public class Hashing_SubarrayCount {
     public static void printSubarrayCount(int[] A, int N, int S) {
         Map<Integer, Integer> map = new HashMap<>();
         int currentSum = 0;
