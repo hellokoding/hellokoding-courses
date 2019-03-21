@@ -1,3 +1,3 @@
-# HelloKoding Free Coding Courses with Hands-On Experienced Tutorial and Example Series
+# HelloKoding's Practical Coding Courses, Tutorials and Examples Series
 
 https://hellokoding.com/tag/courses/
