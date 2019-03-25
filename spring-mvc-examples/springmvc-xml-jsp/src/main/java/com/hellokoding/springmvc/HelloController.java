@@ -1,4 +1,4 @@
-package com.hellokoding.hello.web;
+package com.hellokoding.springmvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
