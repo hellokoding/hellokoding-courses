@@ -1,7 +1,5 @@
 package com.hellokoding.datastructure;
 
-import java.util.LinkedList;
-
 public class MyDoublyLinkedList {
     Node head;
     Node tail;
@@ -62,8 +60,6 @@ public class MyDoublyLinkedList {
 
         myLinkedList.removeLast();
         myLinkedList.traversal();
-
-        new LinkedList<>().addFirst();
     }
 
     static class Node {
