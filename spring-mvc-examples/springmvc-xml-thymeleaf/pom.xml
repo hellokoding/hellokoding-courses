@@ -1,19 +1,19 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hellokoding</groupId>
-    <artifactId>hello</artifactId>
+
+    <groupId>com.hellokoding.springmvc</groupId>
+    <artifactId>springmvc-xml-thymeleaf</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>Hello Spring MVC</name>
-    <url>http://maven.apache.org</url>
+
     <properties>
         <jdk.version>1.8</jdk.version>
-        <spring.version>4.2.0.RELEASE</spring.version>
-        <jstl.version>1.2</jstl.version>
-        <thymeleaf.version>2.1.3.RELEASE</thymeleaf.version>
-        <junit.version>3.8.1</junit.version>
-        <logback.version>1.1.3</logback.version>
+        <spring.version>5.1.5.RELEASE</spring.version>
+        <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+        <junit.version>4.12</junit.version>
+        <logback.version>1.2.3</logback.version>
+        <jetty-maven-plugin.version>9.4.15.v20190215</jetty-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -31,7 +31,7 @@
 
         <dependency>
             <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring4</artifactId>
+            <artifactId>thymeleaf-spring5</artifactId>
             <version>${thymeleaf.version}</version>
         </dependency>
 
@@ -60,11 +60,10 @@
             </configuration>
         </plugin>
 
-        <!-- embedded Jetty server, for testing -->
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.2.11.v20150529</version>
+            <version>${jetty-maven-plugin.version}</version>
             <configuration>
                 <scanIntervalSeconds>10</scanIntervalSeconds>
                 <webApp>
