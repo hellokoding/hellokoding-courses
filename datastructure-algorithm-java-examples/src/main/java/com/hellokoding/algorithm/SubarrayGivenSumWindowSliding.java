@@ -22,7 +22,7 @@ public class SubarrayGivenSumWindowSliding {
     }
 
     public static void main (String[] args) {
-        int[] A = {4, -9, 0, 11, 6, -20, 1, 7};
+        int[] A = {4, 0, 11, 6, 1, 7};
         System.out.println(Arrays.toString(findSubarray(A, 8)));
     }
 }
