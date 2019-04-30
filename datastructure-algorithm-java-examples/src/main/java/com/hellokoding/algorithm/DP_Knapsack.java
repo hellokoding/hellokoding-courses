@@ -9,10 +9,10 @@ public class DP_Knapsack {
                 if (i == 0 || w == 0) {
                     cache[i][w] = 0;
                 }
-                else if (weights[i-1] <= w) {
-                    cache[i][w] = Math.max(cache[i-1][w], cache[i-1][w-weights[i-1]] + values[i-1]);
-                } else {
+                else if (weights[i-1] > w) {
                     cache[i][w] = cache[i-1][w];
+                } else {
+                    cache[i][w] = Math.max(cache[i-1][w], cache[i-1][w-weights[i-1]] + values[i-1]);
                 }
             }
         }
