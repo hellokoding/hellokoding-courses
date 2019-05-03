@@ -2,13 +2,13 @@ package com.hellokoding.algorithm;
 
 public class DP_UniquePaths_Obstacles {
     int countUniquePaths(int[][] A) {
+        if (A[0][0] == 1) return 0;
+
         int rows = A.length;
         int cols = A[0].length;
-
         int[][] cache = new int[rows][cols];
 
-        if (A[0][0] == 0)
-            cache[0][0] = 1;
+        cache[0][0] = 1;
 
         for (int i = 1; i < rows; i++) {
             if (A[i][0] == 0)
