@@ -1,0 +1,41 @@
+version: '3'
+services:
+  grafana:
+    image: grafana/grafana:5.4.2
+    ports:
+    - "3000:3000"
+    depends_on:
+    - prom
+
+  prom:
+    image: prom/prometheus:v2.6.0
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+    - 9090:9090
+    depends_on:
+    - app
+
+  app:
+    build: .
+    volumes:
+    - .:/app
+    - ~/.m2:/root/.m2
+    working_dir: /app
+    command: bash -c "mvn clean package && java -jar target/healthcheck-prometheus-1.0-SNAPSHOT-jar-with-dependencies.jar"
+    ports:
+    - "8080:8080"
+    depends_on:
+    - db
+
+  db:
+    container_name: some-mysql
+    image: mysql/mysql-server:5.7
+    environment:
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: hellokoding
+      MYSQL_ROOT_HOST: '%'
+    ports:
+    - "3306:3306"
+    restart: always
