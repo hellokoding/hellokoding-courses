@@ -35,6 +35,15 @@ public class ProductRepositoryTest {
     }
 
     @Test
+    public void whenFindByName_thenReturnProduct() {
+        // when
+        Product product = productRespository.findByName("P1").get();
+
+        // then
+        assertThat(product.getDescription()).isEqualTo("P1 desc");
+    }
+
+    @Test
     public void whenFindAll_thenReturnProductList() {
         // when
         List<Product> products = productRespository.findAll();
