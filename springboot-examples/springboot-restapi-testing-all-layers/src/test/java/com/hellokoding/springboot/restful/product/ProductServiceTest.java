@@ -37,6 +37,6 @@ public class ProductServiceTest {
         List<Product> actualProducts = productService.findAll();
 
         // then
-        assertThat(actualProducts).isEqualTo(actualProducts);
+        assertThat(actualProducts).isEqualTo(expectedProducts);
     }
 }
