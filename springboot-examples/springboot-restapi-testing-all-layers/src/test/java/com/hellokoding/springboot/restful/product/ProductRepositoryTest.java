@@ -49,6 +49,6 @@ public class ProductRepositoryTest {
         List<Product> products = productRespository.findAll();
 
         // then
-        assertThat(products.size()).isEqualTo(1);
+        assertThat(products).hasSize(1);
     }
 }

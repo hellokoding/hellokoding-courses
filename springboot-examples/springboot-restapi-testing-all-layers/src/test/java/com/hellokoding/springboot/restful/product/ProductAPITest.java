@@ -56,6 +56,7 @@ public class ProductAPITest {
 
     @Test
     public void whenFindById_thenReturnProductDTO() throws Exception {
+        // given
         ProductDTO productDTO = ProductDTO.builder()
             .name("P1")
             .description("P1 desc")
@@ -65,6 +66,7 @@ public class ProductAPITest {
         doReturn(Optional.of(new Product())).when(productService).findById(anyLong());
         doReturn(productDTO).when(productMapper).toProductDTO(any(Product.class));
 
+        // when + then
         this.mockMvc.perform(get("/api/v1/products/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(productDTO.getName())));
