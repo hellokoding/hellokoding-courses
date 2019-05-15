@@ -8,10 +8,10 @@ import java.util.Optional;
 
 @Service
 public class ProductService {
-    private final ProductRespository productRespository;
+    private final ProductRepository productRespository;
 
     @Autowired
-    public ProductService(ProductRespository productRespository) {
+    public ProductService(ProductRepository productRespository) {
         this.productRespository = productRespository;
     }
 
