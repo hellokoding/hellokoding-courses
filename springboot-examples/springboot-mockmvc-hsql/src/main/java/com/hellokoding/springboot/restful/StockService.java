@@ -23,4 +23,8 @@ public class StockService {
     public Stock save(Stock stock) {
         return stockRepository.save(stock);
     }
+
+    public void deleteById(Long id) {
+        stockRepository.deleteById(id);
+    }
 }

@@ -2,10 +2,13 @@ package com.hellokoding.springboot.restful;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -34,7 +37,7 @@ public class StockAPI {
 
     @PostMapping
     public ResponseEntity create(@RequestBody Stock stock) {
-        return ResponseEntity.ok(stockService.save(stock));
+        return ResponseEntity.status(HttpStatus.CREATED).body(stockService.save(stock));
     }
 
     @PatchMapping("/{stockId}")
@@ -46,9 +49,16 @@ public class StockAPI {
         }
 
         Stock stock = stockOptional.get();
-        if (updatingStock.getName() != null) stock.setName(updatingStock.getName());
-        if (updatingStock.getPrice() != null) stock.setPrice(updatingStock.getPrice());
+        if (!StringUtils.isEmpty(updatingStock.getName())) stock.setName(updatingStock.getName());
+        if (!Objects.isNull(updatingStock.getPrice())) stock.setPrice(updatingStock.getPrice());
 
-        return ResponseEntity.ok(stockService.save(stock));
+        return ResponseEntity.accepted().body(stockService.save(stock));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable Long id) {
+        stockService.deleteById(id);
+
+        return ResponseEntity.accepted().build();
     }
 }

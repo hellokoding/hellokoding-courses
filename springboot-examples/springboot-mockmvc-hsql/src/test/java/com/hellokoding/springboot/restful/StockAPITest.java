@@ -20,7 +20,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @WebMvcTest
 public class StockAPITest {
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -29,6 +28,7 @@ public class StockAPITest {
 
     @Test
     public void findAll() throws Exception {
+        // given
         Stock stock = new Stock();
         stock.setId(1L);
         stock.setName("Stock 1");
@@ -37,6 +37,7 @@ public class StockAPITest {
         List<Stock> stocks = Arrays.asList(stock);
         given(stockService.findAll()).willReturn(stocks);
 
+        // when + then
         this.mockMvc.perform(get("/api/v1/stocks"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[{'id': 1,'name': 'Stock 1';'price': 1}]"));
