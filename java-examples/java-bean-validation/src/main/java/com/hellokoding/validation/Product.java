@@ -1,4 +1,4 @@
-package com.hellokoding.java;
+package com.hellokoding.validation;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;

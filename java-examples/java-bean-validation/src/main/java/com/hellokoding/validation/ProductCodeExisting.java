@@ -1,4 +1,4 @@
-package com.hellokoding.java;
+package com.hellokoding.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
