@@ -9,7 +9,7 @@ import java.util.Set;
 public class Main {
     public static void main(String[] args) {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Product product = new Product(null, "Hello Koding", "Coding Courses", BigDecimal.ZERO);
+        Product product = new Product(null, "Hello Koding", "Coding Courses", null, new BigDecimal(0.789));
         Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
 
         for(ConstraintViolation constraintViolation : constraintViolations) {
