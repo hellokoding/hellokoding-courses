@@ -1,6 +1,5 @@
 package com.hellokoding.springboot.restful.product;
 
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,7 +8,6 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
 @Component
-@NoArgsConstructor
 public class ProductIDExistingValidator implements ConstraintValidator<ProductIDExisting, Long> {
     @Autowired
     private ProductService productService;

@@ -7,6 +7,9 @@ import lombok.Data;
 @Builder
 public class ResponseDTO<T> {
     private String status;
-    private String message;
+
+    @Builder.Default
+    private String message = "Success!";
+
     private T body;
 }
