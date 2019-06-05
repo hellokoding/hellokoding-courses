@@ -1,5 +1,7 @@
 package com.hellokoding.java.collections;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,7 +15,6 @@ public class BlockingQueueExample {
         Thread t1 = new Thread(new Producer(q));
         Thread t2 = new Thread(new Consumer(q));
         Thread t3 = new Thread(new Consumer(q));
-
         t1.start();
         t2.start();
         t3.start();
