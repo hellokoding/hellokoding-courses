@@ -2,18 +2,18 @@ package com.hellokoding.algorithm;
 
 public class String_LongestPalindrome_BruteForce {
     static String findLongestPalindromicSubstring(String str) {
-        String longest = "";
+        String longestPalindrome = "";
         char[] charArr = str.toCharArray();
         for (int i = 0; i < charArr.length; i++) {
             for (int j = i; j < charArr.length; j++) {
                 String substr = str.substring(i, j+1);
-                if(isPalindrome(substr) && substr.length() > longest.length()) {
-                    longest = substr;
+                if(isPalindrome(substr) && substr.length() > longestPalindrome.length()) {
+                    longestPalindrome = substr;
                 }
             }
         }
 
-        return longest;
+        return longestPalindrome;
     }
 
     static boolean isPalindrome(String str) {
