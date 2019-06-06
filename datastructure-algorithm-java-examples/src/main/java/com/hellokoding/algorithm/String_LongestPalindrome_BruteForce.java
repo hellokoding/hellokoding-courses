@@ -22,6 +22,8 @@ public class String_LongestPalindrome_BruteForce {
     }
 
     public static void main(String[] args) {
+        System.out.println(findLongestPalindromicSubstring("bananas"));
         System.out.println(findLongestPalindromicSubstring("bb"));
+        System.out.println(findLongestPalindromicSubstring("a"));
     }
 }
