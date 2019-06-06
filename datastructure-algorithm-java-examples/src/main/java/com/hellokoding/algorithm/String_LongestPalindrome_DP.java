@@ -1,19 +1,19 @@
 package com.hellokoding.algorithm;
 
 public class String_LongestPalindrome_DP {
-    static String findLongestPalindromicSubstring(String str) {
-        int n = str.length();
+    static String findLongestPalindromicSubstring(String S) {
+        int n = S.length();
         int start = 0;
         int maxLength = 1;
-        boolean[][] palindrome = new boolean[n][n];
+        boolean[][] P = new boolean[n][n];
 
         for (int i = 0; i < n; i++) {
-            palindrome[i][i] = true;
+            P[i][i] = true;
         }
 
         for (int i = 0; i < n - 1; i++) {
-            if (str.charAt(i) == str.charAt(i+1)) {
-                palindrome[i][i+1] = true;
+            if (S.charAt(i) == S.charAt(i+1)) {
+                P[i][i+1] = true;
                 start = i;
                 maxLength = 2;
             }
@@ -22,8 +22,8 @@ public class String_LongestPalindrome_DP {
         for (int l = 3; l <= n; l++) {
             for (int i = 0; i < n - l + 1; i++) {
                 int j = i + l - 1;
-                if (str.charAt(i) == str.charAt(j) && palindrome[i+1][j-1]) {
-                    palindrome[i][j] = true;
+                if (S.charAt(i) == S.charAt(j) && P[i+1][j-1]) {
+                    P[i][j] = true;
 
                     if (l > maxLength) {
                         maxLength = l;
@@ -33,7 +33,7 @@ public class String_LongestPalindrome_DP {
             }
         }
 
-        return str.substring(start, start + maxLength);
+        return S.substring(start, start + maxLength);
     }
 
     public static void main(String[] args) {
