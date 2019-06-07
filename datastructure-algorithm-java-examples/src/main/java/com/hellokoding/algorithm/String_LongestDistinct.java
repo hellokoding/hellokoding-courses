@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class String_LongestDistinct {
-    static String lengthOfLongestSubstring(String s) {
+    static String longestDistinctCharacters(String s) {
         int n = s.length();
         int l = 0, i = 0, j = 0;
         Set<Character> chars = new HashSet<>();
@@ -22,6 +22,6 @@ public class String_LongestDistinct {
     }
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("Hello Koding"));
+        System.out.println(longestDistinctCharacters("HelloKoding"));
     }
 }
