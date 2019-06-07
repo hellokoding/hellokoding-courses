@@ -3,7 +3,7 @@ package com.hellokoding.algorithm;
 public class String_LongestPalindrome_DP {
     static String findLongestPalindromicSubstring(String S) {
         int n = S.length();
-        int start = 0;
+        int startIndex = 0;
         int maxLength = 1;
         boolean[][] P = new boolean[n][n];
 
@@ -14,7 +14,7 @@ public class String_LongestPalindrome_DP {
         for (int i = 0; i < n - 1; i++) {
             if (S.charAt(i) == S.charAt(i+1)) {
                 P[i][i+1] = true;
-                start = i;
+                startIndex = i;
                 maxLength = 2;
             }
         }
@@ -27,13 +27,13 @@ public class String_LongestPalindrome_DP {
 
                     if (l > maxLength) {
                         maxLength = l;
-                        start = i;
+                        startIndex = i;
                     }
                 }
             }
         }
 
-        return S.substring(start, start + maxLength);
+        return S.substring(startIndex, startIndex + maxLength);
     }
 
     public static void main(String[] args) {
