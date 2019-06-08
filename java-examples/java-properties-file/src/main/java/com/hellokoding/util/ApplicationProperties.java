@@ -14,9 +14,9 @@ public enum ApplicationProperties {
     ApplicationProperties() {
         properties = new Properties();
         try {
-            properties.load(new FileInputStream("src/main/resources/application.properties"));
+            properties.load(getClass().getClassLoader().getResourceAsStream("application.properties"));
         } catch (IOException e) {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
