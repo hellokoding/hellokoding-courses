@@ -1,7 +1,7 @@
 package com.hellokoding.algorithm;
 
 public class DP_LongestCommonSubsequence {
-    static int lengthOflongestCommonSubsequence(String S, String T) {
+    static int lengthOfLongestCommonSubsequence(String S, String T) {
         int m = S.length();
         int n = T.length();
         int[][] lengths = new int[m+1][n+1];
@@ -23,6 +23,6 @@ public class DP_LongestCommonSubsequence {
     }
 
     public static void main(String[] args) {
-        System.out.println(lengthOflongestCommonSubsequence("XMJYAUZ", "MZJAWXU"));
+        System.out.println(lengthOfLongestCommonSubsequence("XMJYAUZ", "MZJAWXU"));
     }
 }
