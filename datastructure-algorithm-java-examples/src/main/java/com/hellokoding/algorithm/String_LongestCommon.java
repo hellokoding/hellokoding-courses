@@ -1,7 +1,7 @@
 package com.hellokoding.algorithm;
 
 public class String_LongestCommon {
-    static String longestCommon(String S, String T) {
+    static String longestCommonSubstring(String S, String T) {
         int m = S.length();
         int n = T.length();
         int[][] lengths = new int[m+1][n+1];
@@ -27,6 +27,6 @@ public class String_LongestCommon {
     }
 
     public static void main(String[] args) {
-        System.out.println(longestCommon("ABABC", "BABCA"));
+        System.out.println(longestCommonSubstring("ABABC", "BABCA"));
     }
 }
