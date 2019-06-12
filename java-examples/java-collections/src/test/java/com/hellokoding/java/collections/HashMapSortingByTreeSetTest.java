@@ -48,7 +48,7 @@ public class HashMapSortingByTreeSetTest {
         SortedSet<ComparableBook> sortedSet = new TreeSet<>(bookMap.values());
 
         // then
-        String actual = sortedSet.stream().map(k -> k.title).collect(Collectors.joining());
+        String actual = sortedSet.stream().map(v -> v.title).collect(Collectors.joining());
         assertThat(actual).isEqualTo("ACD");
     }
 }

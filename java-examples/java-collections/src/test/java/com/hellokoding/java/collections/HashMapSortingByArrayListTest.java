@@ -18,10 +18,10 @@ public class HashMapSortingByArrayListTest {
 
         // when
         List<NonComparableBook> bookList = new ArrayList<>(bookMap.keySet());
-        bookList.sort(Comparator.comparing(e -> e.title));
+        Collections.sort(bookList, Comparator.comparing(e -> e.title));
 
         // then
-        String actual = bookList.stream().map(k -> k.title).collect(Collectors.joining());
+        String actual = bookList.stream().map(e -> e.title).collect(Collectors.joining());
         assertThat(actual).isEqualTo("ACD");
     }
 
@@ -38,7 +38,7 @@ public class HashMapSortingByArrayListTest {
         Collections.sort(bookList);
 
         // then
-        String actual = bookList.stream().map(k -> k.title).collect(Collectors.joining());
+        String actual = bookList.stream().map(e -> e.title).collect(Collectors.joining());
         assertThat(actual).isEqualTo("ACD");
     }
 
@@ -55,7 +55,7 @@ public class HashMapSortingByArrayListTest {
         Collections.sort(bookList);
 
         // then
-        String actual = bookList.stream().map(k -> k.title).collect(Collectors.joining());
+        String actual = bookList.stream().map(e -> e.title).collect(Collectors.joining());
         assertThat(actual).isEqualTo("ACD");
     }
 }

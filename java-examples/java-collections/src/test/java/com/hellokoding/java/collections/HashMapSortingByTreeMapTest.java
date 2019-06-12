@@ -32,7 +32,7 @@ public class HashMapSortingByTreeMapTest {
         SortedMap<ComparableBook, Integer> sortedMap = new TreeMap<>(bookMap);
 
         // then
-        String actual = sortedMap.keySet().stream().map(k -> k.title).collect(Collectors.joining());
+        String actual = sortedMap.keySet().stream().map(e -> e.title).collect(Collectors.joining());
         assertThat(actual).isEqualTo("ACD");
     }
 }
