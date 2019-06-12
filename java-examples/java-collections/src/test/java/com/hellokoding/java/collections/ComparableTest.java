@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComparableTest {
     @Test(expected = ClassCastException.class)
-    public void whenArraysSortNonComparable_thenThrowException(){
+    public void givenNonComparable_whenArraysSort_thenThrowException(){
         NonComparableBook[] books = new NonComparableBook[]{
             new NonComparableBook("C"),
             new NonComparableBook("A"),
@@ -19,7 +19,7 @@ public class ComparableTest {
     }
 
     @Test
-    public void whenArraysSortComparable_thenSuccess(){
+    public void givenComparable_whenArraysSort_thenSuccess(){
         ComparableBook[] books = new ComparableBook[]{
             new ComparableBook("C"),
             new ComparableBook("A"),
@@ -34,7 +34,7 @@ public class ComparableTest {
     }
 
     @Test
-    public void whenCollectionSortComparable_thenSuccess(){
+    public void givenComparable_whenCollectionSort_thenSuccess(){
         List<ComparableBook> books = Arrays.asList(
             new ComparableBook("C"),
             new ComparableBook("A"),

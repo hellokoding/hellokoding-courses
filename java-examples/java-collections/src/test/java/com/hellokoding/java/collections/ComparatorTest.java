@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComparatorTest {
     @Test
-    public void whenArraysSortNonComparableWithComparator_thenSuccess(){
+    public void givenNonComparableWithComparator_whenArraysSort_thenSuccess(){
         NonComparableBook[] books = new NonComparableBook[]{
             new NonComparableBook("C"),
             new NonComparableBook("A"),
@@ -22,7 +22,7 @@ public class ComparatorTest {
     }
 
     @Test
-    public void whenArraysSortComparableWithComparator_thenSuccess(){
+    public void givenComparableWithComparator_whenArraysSort_thenSuccess(){
         ComparableBook[] books = new ComparableBook[]{
             new ComparableBook("C"),
             new ComparableBook("A"),
@@ -37,7 +37,7 @@ public class ComparatorTest {
     }
 
     @Test
-    public void whenCollectionSortComparableWithComparator_thenSuccess(){
+    public void givenComparableWithComparator_whenCollectionSort_thenSuccess(){
         List<ComparableBook> books = Arrays.asList(
             new ComparableBook("C"),
             new ComparableBook("A"),
