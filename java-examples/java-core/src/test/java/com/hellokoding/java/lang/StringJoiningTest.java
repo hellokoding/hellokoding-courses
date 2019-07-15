@@ -39,17 +39,14 @@ public class StringJoiningTest {
     }
 
     @Test
-    public void joinStringsWithStringBuilder() {
-        StringBuilder stringBuilder = new StringBuilder();
+    public void joinStringsWithStringConcat() {
+        final String DELIMITER = ", ";
+        String joinedString = "apple"
+            .concat(DELIMITER)
+            .concat("orange")
+            .concat(DELIMITER)
+            .concat("passion");
 
-        stringBuilder.append("apple")
-            .append(", ")
-            .append("orange")
-            .append(", ")
-            .append("passion");
-
-        String result = stringBuilder.toString();
-
-        assertThat(result).isEqualTo("apple, orange, passion");
+        assertThat(joinedString).isEqualTo("apple, orange, passion");
     }
 }
