@@ -40,13 +40,12 @@ public class StringJoiningTest {
 
     @Test
     public void joinStringsWithStringConcat() {
-        final String DELIMITER = ", ";
         String joinedString = "apple"
-            .concat(DELIMITER)
+            .concat(", ")
             .concat("orange")
-            .concat(DELIMITER)
+            .concat("; ")
             .concat("passion");
 
-        assertThat(joinedString).isEqualTo("apple, orange, passion");
+        assertThat(joinedString).isEqualTo("apple, orange; passion");
     }
 }
