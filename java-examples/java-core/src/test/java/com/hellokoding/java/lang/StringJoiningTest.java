@@ -21,6 +21,15 @@ public class StringJoiningTest {
     }
 
     @Test
+    public void joinArrayOfStringsWithStringJoin() {
+        String[] arr = {"apple", "orange", "passion"};
+
+        String result = String.join(", ", arr);
+
+        assertThat(result).isEqualTo("apple, orange, passion");
+    }
+
+    @Test
     public void joinListOfStringsWithStringJoin() {
         List<String> lst = Arrays.asList("apple", "orange", "passion");
 
@@ -30,10 +39,10 @@ public class StringJoiningTest {
     }
 
     @Test
-    public void joinArrayOfStringsWithStringJoin() {
-        String[] arr = {"apple", "orange", "passion"};
+    public void joinSetOfStringsWithStringJoin() {
+        Set<String> set = new LinkedHashSet<>(Arrays.asList("apple", "orange", "passion"));
 
-        String result = String.join(", ", arr);
+        String result = String.join(", ", set);
 
         assertThat(result).isEqualTo("apple, orange, passion");
     }
