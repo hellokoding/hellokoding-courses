@@ -19,7 +19,7 @@ public class HashMapExample {
 
         // sort
         SortedMap<String, Integer> sortedMap = new TreeMap<>(map);
-        System.out.println(sortedMap);
+        System.out.println(sortedMap); // {k1=1, k2=2}
 
         // query
         System.out.println(map.get("k1")); // 1
@@ -29,7 +29,7 @@ public class HashMapExample {
 
         // update value
         map.replace("k2", 20);
-        System.out.println(map); // {k1=1, k2=20}
+        System.out.println(map); // {k1=1, k2=2}
 
         // remove entry
         map.remove("k2");
