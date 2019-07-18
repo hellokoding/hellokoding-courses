@@ -1,4 +1,4 @@
-package com.hellokoding.java.lang;
+package com.hellokoding.java.collections;
 
 
 import java.util.*;
@@ -31,7 +31,7 @@ public class HashMapExample {
         map.replace("k2", 20);
         System.out.println(map); // {k1=1, k2=2}
 
-        // remove entry
+        // remove entries
         map.remove("k2");
         System.out.println(map); // {k1=1}
         map.clear();
