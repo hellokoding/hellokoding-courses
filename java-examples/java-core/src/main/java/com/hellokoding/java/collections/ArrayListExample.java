@@ -5,7 +5,8 @@ import java.util.*;
 
 public class ArrayListExample {
     public static void main(String args[]) {
-        // create and initialize
+        // create and initialize with ArrayList constructors
+
         List<Integer> lst1 = new ArrayList<>();
         lst1.add(1);
         lst1.add(2);
@@ -19,14 +20,26 @@ public class ArrayListExample {
         List<Integer> lst4 = new ArrayList<>(Set.of(1, 2, 3));
         System.out.println(lst4); // [3, 2, 1]
 
-        List<Integer> lst5 = Collections.emptyList();
+        // create and initialize with Arrays.asList
 
-        List<Integer> lst6 = Collections.singletonList(1);
+        List<Integer> lst5 = Arrays.asList(1, 2, 3);
 
-        List<Integer> lst7 = List.copyOf(lst6);
+        // create and initialize with Collections factory methods
 
-        // iterate
+        List<Integer> lst6 = Collections.emptyList();
+
+        List<Integer> lst7 = Collections.singletonList(1);
+
+        // create and initialize with Java 9+ List.of, List.copyOf
+
+        List<Integer> lst9 = List.of(1, 2, 3);
+        List<Integer> lst10 = List.copyOf(lst9);
+
+        // iterate with Java 8+ forEach(Consumer)
+
         lst1.forEach(System.out::println);
+
+        // iterate with for loop
 
         for(int ele : lst1) {
             System.out.printf("%d ", ele);
@@ -38,6 +51,8 @@ public class ArrayListExample {
         }
         System.out.println();
 
+        // iterate with iterator
+
         Iterator<Integer> iter = lst1.iterator();
         while (iter.hasNext()) {
             System.out.printf("%d ", iter.next());
@@ -45,6 +60,7 @@ public class ArrayListExample {
         System.out.println();
 
         // add elements into a list
+
         lst1.add(4);
         lst1.add(5);
         lst1.add(5); // add a duplicate element
@@ -52,34 +68,41 @@ public class ArrayListExample {
         System.out.println(lst1); // [1, 2, 3, 4, 5, 5, null]
 
         // update an element at index
+
         lst1.set(0, 10);
 
         // delete an element by index
+
         lst1.remove(1);
 
         // delete an element by value
+
         lst1.remove(null);
 
-
         // get an element by index
+
         int i1 = lst1.get(0);
 
         // check if an element existing
+
         boolean isExist = lst1.contains(3);
 
         // check the list size
         int size = lst1.size();
 
         // check if the list is empty
+
         boolean isEmpty = lst1.isEmpty();
 
         // sort a list in ascending order
         // NullPointerException will be thrown if the list has null elements
+
         lst1.sort(Comparator.naturalOrder());
         Collections.sort(lst1);
         System.out.println(lst1);
 
         // sort a list in descending order
+
         lst1.sort(Comparator.reverseOrder());
         Collections.sort(lst1, Collections.reverseOrder());
         System.out.println(lst1);
