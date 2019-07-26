@@ -13,9 +13,10 @@ public class HashMapExample {
         System.out.println(map); // {k1=1, k2=2}
 
         // iterate
-        map.entrySet().forEach(System.out::println);
-        map.keySet().forEach(System.out::println);
-        map.values().forEach(System.out::println);
+        map.entrySet().forEach(e -> System.out.printf("%s=%d ", e.getKey(), e.getValue()));
+        map.keySet().forEach(e -> System.out.printf("%s ", e));
+        map.values().forEach(e -> System.out.printf("%d ", e));
+        System.out.println();
 
         // sort
         SortedMap<String, Integer> sortedMap = new TreeMap<>(map);
@@ -29,7 +30,7 @@ public class HashMapExample {
 
         // update value
         map.replace("k2", 20);
-        System.out.println(map); // {k1=1, k2=2}
+        System.out.println(map); // {k1=1, k2=20}
 
         // remove entries
         map.remove("k2");
