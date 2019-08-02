@@ -11,7 +11,7 @@ public class StringPoolTest {
 
         String s2 = "Hello Koding"; // This string is reused from s1
 
-        assertThat(s1).isSameAs(s2);
+        assertThat(s1 == s2).isTrue();
     }
 
     @Test
@@ -20,7 +20,7 @@ public class StringPoolTest {
 
         String s2 = new String("Hello Koding"); // This string is created and stored in a random location in heap memory
 
-        assertThat(s1).isNotSameAs(s2);
+        assertThat(s1 == s2).isFalse();
     }
 
     @Test
@@ -29,7 +29,7 @@ public class StringPoolTest {
 
         String s2 = "Hello Koding"; // This string is created and stored in String Pool
 
-        assertThat(s1).isNotSameAs(s2);
+        assertThat(s1 == s2).isFalse();
     }
 
     @Test
@@ -39,6 +39,6 @@ public class StringPoolTest {
 
         String s2 = "Hello Koding";
 
-        assertThat(s1).isSameAs(s2);
+        assertThat(s1 == s2).isTrue();
     }
 }
