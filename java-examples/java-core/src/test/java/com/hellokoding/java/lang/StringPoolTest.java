@@ -7,27 +7,33 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringPoolTest {
     @Test
     public void testStringLiterals() {
-        String s1 = "Hello Koding"; // This string is created and stored in the String Pool
+        // This string is created and stored in the string pool
+        String s1 = "Hello Koding";
 
-        String s2 = "Hello Koding"; // This string is reused from s1
+        // This string is reused from the string pool
+        String s2 = "Hello Koding";
 
         assertThat(s1 == s2).isTrue();
     }
 
     @Test
     public void testStringObjects() {
-        String s1 = new String("Hello Koding"); // This string is created and stored in a random location in heap memory
+        // This string is created and stored in heap memory
+        String s1 = new String("Hello Koding");
 
-        String s2 = new String("Hello Koding"); // This string is created and stored in a random location in heap memory
+        // This string is created and stored in heap memory
+        String s2 = new String("Hello Koding");
 
         assertThat(s1 == s2).isFalse();
     }
 
     @Test
     public void testStringLiteralVsObject() {
-        String s1 = new String("Hello Koding"); // This string is created and stored in heap memory
+        // This string is created and stored in heap memory
+        String s1 = new String("Hello Koding");
 
-        String s2 = "Hello Koding"; // This string is created and stored in String Pool
+        // This string is created and stored in the string pool
+        String s2 = "Hello Koding";
 
         assertThat(s1 == s2).isFalse();
     }
