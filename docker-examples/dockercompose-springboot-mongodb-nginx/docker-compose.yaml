@@ -15,24 +15,24 @@ services:
   mongodb:
     container_name: some-mongo
     image: mongo:3.6
+    restart: always
     environment:
       - MONGO_DATA_DIR=/data/db
       - MONGO_LOG_DIR=/dev/null
     volumes:
       - ./data/db:/data/db
     ports:
-        - 27017:27017
+      - 27017:27017
     command: mongod --smallfiles --logpath=/dev/null # --quiet
 
   app:
-    restart: always
     build: ./app
     working_dir: /app
     volumes:
       - ./app:/app
       - ~/.m2:/root/.m2
-    expose:
-      - "8080"
+    ports:
+      - 8080:8080
     command: mvn clean spring-boot:run
     depends_on:
       - mongodb
