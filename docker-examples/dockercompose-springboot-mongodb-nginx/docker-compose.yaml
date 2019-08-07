@@ -1,7 +1,7 @@
 version: '3'
 services:
-  nginx:
-   container_name: some-nginx
+  hk-nginx:
+   container_name: hk-nginx
    image: nginx:1.13
    restart: always
    ports:
@@ -12,8 +12,8 @@ services:
    depends_on:
    - app
 
-  mongodb:
-    container_name: some-mongo
+  hk-mongodb:
+    container_name: hk-mongodb
     image: mongo:3.6
     restart: always
     environment:
@@ -29,8 +29,8 @@ services:
     volumes:
       - ./app:/app
       - ~/.m2:/root/.m2
-    ports:
-      - 8080:8080
+    expose:
+      - 8080
     command: mvn clean spring-boot:run
     depends_on:
-      - mongodb
+      - hk-mongodb
