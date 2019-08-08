@@ -1,7 +1,7 @@
 version: '3'
 services:
-  nginx:
-   container_name: some-nginx
+  hk-nginx:
+   container_name: hk-nginx
    image: nginx:1.13
    restart: always
    ports:
@@ -12,8 +12,8 @@ services:
    depends_on:
    - app
  
-  mysql:
-   container_name: some-mysql
+  hk-mysql:
+   container_name: hk-mysql
    image: mysql/mysql-server:5.7
    environment:
     MYSQL_DATABASE: test
@@ -34,4 +34,4 @@ services:
       - "8080"
     command: mvn clean spring-boot:run
     depends_on:
-      - mysql
+      - hk-mysql
