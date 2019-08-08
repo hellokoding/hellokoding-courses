@@ -4,3 +4,7 @@ target
 .project
 .settings
 .DS_Store
+.classpath
+.factorypath
+dump.rdb
+Test.java
