@@ -30,7 +30,7 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
-    @CachePut(key = "#product.id")
+    @CachePut(key = "T(java.lang.String).format('%s-%s-%s', #root.target.Class.simpleName, #root.methodName, #product.name)")
     public Product save(Product product) {
         return productRepository.save(product);
     }
