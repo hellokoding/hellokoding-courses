@@ -1,5 +1,7 @@
 package com.hellokoding.java.collections;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -7,8 +9,9 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class HashSetInitializeExample {
-    void initializeInMultipleLines() {
+public class HashSetInitializeTest {
+    @Test
+    public void initializeInMultipleLines() {
         // Create a new HashSet
         Set<Integer> set = new HashSet<>();
 
@@ -28,7 +31,8 @@ public class HashSetInitializeExample {
         System.out.println(set);
     }
 
-    void initializeInOneLine() {
+    @Test
+    public void initializeInOneLine() {
         // Create a new HashSet
         Set<Integer> set = new HashSet<>(){{
             add(3);
@@ -42,7 +46,8 @@ public class HashSetInitializeExample {
         System.out.println(set);
     }
 
-    void initializeByAddAll() {
+    @Test
+    public void initializeByAddAll() {
         // Create a new HashSet
         Set<Integer> set = new HashSet<>();
 
@@ -58,7 +63,8 @@ public class HashSetInitializeExample {
         System.out.println(set);
     }
 
-    void initializeFromAnotherCollectionWhenCreating() {
+    @Test
+    public void initializeFromAnotherCollectionWhenCreating() {
         // create and initialize a HashSet from Java 9+ List.of
         Set<Integer> set1 = new HashSet<>(List.of(3, 1, 2));
         assertThat(set1).hasSize(3);
