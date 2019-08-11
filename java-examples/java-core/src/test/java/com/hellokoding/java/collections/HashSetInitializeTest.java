@@ -49,18 +49,23 @@ public class HashSetInitializeTest {
     @Test
     public void initializeByAddAll() {
         // Create a new HashSet
-        Set<Integer> set = new HashSet<>();
+        Set<Integer> set1 = new HashSet<>();
 
-        // Add all from List
-        set.addAll(List.of(3, 1, 2));
+        // Add all from Java 9+ List.of
+        set1.addAll(List.of(3, 1, 2));
 
-        // Add all from Set
-        set.addAll(Set.of(5, 4, 6));
+        // Add all from Arrays.asList
+        set1.addAll(Arrays.asList(5, 4, 6));
 
-        assertThat(set).hasSize(6);
+        // Add all from Java 9+ Set.of
+        set1.addAll(Set.of(8, 7, 9));
 
-        // The output ordering will be vary as Set is not reserved the insertion order
-        System.out.println(set);
+        assertThat(set1).hasSize(9);
+
+        // Add all from an existing collection
+        Set<Integer> set2 = new HashSet<>();
+        set2.addAll(set1);
+        assertThat(set2).hasSize(9);
     }
 
     @Test
@@ -76,5 +81,9 @@ public class HashSetInitializeTest {
         // create and initialize a HashSet from Java 9+ Set.of
         Set<Integer> set3 = new HashSet<>(Set.of(5, 4, 6));
         assertThat(set3).hasSize(3);
+
+        // create and initialize from an existing collection
+        Set<Integer> set4 = new HashSet<>(set3);
+        assertThat(set4).hasSize(3);
     }
 }
