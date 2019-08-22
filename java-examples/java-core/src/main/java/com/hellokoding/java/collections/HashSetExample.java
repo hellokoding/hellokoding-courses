@@ -4,7 +4,7 @@ package com.hellokoding.java.collections;
 import java.util.*;
 
 public class HashSetExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         // create and initialize
         Set<Integer> set = new HashSet<>();
         set.add(3);
@@ -21,7 +21,11 @@ public class HashSetExample {
         System.out.println(treeSet);
 
         // query
-        System.out.println(set.iterator().next()); // get first element
+        Integer obj = set.stream()
+                .filter(ele -> ele.equals(1))
+                .findFirst()
+                .orElse(null);
+        System.out.println(obj);
         System.out.println(set.contains(2));
         System.out.println(set.size());
         System.out.println(set.isEmpty());
