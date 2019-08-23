@@ -17,7 +17,7 @@ public class ArrayListSortingTest {
         bookList.add(new NonComparableBook("D"));
 
         // when sorting in natural / ascending order
-        Collections.sort(bookList, Comparator.comparing(e -> e.title));
+        bookList.sort(Comparator.comparing(e -> e.title));
 
         // then
         String actual = bookList.stream().map(e -> e.title).collect(Collectors.joining());
@@ -33,7 +33,7 @@ public class ArrayListSortingTest {
         bookList.add(new ComparableBook("D"));
 
         // when sorting in natural / ascending order
-        Collections.sort(bookList);
+        bookList.sort(Comparator.naturalOrder());
 
         // then
         String actual = bookList.stream().map(e -> e.title).collect(Collectors.joining());
@@ -49,7 +49,7 @@ public class ArrayListSortingTest {
         bookList.add(new ComparableBook("D"));
 
         // when sorting in reverse / descending order
-        Collections.sort(bookList, Comparator.reverseOrder());
+        bookList.sort(Comparator.reverseOrder());
 
         // then
         String actual = bookList.stream().map(e -> e.title).collect(Collectors.joining());
