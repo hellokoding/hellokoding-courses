@@ -16,9 +16,13 @@ public class ArrayListExample {
 
         // iterate with Java 8+ forEach(Consumer)
         lst.forEach(e -> System.out.printf("%d ", e));
+        System.out.println();
 
-        // sort
+        // sort in ascending
         lst.sort(Comparator.naturalOrder());
+        System.out.println(lst);
+        // sort in descending
+        lst.sort(Comparator.reverseOrder());
         System.out.println(lst);
 
         // query
@@ -36,7 +40,7 @@ public class ArrayListExample {
         lst.remove(1);
         System.out.println(lst);
         // delete an element by value
-        lst.remove(Integer.valueOf(3));
+        lst.remove(Integer.valueOf(10));
         System.out.println(lst);
     }
 }
