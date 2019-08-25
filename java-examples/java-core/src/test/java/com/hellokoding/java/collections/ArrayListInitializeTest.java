@@ -67,7 +67,7 @@ public class ArrayListInitializeTest {
 
     @Test
     public void initializeFromAnotherCollectionWhenCreating() {
-        // create and initialize am ArrayList from Java 9+ List.of
+        // create and initialize an ArrayList from Java 9+ List.of
         List<Integer> lst1 = new ArrayList<>(List.of(3, 1, 2));
         assertThat(lst1).hasSize(3);
 
