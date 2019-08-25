@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ArrayListInitializeTest {
     @Test
     public void initializeInMultipleLines() {
-        // Create a new HashSet
+        // Create a new ArrayList
         List<Integer> lst = new ArrayList<>();
 
         // Add elements to ArrayList
@@ -45,7 +45,7 @@ public class ArrayListInitializeTest {
 
     @Test
     public void initializeByAddAll() {
-        // Create a new HashSet
+        // Create a new ArrayList
         List<Integer> lst1 = new ArrayList<>();
 
         // Add all from Java 9+ List.of
@@ -60,7 +60,7 @@ public class ArrayListInitializeTest {
         assertThat(lst1).hasSize(9);
 
         // Add all from an existing collection
-        Set<Integer> lst2 = new HashSet<>();
+        List<Integer> lst2 = new ArrayList<>();
         lst2.addAll(lst1);
         assertThat(lst2).hasSize(9);
     }
@@ -81,6 +81,6 @@ public class ArrayListInitializeTest {
 
         // create and initialize from an existing collection
         List<Integer> lst4 = new ArrayList<>(lst3);
-        assertThat(lst3).hasSize(3);
+        assertThat(lst4).hasSize(3);
     }
 }
