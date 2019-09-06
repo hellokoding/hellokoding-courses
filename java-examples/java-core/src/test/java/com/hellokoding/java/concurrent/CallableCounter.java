@@ -14,6 +14,7 @@ public class CallableCounter implements Callable<AtomicInteger> {
     public AtomicInteger call() throws Exception {
         for (int i = 0; i < 100; i++) {
             counter.getAndIncrement();
+            Thread.sleep(10);
         }
 
         return counter;
