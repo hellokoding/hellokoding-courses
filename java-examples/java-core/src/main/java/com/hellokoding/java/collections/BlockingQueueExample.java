@@ -1,7 +1,5 @@
 package com.hellokoding.java.collections;
 
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;

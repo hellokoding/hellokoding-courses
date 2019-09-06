@@ -8,3 +8,4 @@ target
 .factorypath
 dump.rdb
 Test.java
+*.log

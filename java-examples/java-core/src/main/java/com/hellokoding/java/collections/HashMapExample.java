@@ -4,7 +4,7 @@ package com.hellokoding.java.collections;
 import java.util.*;
 
 public class HashMapExample {
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         // create and add key-value pairs
         Map<String, Integer> map = new HashMap<>();
         map.put("k1", 1);
