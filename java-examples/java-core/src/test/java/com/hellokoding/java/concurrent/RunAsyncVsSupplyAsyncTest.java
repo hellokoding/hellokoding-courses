@@ -8,15 +8,14 @@ import static com.hellokoding.java.concurrent.ConcurrentUtils.stop;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RunAsyncVsSupplyAsyncTest {
-    ExecutorService executorService = Executors.newFixedThreadPool(3);
+    private ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     @Test
     public void runAsync() {
         Counter counter = new Counter();
 
         for (int i = 0; i < 10000; i++) {
-            CompletableFuture.runAsync(counter::increaseRunnable)
-            .thenRunAsync(counter::increaseRunnable);
+            CompletableFuture.runAsync(counter::increaseRunnable);
         }
 
         stop(ForkJoinPool.commonPool());
