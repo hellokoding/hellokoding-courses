@@ -15,7 +15,8 @@ public class RunAsyncVsSupplyAsyncTest {
         Counter counter = new Counter();
 
         for (int i = 0; i < 10000; i++) {
-            CompletableFuture.runAsync(counter::increaseRunnable);
+            CompletableFuture.runAsync(counter::increaseRunnable)
+            .thenRunAsync(counter::increaseRunnable);
         }
 
         stop(ForkJoinPool.commonPool());
@@ -41,9 +42,7 @@ public class RunAsyncVsSupplyAsyncTest {
         Counter counter = new Counter();
 
         for (int i = 0; i < 10000; i++) {
-            CompletableFuture
-                .supplyAsync(counter::increaseSupplier, executorService)
-                .thenAccept(counter::printConsumer);
+            CompletableFuture.supplyAsync(counter::increaseSupplier, executorService);
         }
 
         stop(executorService);
@@ -63,9 +62,5 @@ class Counter {
         count++;
 
         return count;
-    }
-
-    synchronized void printConsumer(int i) {
-        System.out.println(i);
     }
 }
