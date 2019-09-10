@@ -15,7 +15,8 @@ public class RunAsyncVsSupplyAsyncTest {
 
     @Test
     public void runAsync() throws ExecutionException, InterruptedException {
-        CompletableFuture c = CompletableFuture.runAsync(() -> System.out.println("runAsync has no return values"));
+        CompletableFuture c = CompletableFuture
+            .runAsync(() -> System.out.println("runAsync has no return values"));
 
         assertThat(c.get()).isNull();
     }
@@ -31,7 +32,8 @@ public class RunAsyncVsSupplyAsyncTest {
 
     @Test
     public void runAsyncWithExecutor() throws ExecutionException, InterruptedException {
-        CompletableFuture c = CompletableFuture.runAsync(() -> System.out.println("Run runAsync with an Executor"), executorService);
+        CompletableFuture c = CompletableFuture
+            .runAsync(() -> System.out.println("Run runAsync with an Executor"), executorService);
 
         stop(executorService);
 
@@ -40,7 +42,8 @@ public class RunAsyncVsSupplyAsyncTest {
 
     @Test
     public void supplyAsync() throws ExecutionException, InterruptedException {
-        CompletableFuture c = CompletableFuture.supplyAsync(() -> "supplyAsync has return value");
+        CompletableFuture c = CompletableFuture
+            .supplyAsync(() -> "supplyAsync has return value");
 
         assertThat(c.get()).isEqualTo("supplyAsync has return value");
     }
@@ -56,7 +59,8 @@ public class RunAsyncVsSupplyAsyncTest {
 
     @Test
     public void supplyAsyncWithExecutor() throws ExecutionException, InterruptedException {
-        CompletableFuture c = CompletableFuture.supplyAsync(() -> "run supplyAsync with an Executor", executorService);
+        CompletableFuture c = CompletableFuture
+            .supplyAsync(() -> "run supplyAsync with an Executor", executorService);
 
         stop(executorService);
 
