@@ -25,7 +25,7 @@ public class RunAsyncVsSupplyAsyncTest {
     public void runAsyncWithCallbacks() throws ExecutionException, InterruptedException {
         CompletableFuture c = CompletableFuture
             .runAsync(() -> System.out.println("runAsync"))
-            .thenRunAsync(() -> System.out.println("callback"));
+            .thenRunAsync(() -> System.out.println("thenRunAsync callback"));
 
         assertThat(c.get()).isNull();
     }
