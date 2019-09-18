@@ -15,20 +15,20 @@ func ProvideProductAPI(p ProductService) ProductAPI {
 	return ProductAPI{ProductService: p}
 }
 
-func (p ProductAPI) FindAll(c *gin.Context) {
+func (p *ProductAPI) FindAll(c *gin.Context) {
 	products := p.ProductService.FindAll()
 
 	c.JSON(http.StatusOK, gin.H{"products": ToProductDTOs(products)})
 }
 
-func (p ProductAPI) FindByID(c *gin.Context) {
+func (p *ProductAPI) FindByID(c *gin.Context) {
 	id, _ :=  strconv.Atoi(c.Param("id"))
 	product := p.ProductService.FindByID(uint(id))
 	
 	c.JSON(http.StatusOK, gin.H{"product": ToProductDTO(product)})
 }
 
-func (p ProductAPI) Create(c *gin.Context) {
+func (p *ProductAPI) Create(c *gin.Context) {
 	var productDTO ProductDTO
 	err := c.BindJSON(&productDTO)
 	if err != nil {
@@ -42,7 +42,7 @@ func (p ProductAPI) Create(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"product": ToProductDTO(createdProduct)})
 }
 
-func (p ProductAPI) Update(c *gin.Context) {
+func (p *ProductAPI) Update(c *gin.Context) {
 	var productDTO ProductDTO
 	err := c.BindJSON(&productDTO)
 	if err != nil {
@@ -65,7 +65,7 @@ func (p ProductAPI) Update(c *gin.Context) {
 	c.Status(http.StatusOK)
 }
 
-func (p ProductAPI) Delete(c *gin.Context) {
+func (p *ProductAPI) Delete(c *gin.Context) {
 	id, _ :=  strconv.Atoi(c.Param("id"))
 	product := p.ProductService.FindByID(uint(id))
 	if product == (Product{}) {

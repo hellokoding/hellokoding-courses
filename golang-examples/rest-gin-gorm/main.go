@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	
+
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/gin-gonic/gin"
