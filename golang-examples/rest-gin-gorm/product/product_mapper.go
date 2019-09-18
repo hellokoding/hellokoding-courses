@@ -10,7 +10,7 @@ func ToProductDTO(product Product) ProductDTO {
 
 func ToProductDTOs(products []Product) []ProductDTO {
 	productdtos := make([]ProductDTO, len(products))
-	
+
 	for i, itm := range products {
 		productdtos[i] = ToProductDTO(itm)
 	}
