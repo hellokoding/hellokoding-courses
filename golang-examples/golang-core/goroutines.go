@@ -10,13 +10,13 @@ func f(s string) {
 }
 
 func main() {
-	f("Runing defined function on the main thread")
+	f("i'm sync")
 
-	go f("Runing defined function on another thread")
+	go f("i'm async")
 
 	go func(s string) {
 		fmt.Println(s)
-	}("Running anonymous function on another thread")
+	}("i'm async")
 
 	time.Sleep(1*time.Second)
 	fmt.Println("done!")
