@@ -45,7 +45,7 @@ func main() {
 
 	r := waitGroup.waitTimeout(time.Second)
 	if r == true {
-		fmt.Println("Wait timeout")
+		fmt.Println("Wait timeout!")
 	} else {
 		fmt.Println("done!")
 	}
