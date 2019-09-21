@@ -19,10 +19,11 @@ func (wg *MyWaitGroup) waitTimeout(timeout time.Duration) bool {
 	}()
 	
     select {
-    case <-done:
-        return false
-    case <-time.After(timeout):
-        return true
+    	case <-done:
+			return false
+			
+    	case <-time.After(timeout):
+        	return true
     }
 }
 
@@ -33,6 +34,7 @@ func f(s string, waitGroup *MyWaitGroup) {
 
 func main() {
 	var waitGroup MyWaitGroup 
+	
 	waitGroup.Add(1)
 	go f("i'm async!", &waitGroup)
 
