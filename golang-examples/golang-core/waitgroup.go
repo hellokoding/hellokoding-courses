@@ -5,23 +5,23 @@ import (
 	"sync"
 )
 
-func f(s string, wg *sync.WaitGroup) {
-	defer wg.Done()
+func f(s string, waitGroup *sync.WaitGroup) {
+	defer waitGroup.Done()
 	fmt.Println(s)
 }
 
 func main() {
-	var wg sync.WaitGroup 
-	wg.Add(1)
-	go f("i'm async!", &wg)
+	var waitGroup sync.WaitGroup 
+	waitGroup.Add(1)
+	go f("i'm async!", &waitGroup)
 
-	wg.Add(1)
+	waitGroup.Add(1)
 	go func(s string) {
-		defer wg.Done()
+		defer waitGroup.Done()
 		fmt.Println(s)
 	}("i'm async too!")
 
-	wg.Wait()
+	waitGroup.Wait()
 
 	fmt.Println("done!")
 }
