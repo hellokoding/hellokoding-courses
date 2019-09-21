@@ -18,6 +18,6 @@ func main() {
 		fmt.Println(s)
 	}("i'm async too!")
 
-	time.Sleep(1*time.Second)
+	time.Sleep(time.Second)
 	fmt.Println("done!")
 }
