@@ -20,7 +20,7 @@ public class ArrayListQueryTest {
     }
 
     @Test
-    public void get_OK() {
+    public void get_thenOK() {
         List<Integer> lst = new ArrayList<>();
         lst.add(3);
         lst.add(1);
@@ -31,7 +31,7 @@ public class ArrayListQueryTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void get_Exception() {
+    public void get_thenException() {
         List<Integer> lst = new ArrayList<>();
         lst.add(3);
         lst.add(1);
