@@ -39,7 +39,7 @@ public class ArrayListIterateTest {
         lst.add(2);
         lst.add(3);
 
-        lst.forEach(System.out::println);
+        lst.forEach(e -> System.out.printf("%d ", e));
     }
 
     @Test

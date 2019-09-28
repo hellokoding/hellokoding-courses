@@ -41,4 +41,25 @@ public class ArrayListOverviewTest {
         // The output ordering will be same as the insertion oder
         System.out.println(lst);
     }
+
+    @Test
+    public void forEachConsumer() {
+        List<Integer> lst = new ArrayList<>();
+        lst.add(1);
+        lst.add(2);
+        lst.add(3);
+
+        lst.forEach(e -> System.out.printf("%d ", e));
+    }
+
+    @Test
+    public void filter() {
+        List<Integer> lst = new ArrayList<>();
+        lst.add(3);
+        lst.add(1);
+        lst.add(2);
+
+        Integer[] arr = lst.stream().filter(e -> e >= 2).toArray(Integer[]::new);
+        assertThat(arr).contains(2, 3);
+    }
 }
