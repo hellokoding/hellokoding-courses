@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ArrayListOverviewTest {
     @Test
@@ -61,5 +62,23 @@ public class ArrayListOverviewTest {
 
         Integer[] arr = lst.stream().filter(e -> e >= 2).toArray(Integer[]::new);
         assertThat(arr).contains(2, 3);
+    }
+
+    @Test
+    public void insert() {
+        List<Integer> lst = new ArrayList<>();
+        lst.add(1);
+        lst.add(2);
+
+        // Inserts element to lst at the specified index
+        lst.add(0, 3);
+
+        // Asserts that the list contains exactly the given values in order
+        assertThat(lst).containsExactly(3, 1, 2);
+
+        // Asserts that the list throws IndexOutOfBoundsException
+        //     when insert element at the out of bound position
+        assertThatThrownBy(() -> lst.add(5, 4))
+                .isInstanceOf(IndexOutOfBoundsException.class);
     }
 }
