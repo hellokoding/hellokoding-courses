@@ -37,6 +37,7 @@ public class ArrayListOverviewTest {
 
         // Can add duplicate element
         lst.add(2);
+
         assertThat(lst).hasSize(5);
 
         // The output ordering will be same as the insertion oder
