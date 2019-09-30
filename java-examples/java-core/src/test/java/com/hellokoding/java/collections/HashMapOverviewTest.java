@@ -17,21 +17,26 @@ public class HashMapOverviewTest {
     }
 
     @Test
-    public void initializeWithPutIfAbsent() {
+    public void initializeWithPut() {
         // Create a new HashMap
         Map<String, Integer> map = new HashMap<>();
 
         // Add elements to HashMap
-        map.putIfAbsent("k1", 1);
+        map.put("k1", 1);
+        map.put("k2", 2);
+        map.put("k3", 3);
 
         // Can add null key and value
-        map.putIfAbsent(null, 2);
-        map.putIfAbsent("k3", null);
+        map.put(null, 4);
+        map.put("k4", null);
 
-        // Duplicate key will be ignored
-        map.putIfAbsent("k1", 10);
+        // Value of duplicate key will be overridden
+        map.put("k1", 10);
 
-        assertThat(map).hasSize(3);
+        assertThat(map).hasSize(5);
+
+        // The output ordering will be vary as Map is not reserved the insertion order
+        System.out.println(map);
     }
 
     @Test

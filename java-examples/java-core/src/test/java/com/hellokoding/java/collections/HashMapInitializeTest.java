@@ -23,6 +23,7 @@ public class HashMapInitializeTest {
 
         // Value of duplicate key will be overridden
         map.put("k1", 10);
+
         assertThat(map).hasSize(5);
 
         // The output ordering will be vary as Map is not reserved the insertion order
