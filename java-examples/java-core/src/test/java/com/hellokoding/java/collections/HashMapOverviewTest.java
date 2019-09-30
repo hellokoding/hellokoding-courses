@@ -14,7 +14,6 @@ public class HashMapOverviewTest {
         assertThat(map1).isInstanceOf(HashMap.class);
 
         HashMap<String, Integer> map2 = new HashMap<>();
-        assertThat(map2).isInstanceOf(HashMap.class);
     }
 
     @Test
