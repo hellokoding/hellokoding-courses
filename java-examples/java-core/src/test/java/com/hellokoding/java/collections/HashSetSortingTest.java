@@ -26,6 +26,15 @@ public class HashSetSortingTest {
     }
 
     @Test
+    public void sortWithTreeSetAndComparator() {
+        Set<Integer> set = new HashSet<>(Set.of(3, 1, 2));
+        NavigableSet<Integer> sortedSet = new TreeSet<>(Comparator.reverseOrder());
+        sortedSet.addAll(set);
+
+        assertThat(sortedSet).containsExactly(3, 2, 1);
+    }
+
+    @Test
     public void sortAscWithArrayList() {
         Set<String> set = new HashSet<>(Set.of("c", "a", "b"));
         List<String> list = new ArrayList<>(set);

@@ -55,7 +55,7 @@ public class ComparatorTest {
         );
 
         // when
-        Collections.sort(books, Comparator.reverseOrder());
+        Collections.sort(books, Comparator.comparing(e -> e.title));
 
         // when
         String actual = books.stream().map(e -> e.title).collect(Collectors.joining());
