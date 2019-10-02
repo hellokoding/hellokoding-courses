@@ -19,7 +19,7 @@ public class ComparableVsComparatorTest {
     }
 
     @Test
-    public void provideLocalSortKeyWithComparator() {
+    public void provideSortKeyWithComparator() {
         Book book1 = new Book(1, "b");
         Book book2 = new Book(2, "c");
         Book book3 = new Book(3, "a");
@@ -41,7 +41,7 @@ public class ComparableVsComparatorTest {
     }
 
     @Test
-    public void overrideSortingKeyWithComparator() {
+    public void overrideSortKeyWithComparator() {
         ComparableBook book1 = new ComparableBook(1, "b");
         ComparableBook book2 = new ComparableBook(2, "c");
         ComparableBook book3 = new ComparableBook(3, "a");

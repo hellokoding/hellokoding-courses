@@ -59,6 +59,6 @@ public class ComparatorTest {
 
         // when
         String actual = books.stream().map(e -> e.title).collect(Collectors.joining());
-        assertThat(actual).isEqualTo("DCA");
+        assertThat(actual).isEqualTo("ACD");
     }
 }
