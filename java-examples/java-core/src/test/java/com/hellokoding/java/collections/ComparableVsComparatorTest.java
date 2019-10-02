@@ -30,7 +30,7 @@ public class ComparableVsComparatorTest {
     }
 
     @Test
-    public void changeDefaultOrderingDirectionWithComparator() {
+    public void reverseTheDefaultOrderingWithComparator() {
         ComparableBook book1 = new ComparableBook(1, "b");
         ComparableBook book2 = new ComparableBook(2, "c");
         ComparableBook book3 = new ComparableBook(3, "a");
@@ -52,40 +52,44 @@ public class ComparableVsComparatorTest {
     }
 
     @Test
-    public void controlComparable() {
-        ComparableBook book1 = new ComparableBook(1, "b");
-        ComparableBook book2 = new ComparableBook(2, "c");
-        ComparableBook book3 = new ComparableBook(3, "a");
-
-        List<ComparableBook> books = Arrays.asList(book3, book1, book2);
-
-        books.sort(Comparator.naturalOrder());
-        // Asserts that the actual sorted result in expected order
-        assertThat(books).containsExactly(book3, book1, book2);
-
-        books.sort(Comparator.reverseOrder());
-        assertThat(books).containsExactly(book2, book1, book3);
-
-        books.sort(Comparator.comparing(ComparableBook::getId));
-        assertThat(books).containsExactly(book1, book2, book3);
-    }
-
-    @Test
-    public void provideOrdering() {
+    public void compareMultipleFieldsWithComparator() {
         Book book1 = new Book(1, "b");
         Book book2 = new Book(2, "c");
         Book book3 = new Book(3, "a");
 
-        List<Book> books = Arrays.asList(book3, book1, book2);
+        List<Book> list = Arrays.asList(book1, book2, book3);
+        list.sort(Comparator
+            .comparing(Book::getTitle)
+            .thenComparing(Book::getId));
+        assertThat(list).containsExactly(book3, book1, book2);
+    }
 
-        books.sort(Comparator.comparing(Book::getTitle));
-        assertThat(books).containsExactly(book3, book1, book2);
+    @Test
+    public void reverseTheComparingOfComparator() {
+        Book book1 = new Book(1, "b");
+        Book book2 = new Book(2, "c");
+        Book book3 = new Book(3, "c");
 
-        books.sort(Comparator.comparing(Book::getTitle).reversed());
-        assertThat(books).containsExactly(book2, book1, book3);
+        List<Book> list = Arrays.asList(book1, book2, book3);
+        list.sort(Comparator
+                .comparing(Book::getTitle, Comparator.reverseOrder())
+                .thenComparing(Book::getId, Comparator.reverseOrder()));
 
-        books.sort(Comparator.comparing(Book::getId));
-        assertThat(books).containsExactly(book1, book2, book3);
+        assertThat(list).containsExactly(book3, book2, book1);
+    }
+
+    @Test
+    public void reverseTheComparingOfComparator2() {
+        Book book1 = new Book(1, "b");
+        Book book2 = new Book(2, "c");
+        Book book3 = new Book(3, "a");
+
+        List<Book> list = Arrays.asList(book1, book2, book3);
+        list.sort(Comparator
+                .comparing(Book::getTitle)
+                .reversed());
+
+        assertThat(list).containsExactly(book2, book1, book3);
     }
 
     static class Book {
@@ -119,9 +123,17 @@ public class ComparableVsComparatorTest {
             return id;
         }
 
+        String getTitle() {
+            return title;
+        }
+
         @Override
         public int compareTo(ComparableBook o) {
-            return this.title.compareTo(o.title);
+            //return this.title.compareTo(o.title);
+            return Comparator
+                .comparing(ComparableBook::getTitle)
+                .thenComparing(ComparableBook::getId)
+                .compare(this, o);
         }
     }
 }
