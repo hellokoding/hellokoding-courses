@@ -26,7 +26,7 @@ public class HashSetSortingTest {
     }
 
     @Test
-    public void sortWithTreeSetAndComparator() {
+    public void sortDescWithTreeSet2() {
         Set<Integer> set = new HashSet<>(Set.of(3, 1, 2));
         NavigableSet<Integer> sortedSet = new TreeSet<>(Comparator.reverseOrder());
         sortedSet.addAll(set);
