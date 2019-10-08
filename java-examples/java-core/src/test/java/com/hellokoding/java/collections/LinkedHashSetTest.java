@@ -44,6 +44,8 @@ public class LinkedHashSetTest {
 
         Set<Integer> linkedHashSet2 = new LinkedHashSet<>();
         linkedHashSet2.add(1);
+        linkedHashSet2.add(1); // duplicated element is ignored
+        linkedHashSet2.add(null); // permits null element
 
         linkedHashSet2.addAll(linkedHashSet1);
 
@@ -85,13 +87,11 @@ public class LinkedHashSetTest {
 
     @Test
     public void containsACustomObject(){
-        Book book1 = new Book(1, "b");
-        Book book2 = new Book(2, "c");
-        Book book3 = new Book(3, "c");
+        Set<Book> linkedHashSet = new LinkedHashSet<>();
+        linkedHashSet.add(new Book(1, "a"));
 
-        Set<Book> linkedHashSet = new LinkedHashSet<>(Set.of(book1, book2, book3));
-        Boolean contained = linkedHashSet.contains(new Book(1, "b"));
-        assertThat(contained).isTrue();
+        Boolean contained = linkedHashSet.contains(new Book(1, "a"));
+        assertThat(contained).isFalse();
     }
 
     @Test
@@ -122,7 +122,7 @@ public class LinkedHashSetTest {
         LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>(Set.of(1, 2, 3));
         linkedHashSet.remove(1);
 
-        assertThat(linkedHashSet).containsExactly(2, 3);
+        assertThat(linkedHashSet).contains(2, 3);
     }
 
     @Test
