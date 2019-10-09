@@ -79,58 +79,31 @@ public class LinkedHashSetTest {
     }
 
     @Test
-    public void examine() {
-        Set<Integer> linkedHashSet = new LinkedHashSet<>(Set.of(1, 2, 3));
+    public void containsAddRemove() {
+        Set<Integer> linkedHashSet = new LinkedHashSet<>(List.of(1, 2, 3));
         Boolean contained = linkedHashSet.contains(3);
         assertThat(contained).isTrue();
+
+        linkedHashSet.add(1); // duplicated element is ignored
+        linkedHashSet.add(null); // permits null element
+        assertThat(linkedHashSet).containsExactly(1, 2, 3, null);
+
+        linkedHashSet.remove(2);
+        assertThat(linkedHashSet).containsExactly(1, 3, null);
     }
 
     @Test
-    public void containsACustomObject(){
+    public void containsAddRemoveACustomObject(){
         Set<Book> linkedHashSet = new LinkedHashSet<>();
         linkedHashSet.add(new Book(1, "a"));
 
         Boolean contained = linkedHashSet.contains(new Book(1, "a"));
         assertThat(contained).isFalse();
-    }
 
-    @Test
-    public void add() {
-        LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>();
-        linkedHashSet.add(1);
-        linkedHashSet.add(2);
-        linkedHashSet.add(3);
-
-        linkedHashSet.add(1); // duplicated element is ignored
-        linkedHashSet.add(null); // permits null element
-
-        // iteration order is same as insertion order
-        assertThat(linkedHashSet).containsExactly(1, 2, 3, null);
-    }
-
-    @Test
-    public void addACustomObject() {
-        LinkedHashSet<Book> linkedHashSet = new LinkedHashSet<>();
         linkedHashSet.add(new Book(1, "a"));
-        linkedHashSet.add(new Book(1, "a"));
-
         assertThat(linkedHashSet).hasSize(2);
-    }
 
-    @Test
-    public void remove() {
-        LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>(Set.of(1, 2, 3));
-        linkedHashSet.remove(1);
-
-        assertThat(linkedHashSet).contains(2, 3);
-    }
-
-    @Test
-    public void removeACustomObject() {
-        Set<Book> linkedHashSet = new LinkedHashSet<>();
-        linkedHashSet.add(new Book(1, "a"));
         linkedHashSet.remove(new Book(1, "a"));
-
         assertThat(linkedHashSet).hasSize(1);
     }
 

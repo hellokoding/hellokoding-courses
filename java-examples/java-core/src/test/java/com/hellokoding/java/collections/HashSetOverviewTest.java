@@ -2,7 +2,6 @@ package com.hellokoding.java.collections;
 
 import org.junit.Test;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
@@ -15,13 +14,7 @@ public class HashSetOverviewTest {
         Set<Integer> set1 = new HashSet<>();
         assertThat(set1).isInstanceOf(HashSet.class);
 
-        Collection<Integer> set2 = new HashSet<>();
-        assertThat(set2).isInstanceOf(HashSet.class);
-
-        Iterable<Integer> set3 = new HashSet<>();
-        assertThat(set3).isInstanceOf(HashSet.class);
-
-        HashSet<Integer> set4 = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
     }
 
     @Test

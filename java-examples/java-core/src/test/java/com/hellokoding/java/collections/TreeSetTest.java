@@ -80,54 +80,31 @@ public class TreeSetTest {
     }
 
     @Test
-    public void examine() {
-        NavigableSet<Integer> treeSet = new TreeSet<>(Set.of(1, 2, 3));
+    public void containsAddRemove() {
+        NavigableSet<Integer> treeSet = new TreeSet<>(Set.of(3, 1, 2));
         Boolean contained = treeSet.contains(3);
         assertThat(contained).isTrue();
+
+        treeSet.add(1); // duplicated element is ignored
+        treeSet.add(4);
+        assertThat(treeSet).containsExactly(1, 2, 3, 4);
+
+        treeSet.remove(3);
+        assertThat(treeSet).containsExactly(1, 2, 4);
     }
 
     @Test
-    public void containsACustomObject(){
+    public void containsAddRemoveACustomObject(){
         TreeSet<Book> treeSet = new TreeSet<>();
         treeSet.add(new Book(1, "a"));
 
         Boolean contained = treeSet.contains(new Book(2, "a"));
         assertThat(contained).isTrue();
-    }
 
-    @Test
-    public void add() {
-        NavigableSet<Integer> treeSet = new TreeSet<>();
-        treeSet.add(1);
-        treeSet.add(1); // duplicated element is ignored
-        treeSet.addAll(Set.of(2, 3));
-
-        assertThat(treeSet).containsExactly(1, 2, 3);
-    }
-
-    @Test
-    public void addACustomObject() {
-        NavigableSet<Book> treeSet = new TreeSet<>();
-        treeSet.add(new Book(1, "a"));
         treeSet.add(new Book(2, "a"));
-
         assertThat(treeSet).hasSize(1);
-    }
 
-    @Test
-    public void remove() {
-        NavigableSet<Integer> treeSet = new TreeSet<>(Set.of(1, 2, 3));
-        treeSet.remove(1);
-
-        assertThat(treeSet).containsExactly(2, 3);
-    }
-
-    @Test
-    public void removeACustomObject() {
-        NavigableSet<Book> treeSet = new TreeSet<>();
-        treeSet.add(new Book(1, "a"));
         treeSet.remove(new Book(2, "a"));
-
         assertThat(treeSet).isEmpty();
     }
 
