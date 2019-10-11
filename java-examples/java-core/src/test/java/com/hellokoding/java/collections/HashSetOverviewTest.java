@@ -2,9 +2,7 @@ package com.hellokoding.java.collections;
 
 import org.junit.Test;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +13,15 @@ public class HashSetOverviewTest {
         assertThat(set1).isInstanceOf(HashSet.class);
 
         HashSet<Integer> set2 = new HashSet<>();
+    }
+
+    @Test
+    public void initWithListOfAndSetOf() {
+        Set<Integer> set1 = new HashSet<>(List.of(3, 1, 2));
+        assertThat(set1).contains(3, 1, 2);
+
+        Set<Integer> set2 = new HashSet<>(Set.of(5, 4, 6));
+        assertThat(set2).contains(5, 4, 6);
     }
 
     @Test
@@ -77,5 +84,52 @@ public class HashSetOverviewTest {
 
         // Asserts that the set contains the given values in order
         assertThat(sortedSet).containsExactly(1, 2, 3);
+    }
+
+    @Test
+    public void containsAddRemove() {
+        Set<Integer> hashSet = new HashSet<>(List.of(1, 2, 3));
+        Boolean contained = hashSet.contains(3);
+        assertThat(contained).isTrue();
+
+        hashSet.add(1); // duplicated element is ignored
+        hashSet.add(null); // permits null element
+        assertThat(hashSet).contains(1, 2, 3, null);
+
+        hashSet.remove(2);
+        assertThat(hashSet).contains(1, 3, null);
+    }
+
+    @Test
+    public void containsAddRemoveACustomObject(){
+        Set<Book> hashSet = new HashSet<>();
+        hashSet.add(new Book(1, "a"));
+
+        Boolean contained = hashSet.contains(new Book(1, "a"));
+        assertThat(contained).isFalse();
+
+        hashSet.add(new Book(1, "a"));
+        assertThat(hashSet).hasSize(2);
+
+        hashSet.remove(new Book(1, "a"));
+        assertThat(hashSet).hasSize(2);
+    }
+
+    static class Book {
+        int id;
+        String title;
+
+        Book(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+
+        int getId() {
+            return id;
+        }
+
+        String getTitle() {
+            return title;
+        }
     }
 }

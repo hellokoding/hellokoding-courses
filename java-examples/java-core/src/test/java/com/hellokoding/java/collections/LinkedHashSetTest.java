@@ -104,7 +104,7 @@ public class LinkedHashSetTest {
         assertThat(linkedHashSet).hasSize(2);
 
         linkedHashSet.remove(new Book(1, "a"));
-        assertThat(linkedHashSet).hasSize(1);
+        assertThat(linkedHashSet).hasSize(2);
     }
 
     static class Book {
