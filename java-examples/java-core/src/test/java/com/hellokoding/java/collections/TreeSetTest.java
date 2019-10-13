@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class TreeSetTest {
     @Test
@@ -80,13 +81,14 @@ public class TreeSetTest {
     }
 
     @Test
-    public void containsAddRemove() {
+    public void containsAddRemoveSingleElement() {
         NavigableSet<Integer> treeSet = new TreeSet<>(Set.of(3, 1, 2));
         Boolean contained = treeSet.contains(3);
         assertThat(contained).isTrue();
 
-        treeSet.add(1); // duplicated element is ignored
         treeSet.add(4);
+        treeSet.add(4);
+        assertThatThrownBy(() -> treeSet.add(null)).isInstanceOf(NullPointerException.class);
         assertThat(treeSet).containsExactly(1, 2, 3, 4);
 
         treeSet.remove(3);
@@ -94,7 +96,23 @@ public class TreeSetTest {
     }
 
     @Test
-    public void containsAddRemoveACustomObject(){
+    public void containsAddRemoveMultipleElements() {
+        NavigableSet<Integer> treeSet = new TreeSet<>(Set.of(3, 1, 2));
+        Boolean contained = treeSet.containsAll(Set.of(1, 2));
+        assertThat(contained).isTrue();
+
+        treeSet.addAll(Set.of(3, 4, 5));
+        assertThat(treeSet).containsExactly(1, 2, 3, 4, 5);
+
+        treeSet.removeAll(Set.of(1, 2, 6));
+        assertThat(treeSet).containsExactly(3, 4, 5);
+
+        treeSet.removeIf(e -> e >= 4);
+        assertThat(treeSet).contains(3);
+    }
+
+    @Test
+    public void objectsComparingProblem(){
         TreeSet<Book> treeSet = new TreeSet<>();
         treeSet.add(new Book(1, "a"));
 
@@ -128,6 +146,46 @@ public class TreeSetTest {
         @Override
         public int compareTo(Book o) {
             return CharSequence.compare(this.title, o.title);
+        }
+    }
+
+    @Test
+    public void objectsComparingFixed(){
+        TreeSet<BookFixed> treeSet = new TreeSet<>();
+        treeSet.add(new BookFixed(1, "a"));
+
+        Boolean contained = treeSet.contains(new BookFixed(2, "a"));
+        assertThat(contained).isFalse();
+
+        treeSet.add(new BookFixed(2, "a"));
+        assertThat(treeSet).hasSize(2);
+
+        treeSet.remove(new BookFixed(2, "a"));
+        assertThat(treeSet).hasSize(1);
+    }
+
+    static class BookFixed implements Comparable<BookFixed> {
+        int id;
+        String title;
+
+        BookFixed(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+
+        int getId() {
+            return id;
+        }
+
+        String getTitle() {
+            return title;
+        }
+
+        @Override
+        public int compareTo(BookFixed o) {
+            return Comparator.comparing(BookFixed::getId)
+                .thenComparing(BookFixed::getTitle)
+                .compare(this, o);
         }
     }
 }
