@@ -7,7 +7,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ArrayListOverviewTest {
+public class ArrayListTest {
     @Test
     public void declare() {
         List<Integer> lst1 = new ArrayList<>();
@@ -17,7 +17,16 @@ public class ArrayListOverviewTest {
     }
 
     @Test
-    public void initialize() {
+    public void initWithListOfAndSetOf() {
+        List<Integer> arrayList1 = new ArrayList<>(List.of(3, 1, 2));
+        assertThat(arrayList1).contains(3, 1, 2);
+
+        List<Integer> arrayList2 = new ArrayList<>(Set.of(5, 4, 6));
+        assertThat(arrayList2).contains(5, 4, 6);
+    }
+
+    @Test
+    public void initWithAdd() {
         // Create a new ArrayList
         List<Integer> lst = new ArrayList<>();
 
@@ -40,20 +49,25 @@ public class ArrayListOverviewTest {
 
     @Test
     public void forEachConsumer() {
-        List<Integer> lst = new ArrayList<>();
-        lst.add(1);
-        lst.add(2);
-        lst.add(3);
+        List<Integer> lst = new ArrayList<>(List.of(1, 2, 3));
 
         lst.forEach(e -> System.out.printf("%d ", e));
     }
 
     @Test
-    public void filter() {
-        List<Integer> lst = new ArrayList<>();
-        lst.add(3);
-        lst.add(1);
-        lst.add(2);
+    public void get() {
+        List<Integer> lst = new ArrayList<>(List.of(1, 2, 3));
+
+        int firstElement = lst.get(0);
+        assertThat(firstElement).isEqualTo(1);
+    }
+
+    @Test
+    public void filterAndRetrieve() {
+        List<Integer> lst = new ArrayList<>(List.of(1, 2, 3));
+
+        Integer firstElement = lst.stream().findFirst().orElse(null);
+        assertThat(firstElement).isEqualTo(1);
 
         Integer[] arr = lst.stream().filter(e -> e >= 2).toArray(Integer[]::new);
         assertThat(arr).contains(2, 3);
