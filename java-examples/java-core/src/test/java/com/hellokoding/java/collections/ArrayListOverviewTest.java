@@ -13,13 +13,7 @@ public class ArrayListOverviewTest {
         List<Integer> lst1 = new ArrayList<>();
         assertThat(lst1).isInstanceOf(ArrayList.class);
 
-        Collection<Integer> lst2 = new ArrayList<>();
-        assertThat(lst2).isInstanceOf(ArrayList.class);
-
-        Iterable<Integer> lst3 = new ArrayList<>();
-        assertThat(lst3).isInstanceOf(ArrayList.class);
-
-        ArrayList<Integer> lst4 = new ArrayList<>();
+        ArrayList<Integer> lst2 = new ArrayList<>();
     }
 
     @Test
@@ -81,5 +75,115 @@ public class ArrayListOverviewTest {
         //     when insert element at the out of bound position
         assertThatThrownBy(() -> lst.add(5, 4))
                 .isInstanceOf(IndexOutOfBoundsException.class);
+    }
+
+    @Test
+    public void containsAddUpdateRemoveSingleElement() {
+        List<Integer> arrayList = new ArrayList<>(List.of(1, 2, 3));
+        Boolean contained = arrayList.contains(3);
+        assertThat(contained).isTrue();
+
+        arrayList.add(4); // appends an element
+        arrayList.add(0, 10); // inserts at index 0
+        arrayList.add(null);
+        assertThat(arrayList).containsExactly(10, 1, 2, 3, 4, null);
+
+        arrayList.set(0, 100); // update at index 0
+        assertThat(arrayList).containsExactly(100, 1, 2, 3, 4, null);
+
+        arrayList.remove(1); // removes at index 1
+        assertThat(arrayList).containsExactly(100, 2, 3, 4, null);
+
+        arrayList.remove(Integer.valueOf(2)); // removes an element
+        assertThat(arrayList).containsExactly(100, 3, 4, null);
+    }
+
+    @Test
+    public void containsAddUpdateRemoveMultipleElements() {
+        List<Integer> arrayList = new ArrayList<>(List.of(1, 2, 3));
+        Boolean contained = arrayList.containsAll(List.of(1, 2));
+        assertThat(contained).isTrue();
+
+        arrayList.addAll(List.of(4, 5));
+        arrayList.addAll(0, List.of(10, 100));
+        assertThat(arrayList).containsExactly(10, 100, 1, 2, 3, 4, 5);
+
+        arrayList.replaceAll(e -> ++e);
+        assertThat(arrayList).containsExactly(11, 101, 2, 3, 4, 5, 6);
+
+        arrayList.removeAll(List.of(1, 11, 101));
+        assertThat(arrayList).containsExactly(2, 3, 4, 5, 6);
+
+        arrayList.removeIf(e -> e >= 3);
+        assertThat(arrayList).contains(2);
+    }
+
+    @Test
+    public void objectsComparingProblem(){
+        List<Book> list = new ArrayList<>();
+        list.add(new Book(1, "a"));
+
+        Boolean contained = list.contains(new Book(1, "a"));
+        assertThat(contained).isFalse();
+
+        list.remove(new Book(1, "a"));
+        assertThat(list).hasSize(1);
+    }
+
+    static class Book {
+        int id;
+        String title;
+
+        Book(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+
+        int getId() {
+            return id;
+        }
+
+        String getTitle() {
+            return title;
+        }
+    }
+
+    @Test
+    public void objectsComparingFixed(){
+        List<BookFixed> list = new ArrayList<>();
+        list.add(new BookFixed(1, "a"));
+
+        Boolean contained = list.contains(new BookFixed(1, "a"));
+        assertThat(contained).isTrue();
+
+        list.remove(new BookFixed(1, "a"));
+        assertThat(list).hasSize(0);
+    }
+
+    static class BookFixed {
+        int id;
+        String title;
+
+        BookFixed(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+
+        int getId() {
+            return id;
+        }
+
+        String getTitle() {
+            return title;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            BookFixed bookFixed = (BookFixed) o;
+            return id == bookFixed.id &&
+                    Objects.equals(title, bookFixed.title);
+        }
     }
 }
