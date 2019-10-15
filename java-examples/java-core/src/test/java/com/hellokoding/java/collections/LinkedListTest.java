@@ -73,6 +73,7 @@ public class LinkedListTest {
             System.out.printf("%d ", iterator.next());
         }
 
+        // Iterate backward with ListIterator
         ListIterator<Integer> listIterator = linkedList.listIterator(linkedList.size());
         while (listIterator.hasPrevious()){
             System.out.printf("%d ", listIterator.previous());
