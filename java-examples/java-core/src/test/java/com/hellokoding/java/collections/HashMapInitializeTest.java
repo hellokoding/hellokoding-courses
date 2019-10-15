@@ -8,6 +8,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HashMapInitializeTest {
     @Test
+    public void initInOneLineWithFactoryMethods() {
+        // create and initialize a HashMap from Java 9+ Map.of
+        Map<String, Integer> map1 = new HashMap<>((Map.of("k1", 1, "k3", 2, "k2", 3)));
+        assertThat(map1).hasSize(3);
+
+        // create and initialize a HashMap from Java 9+ Map.ofEntries
+        Map<String, Integer> map2 = new HashMap<>(Map.ofEntries(Map.entry("k4", 4), Map.entry("k5", 5)));
+        assertThat(map2).hasSize(2);
+    }
+
+    @Test
+    public void initInOneLineFromAnExistingMap() {
+        Map<String, Integer> map1 = new HashMap<>(Map.ofEntries(Map.entry("k4", 4), Map.entry("k5", 5)));
+
+        // create and initialize from an existing map
+        Map<String, Integer> map2 = new HashMap<>(map1);
+        assertThat(map2).hasSize(2);
+    }
+
+    @Test
     public void initializeWithPut() {
         // Create a new HashMap
         Map<String, Integer> map = new HashMap<>();
@@ -53,7 +73,7 @@ public class HashMapInitializeTest {
     }
 
     @Test
-    public void initializeWithPutInOneLine() {
+    public void initializeWithDoubleBrace() {
         // Create a new HashMap
         Map<String, Integer> map = new HashMap<>(){{
             put("k1", 1);
@@ -86,18 +106,5 @@ public class HashMapInitializeTest {
         assertThat(map2).hasSize(5);
     }
 
-    @Test
-    public void initializeFromAnotherMapWhenCreating() {
-        // create and initialize a HashMap from Java 9+ Map.of
-        Map<String, Integer> map1 = new HashMap<>((Map.of("k1", 1, "k3", 2, "k2", 3)));
-        assertThat(map1).hasSize(3);
 
-        // create and initialize a HashMap from Java 9+ Map.ofEntries
-        Map<String, Integer> map2 = new HashMap<>(Map.ofEntries(Map.entry("k4", 4), Map.entry("k5", 5)));
-        assertThat(map2).hasSize(2);
-
-        // create and initialize from an existing map
-        Map<String, Integer> map3 = new HashMap<>(map1);
-        assertThat(map3).hasSize(3);
-    }
 }
