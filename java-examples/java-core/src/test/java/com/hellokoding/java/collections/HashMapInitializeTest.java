@@ -46,7 +46,7 @@ public class HashMapInitializeTest {
 
         assertThat(map).hasSize(5);
 
-        // The output ordering will be vary as Map is not reserved the insertion order
+        // The output ordering will be vary as HashMap is not reserved the insertion order
         System.out.println(map);
     }
 
@@ -68,7 +68,7 @@ public class HashMapInitializeTest {
         map.putIfAbsent("k1", 10);
         assertThat(map).hasSize(5);
 
-        // The output ordering will be vary as Map is not reserved the insertion order
+        // The output ordering will be vary as HashMap is not reserved the insertion order
         System.out.println(map);
     }
 
@@ -82,9 +82,6 @@ public class HashMapInitializeTest {
         }};
 
         assertThat(map).hasSize(3);
-
-        // The output ordering will be vary as Map is not reserved the insertion order
-        System.out.println(map);
     }
 
     @Test
