@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -86,5 +87,117 @@ public class HashMapTest {
         map.replace("k3", 3);
 
         assertThat(map).contains(Map.entry("k1", 1), Map.entry("k2", 20));
+    }
+
+    @Test
+    public void objectsComparingProblem(){
+        Map<Category, Book> hashMap = new HashMap<>();
+
+        hashMap.put(new Category(1, "c1"), new Book(1, "b1"));
+
+        boolean containedKey = hashMap.containsKey(new Category(1, "c1"));
+        assertThat(containedKey).isFalse();
+
+        boolean containedValue = hashMap.containsValue(new Book(1, "b1"));
+        assertThat(containedValue).isFalse();
+
+        hashMap.put(new Category(1, "c1"), new Book(1, "b1"));
+        assertThat(hashMap).hasSize(2);
+
+        Book previousValue = hashMap.replace(new Category(1, "c1"), new Book(2, "b1"));
+        assertThat(previousValue).isNull();
+
+        hashMap.remove(new Category(1, "c1"));
+        assertThat(hashMap).hasSize(2);
+    }
+
+    static class Category {
+        int id;
+        String name;
+
+        Category(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+    }
+
+    static class Book {
+        int id;
+        String title;
+
+        Book(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+    }
+
+    @Test
+    public void objectsComparingFixed(){
+        Map<CategoryFixed, BookFixed> hashMap = new HashMap<>();
+
+        hashMap.put(new CategoryFixed(1, "c1"), new BookFixed(1, "b1"));
+
+        boolean containedKey = hashMap.containsKey(new CategoryFixed(1, "c1"));
+        assertThat(containedKey).isTrue();
+
+        boolean containedValue = hashMap.containsValue(new BookFixed(1, "b1"));
+        assertThat(containedValue).isTrue();
+
+        hashMap.put(new CategoryFixed(1, "c1"), new BookFixed(1, "b1"));
+        assertThat(hashMap).hasSize(1);
+
+        BookFixed previousValue = hashMap.replace(new CategoryFixed(1, "c1"), new BookFixed(2, "b1"));
+        assertThat(previousValue).isNotNull();
+
+        hashMap.remove(new CategoryFixed(1, "c1"));
+        assertThat(hashMap).hasSize(0);
+    }
+
+    static class CategoryFixed {
+        int id;
+        String name;
+
+        CategoryFixed(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            CategoryFixed that = (CategoryFixed) o;
+            return id == that.id &&
+                    Objects.equals(name, that.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, name);
+        }
+    }
+
+    static class BookFixed {
+        int id;
+        String title;
+
+        BookFixed(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            BookFixed bookFixed = (BookFixed) o;
+            return id == bookFixed.id &&
+                    Objects.equals(title, bookFixed.title);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, title);
+        }
     }
 }
