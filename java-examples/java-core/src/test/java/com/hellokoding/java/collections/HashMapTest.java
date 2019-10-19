@@ -2,9 +2,7 @@ package com.hellokoding.java.collections;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -63,6 +61,20 @@ public class HashMapTest {
     }
 
     @Test
+    public void retrieve() {
+        Map<String, Integer> hashMap = new HashMap<>(Map.of("k1", 1, "k2", 2));
+
+        Set<Map.Entry<String, Integer>> entrySet = hashMap.entrySet();
+        assertThat(entrySet).contains(Map.entry("k1", 1), Map.entry("k2", 2));
+
+        Set<String> keySet = hashMap.keySet();
+        assertThat(keySet).contains("k1", "k2");
+
+        Collection<Integer> values = hashMap.values();
+        assertThat(values).contains(1, 2);
+    }
+
+    @Test
     public void getValueByKey() {
         Map<String, Integer> map = new HashMap<>(Map.of("k1", 1, "k2", 2));
         int value = map.get("k1");
@@ -78,15 +90,23 @@ public class HashMapTest {
     }
 
     @Test
-    public void replace() {
-        Map<String, Integer> map = new HashMap<>();
-        map.put("k1", 1);
-        map.put("k2", 2);
+    public void containsPutReplaceRemove() {
+        Map<String, Integer> map = new HashMap<>(Map.of("k1", 1, "k2", 2));
 
-        map.replace("k2", 20);
-        map.replace("k3", 3);
+        boolean containedKey = map.containsKey("k1");
+        assertThat(containedKey).isTrue();
 
-        assertThat(map).contains(Map.entry("k1", 1), Map.entry("k2", 20));
+        boolean containedValue = map.containsValue(2);
+        assertThat(containedValue).isTrue();
+
+        map.put("k3", 3);
+        assertThat(map).hasSize(3);
+
+        map.replace("k1", 10);
+        assertThat(map).contains(Map.entry("k1", 10), Map.entry("k2", 2), Map.entry("k3", 3));
+
+        map.remove("k3");
+        assertThat(map).contains(Map.entry("k1", 10), Map.entry("k2", 2));
     }
 
     @Test
