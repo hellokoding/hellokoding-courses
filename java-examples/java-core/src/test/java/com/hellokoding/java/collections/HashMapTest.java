@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.*;
 
+import static java.util.Map.Entry.comparingByKey;
+import static java.util.Map.Entry.comparingByValue;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HashMapTest {
@@ -219,5 +221,22 @@ public class HashMapTest {
         public int hashCode() {
             return Objects.hash(id, title);
         }
+    }
+
+    @Test
+    public void sortByKeysAndByValues_WithArrayListAndComparator() {
+        Map.Entry<String, Integer> e1 = Map.entry("k1", 1);
+        Map.Entry<String, Integer> e2 = Map.entry("k2", 20);
+        Map.Entry<String, Integer> e3 = Map.entry("k3", 3);
+
+        Map<String, Integer> map = new HashMap<>(Map.ofEntries(e3, e1, e2));
+
+        List<Map.Entry<String, Integer>> arrayList1 = new ArrayList<>(map.entrySet());
+        arrayList1.sort(comparingByKey(Comparator.naturalOrder()));
+        assertThat(arrayList1).containsExactly(e1, e2, e3);
+
+        List<Map.Entry<String, Integer>> arrayList2 = new ArrayList<>(map.entrySet());
+        arrayList2.sort(comparingByValue(Comparator.reverseOrder()));
+        assertThat(arrayList2).containsExactly(e2, e3, e1);
     }
 }
