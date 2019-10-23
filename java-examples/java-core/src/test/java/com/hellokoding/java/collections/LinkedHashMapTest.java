@@ -19,11 +19,11 @@ public class LinkedHashMapTest {
 
     @Test
     public void initInOneLineWithFactoryMethods() {
-        // create and initialize a HashMap from Java 9+ Map.of
+        // create and initialize a LinkedHashMap from Java 9+ Map.of
         Map<String, Integer> linkedHashMap1 = new LinkedHashMap<>((Map.of("k1", 1, "k3", 2, "k2", 3)));
         assertThat(linkedHashMap1).hasSize(3);
 
-        // create and initialize a HashMap from Java 9+ Map.ofEntries
+        // create and initialize a LinkedHashMap from Java 9+ Map.ofEntries
         Map<String, Integer> linkedHashMap2 = new LinkedHashMap<>(Map.ofEntries(Map.entry("k4", 4), Map.entry("k5", 5)));
         assertThat(linkedHashMap2).hasSize(2);
     }
