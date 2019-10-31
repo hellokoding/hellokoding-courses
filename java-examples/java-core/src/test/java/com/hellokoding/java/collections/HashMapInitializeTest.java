@@ -104,4 +104,17 @@ public class HashMapInitializeTest {
     }
 
 
+    @Test
+    public void initializeWithInitialCapacityAndLoadFactor() {
+        // init with 16 and 0.75 as default initial capacity and default load factor
+        Map<String, Integer> map1 = new HashMap<>();
+
+        int initialCapacity = 2;
+        // init with 2 and 0.75 as initial capacity and default load factor
+        Map<String, Integer> map2 = new HashMap<>(initialCapacity);
+
+        float loadFactor = 1;
+        // init with 16 and 1 as default initial capacity and load factor
+        Map<String, Integer> map3 = new HashMap<>(initialCapacity, loadFactor);
+    }
 }
