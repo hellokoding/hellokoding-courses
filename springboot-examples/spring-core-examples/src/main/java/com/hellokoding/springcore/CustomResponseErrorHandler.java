@@ -39,4 +39,10 @@ public class CustomResponseErrorHandler implements ResponseErrorHandler {
         Scanner s = new Scanner(inputStream).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
+
+    static class CustomException extends IOException {
+        public CustomException(String message) {
+            super(message);
+        }
+    }
 }

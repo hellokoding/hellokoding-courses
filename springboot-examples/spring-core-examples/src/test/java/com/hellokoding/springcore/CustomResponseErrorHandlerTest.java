@@ -12,6 +12,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withBadRequest;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
+import static com.hellokoding.springcore.CustomResponseErrorHandler.CustomException;
 
 public class CustomResponseErrorHandlerTest {
     private MockRestServiceServer mockRestServiceServer;
