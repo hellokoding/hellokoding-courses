@@ -10,7 +10,7 @@ public class ConsumerService {
     @Autowired
     RestTemplate restTemplate;
 
-    public <T> ResponseEntity consumeWebService(String url, Class<T> responseType) {
+    public <T> ResponseEntity consume(String url, Class<T> responseType) {
         return restTemplate.getForEntity(url, responseType);
     }
 }

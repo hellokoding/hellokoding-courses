@@ -8,9 +8,10 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class RestTemplateConfig {
     @Bean
-    RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
-        return restTemplateBuilder
-            .errorHandler(new CustomResponseErrorHandler())
-            .build();
+    RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new CustomResponseErrorHandler());
+
+        return restTemplate;
     }
 }

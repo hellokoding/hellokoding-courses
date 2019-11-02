@@ -2,10 +2,13 @@ package com.hellokoding.springcore;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.test.web.client.ResponseActions;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -14,43 +17,35 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 import static com.hellokoding.springcore.CustomResponseErrorHandler.CustomException;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = {RestTemplateConfig.class, ConsumerService.class})
 public class CustomResponseErrorHandlerTest {
-    private MockRestServiceServer mockRestServiceServer;
-    private RestTemplate restTemplate;
+    private static final String URL = "/server/products/1";
+    private ResponseActions responseActions;
+
+    @Autowired
+    private ConsumerService consumerService;
 
     @Before
     public void setUp() {
-        restTemplate = new RestTemplate();
-        restTemplate.setErrorHandler(new CustomResponseErrorHandler());
-
-        mockRestServiceServer = MockRestServiceServer.createServer(restTemplate);
+        responseActions = MockRestServiceServer.createServer(consumerService.restTemplate)
+            .expect(requestTo(URL))
+            .andExpect(method(HttpMethod.GET));
     }
 
     @Test
     public void response4xx() {
-        String url = "/server/products/1";
-        mockRestServiceServer
-            .expect(requestTo(url))
-            .andExpect(method(HttpMethod.GET))
-            .andRespond(withBadRequest());
+        responseActions.andRespond(withBadRequest());
 
-        assertThatThrownBy(() -> consumeWebService(url, Object.class))
+        assertThatThrownBy(() -> consumerService.consume(URL, Object.class))
             .hasCauseInstanceOf(CustomException.class);
     }
 
     @Test
     public void response5xx() {
-        String url = "/server/products/1";
-        mockRestServiceServer
-            .expect(requestTo(url))
-            .andExpect(method(HttpMethod.GET))
-            .andRespond(withServerError());
+        responseActions.andRespond(withServerError());
 
-        assertThatThrownBy(() -> consumeWebService(url, Object.class))
+        assertThatThrownBy(() ->  consumerService.consume(URL, Object.class))
             .hasCauseInstanceOf(CustomException.class);
-    }
-
-    <T> ResponseEntity consumeWebService(String url, Class<T> responseType) {
-        return restTemplate.getForEntity(url, responseType);
     }
 }
