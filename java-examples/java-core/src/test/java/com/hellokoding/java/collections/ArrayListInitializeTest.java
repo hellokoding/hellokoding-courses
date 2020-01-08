@@ -53,4 +53,15 @@ public class ArrayListInitializeTest {
 
         assertThat(arrayList).contains(1, 2, 3);
     }
+
+    @Test
+    public void initWithCapacity() {
+        List<Integer> arrayList = new ArrayList<>(100);
+
+        for (int i = 0; i < 100; i++) {
+            arrayList.add(i);
+        }
+
+        assertThat(arrayList).hasSize(100);
+    }
 }
