@@ -56,12 +56,12 @@ public class ArrayListInitializeTest {
 
     @Test
     public void initWithCapacity() {
-        List<Integer> arrayList = new ArrayList<>(100);
+        List<Integer> arrayList = new ArrayList<>(1000);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1000; i++) {
             arrayList.add(i);
         }
 
-        assertThat(arrayList).hasSize(100);
+        assertThat(arrayList).hasSize(1000);
     }
 }
