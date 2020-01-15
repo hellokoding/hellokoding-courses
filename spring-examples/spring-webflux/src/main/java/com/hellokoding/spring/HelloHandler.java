@@ -9,7 +9,8 @@ import reactor.core.publisher.Mono;
 @Component
 public class HelloHandler {
     public Mono<ServerResponse> hello(ServerRequest request) {
-        return ServerResponse.ok().contentType(MediaType.TEXT_PLAIN)
+        return ServerResponse.ok()
+            .contentType(MediaType.TEXT_PLAIN)
             .bodyValue("Hello, Spring WebFlux!");
     }
 }
