@@ -9,8 +9,12 @@ import reactor.core.publisher.Mono;
 @Component
 public class HelloHandler {
     public Mono<ServerResponse> hello(ServerRequest request) {
+        String name = request
+            .queryParam("name")
+            .orElse("Spring WebFlux");
+
         return ServerResponse.ok()
             .contentType(MediaType.TEXT_PLAIN)
-            .bodyValue("Hello, Spring WebFlux!");
+            .bodyValue(String.format("Hello, %s!", name));
     }
 }
