@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Consumer;
+import static com.hellokoding.java.lang.ThrowingConsumer.wrapper;
 
 public class LambdaExceptionTest {
     @Test
@@ -41,8 +42,13 @@ public class LambdaExceptionTest {
         List.of("test.txt", "test2.txt")
             .forEach(wrapper(item -> Files.readAllLines(Path.of(item))));
     }
+}
 
-    <T> Consumer<T> wrapper(ThrowingConsumer<T, Exception> t) {
+@FunctionalInterface
+interface ThrowingConsumer<T, E extends Exception> {
+    void accept(T t) throws E;
+
+    static <T> Consumer<T> wrapper(ThrowingConsumer<T, Exception> t) {
         return arg -> {
             try {
                 t.accept(arg);
@@ -51,9 +57,4 @@ public class LambdaExceptionTest {
             }
         };
     }
-}
-
-@FunctionalInterface
-interface ThrowingConsumer<T, E extends Exception> {
-    void accept(T t) throws E;
 }
