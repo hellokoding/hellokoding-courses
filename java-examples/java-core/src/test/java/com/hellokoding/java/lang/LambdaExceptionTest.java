@@ -23,7 +23,7 @@ public class LambdaExceptionTest {
     }
 
     @Test
-    public void wrapperFunction() {
+    public void wrapperMethod() {
         List.of("test.txt", "test2.txt")
             .forEach(item -> readFile(item));
     }
@@ -38,7 +38,7 @@ public class LambdaExceptionTest {
     }
 
     @Test
-    public void generalWrapperFunction() {
+    public void genericWrapperMethod() {
         List.of("test.txt", "test2.txt")
             .forEach(wrapper(item -> Files.readAllLines(Path.of(item))));
     }
