@@ -10,7 +10,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 
 @Service
-@Transactional(readOnly = true)
 public class TransactionalProductService {
     private final ProductRespository productRespository;
 
