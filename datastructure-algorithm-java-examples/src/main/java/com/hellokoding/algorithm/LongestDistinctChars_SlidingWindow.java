@@ -3,8 +3,8 @@ package com.hellokoding.algorithm;
 import java.util.HashSet;
 import java.util.Set;
 
-public class String_LongestDistinct {
-    static String longestDistinctCharacters(String s) {
+public class LongestDistinctChars_SlidingWindow {
+    static String slidingWindow(String s) {
         int n = s.length();
         int l = 0, i = 0, j = 0;
         Set<Character> chars = new HashSet<>();
@@ -22,6 +22,6 @@ public class String_LongestDistinct {
     }
 
     public static void main(String[] args) {
-        System.out.println(longestDistinctCharacters("HelloKoding"));
+        System.out.println(slidingWindow("HelloKoding"));
     }
 }
