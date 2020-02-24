@@ -1,7 +1,5 @@
 package com.hellokoding.algorithm;
 
-import java.util.Objects;
-
 public class String_LongestPalindrome_DP {
     static String findLongestPalindromicSubstring(String s) {
         if(s == null || s.isEmpty()) return "";
