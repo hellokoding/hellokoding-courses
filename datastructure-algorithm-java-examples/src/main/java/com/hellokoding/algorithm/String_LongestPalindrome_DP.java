@@ -1,8 +1,12 @@
 package com.hellokoding.algorithm;
 
+import java.util.Objects;
+
 public class String_LongestPalindrome_DP {
-    static String findLongestPalindromicSubstring(String S) {
-        int n = S.length();
+    static String findLongestPalindromicSubstring(String s) {
+        if(s == null || s.isEmpty()) return "";
+
+        int n = s.length();
         int startIndex = 0;
         int maxLength = 1;
         boolean[][] P = new boolean[n][n];
@@ -12,7 +16,7 @@ public class String_LongestPalindrome_DP {
         }
 
         for (int i = 0; i < n - 1; i++) {
-            if (S.charAt(i) == S.charAt(i+1)) {
+            if (s.charAt(i) == s.charAt(i+1)) {
                 P[i][i+1] = true;
                 startIndex = i;
                 maxLength = 2;
@@ -22,7 +26,7 @@ public class String_LongestPalindrome_DP {
         for (int l = 3; l <= n; l++) {
             for (int i = 0; i < n - l + 1; i++) {
                 int j = i + l - 1;
-                if (S.charAt(i) == S.charAt(j) && P[i+1][j-1]) {
+                if (s.charAt(i) == s.charAt(j) && P[i+1][j-1]) {
                     P[i][j] = true;
 
                     if (l > maxLength) {
@@ -33,7 +37,7 @@ public class String_LongestPalindrome_DP {
             }
         }
 
-        return S.substring(startIndex, startIndex + maxLength);
+        return s.substring(startIndex, startIndex + maxLength);
     }
 
     public static void main(String[] args) {

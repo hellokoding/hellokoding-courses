@@ -1,12 +1,14 @@
 package com.hellokoding.algorithm;
 
 public class String_LongestPalindrome_BruteForce {
-    static String findLongestPalindromicSubstring(String S) {
+    static String findLongestPalindromicSubstring(String s) {
+        if(s == null || s.isEmpty()) return "";
+
         String longestPalindrome = "";
-        char[] charArr = S.toCharArray();
+        char[] charArr = s.toCharArray();
         for (int i = 0; i < charArr.length; i++) {
             for (int j = i; j < charArr.length; j++) {
-                String substr = S.substring(i, j+1);
+                String substr = s.substring(i, j+1);
                 if(isPalindrome(substr) && substr.length() > longestPalindrome.length()) {
                     longestPalindrome = substr;
                 }
@@ -16,9 +18,9 @@ public class String_LongestPalindrome_BruteForce {
         return longestPalindrome;
     }
 
-    static boolean isPalindrome(String S) {
-        String reversedStr = new StringBuilder(S).reverse().toString();
-        return S.equals(reversedStr);
+    static boolean isPalindrome(String s) {
+        String reversedStr = new StringBuilder(s).reverse().toString();
+        return s.equals(reversedStr);
     }
 
     public static void main(String[] args) {
