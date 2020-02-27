@@ -25,6 +25,6 @@ public class LISLengthByDPBottomUp {
 
     public static void main(String[] args) {
         int[] arr = {0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15};
-        System.out.println("Length of LIS: " + lengthOfLIS(arr));
+        System.out.println(lengthOfLIS(arr));
     }
 }
