@@ -1,14 +1,13 @@
 package com.hellokoding.algorithm;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SubarrayGivenSumHashtable {
     public static int countSubArrays(int[] a, int k) {
         int count = 0;
         int cumulativeSum = 0;
-        Map<Integer, Integer> map = new LinkedHashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
 
         for (int value : a) {
