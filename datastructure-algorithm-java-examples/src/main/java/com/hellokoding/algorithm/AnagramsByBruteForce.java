@@ -39,7 +39,6 @@ public class AnagramsByBruteForce {
 
     public static void main(String[] args) {
         System.out.println(areAnagrams("listen", "silent"));
-        System.out.println(areAnagrams("eleven plus two", "twelve plus one"));
         System.out.println(areAnagrams("rat", "car"));
     }
 }
