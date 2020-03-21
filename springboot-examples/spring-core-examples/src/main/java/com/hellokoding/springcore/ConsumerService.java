@@ -8,9 +8,9 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ConsumerService {
     @Autowired
-    RestTemplate restTemplate;
+    RestTemplate restTemplateWithErrorHandler;
 
     public <T> ResponseEntity consume(String url, Class<T> responseType) {
-        return restTemplate.getForEntity(url, responseType);
+        return restTemplateWithErrorHandler.getForEntity(url, responseType);
     }
 }

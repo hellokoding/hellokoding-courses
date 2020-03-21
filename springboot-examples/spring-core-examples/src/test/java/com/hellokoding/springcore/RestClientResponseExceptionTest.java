@@ -1,7 +1,7 @@
 package com.hellokoding.springcore;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +16,11 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
 
 public class RestClientResponseExceptionTest {
+    private static final String URL = "/server/products/1";
     private MockRestServiceServer mockRestServiceServer;
     private RestTemplate restTemplate;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         restTemplate = new RestTemplate();
         mockRestServiceServer = MockRestServiceServer.createServer(restTemplate);
@@ -27,26 +28,24 @@ public class RestClientResponseExceptionTest {
 
     @Test
     public void response4xx() {
-        String url = "/server/products/1";
         mockRestServiceServer
-            .expect(requestTo(url))
+            .expect(requestTo(URL))
             .andExpect(method(HttpMethod.GET))
             .andRespond(withBadRequest());
 
-        ResponseEntity responseEntity = consumeWebService(url, Object.class);
+        ResponseEntity responseEntity = consumeWebService(URL, Object.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
     public void response5xx() {
-        String url = "/server/products/1";
         mockRestServiceServer
-            .expect(requestTo(url))
+            .expect(requestTo(URL))
             .andExpect(method(HttpMethod.GET))
             .andRespond(withServerError());
 
-        ResponseEntity responseEntity = consumeWebService(url, Object.class);
+        ResponseEntity responseEntity = consumeWebService(URL, Object.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }

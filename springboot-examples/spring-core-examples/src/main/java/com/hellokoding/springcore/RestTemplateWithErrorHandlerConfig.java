@@ -6,12 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class RestTemplateConfig {
+public class RestTemplateWithErrorHandlerConfig {
     @Bean
-    RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setErrorHandler(new CustomResponseErrorHandler());
-
-        return restTemplate;
+    RestTemplate restTemplateWithErrorHandler() {
+        return new RestTemplateBuilder()
+            .errorHandler(new CustomResponseErrorHandler())
+            .build();
     }
 }

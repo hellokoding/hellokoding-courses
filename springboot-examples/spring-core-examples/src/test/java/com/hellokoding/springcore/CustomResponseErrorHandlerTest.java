@@ -1,24 +1,24 @@
 package com.hellokoding.springcore;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.ResponseActions;
 
+import static com.hellokoding.springcore.CustomResponseErrorHandler.CustomException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withBadRequest;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withServerError;
-import static com.hellokoding.springcore.CustomResponseErrorHandler.CustomException;
 
-@RunWith(SpringRunner.class)
-@ContextConfiguration(classes = {RestTemplateConfig.class, ConsumerService.class})
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = {RestTemplateWithErrorHandlerConfig.class, ConsumerService.class})
 public class CustomResponseErrorHandlerTest {
     private static final String URL = "/server/products/1";
     private ResponseActions responseActions;
@@ -26,9 +26,9 @@ public class CustomResponseErrorHandlerTest {
     @Autowired
     private ConsumerService consumerService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
-        responseActions = MockRestServiceServer.createServer(consumerService.restTemplate)
+        responseActions = MockRestServiceServer.createServer(consumerService.restTemplateWithErrorHandler)
             .expect(requestTo(URL))
             .andExpect(method(HttpMethod.GET));
     }
