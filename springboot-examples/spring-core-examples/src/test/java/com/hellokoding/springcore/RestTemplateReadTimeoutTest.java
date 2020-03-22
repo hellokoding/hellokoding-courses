@@ -21,6 +21,9 @@ public class RestTemplateReadTimeoutTest {
     private int port;
 
     @Autowired
+    private RestTemplate restTemplateWithConnectTimeout;
+
+    @Autowired
     private RestTemplate restTemplateWithConnectReadTimeout;
 
     @Test
@@ -30,6 +33,21 @@ public class RestTemplateReadTimeoutTest {
         Throwable throwable = catchThrowable(() -> {
             String url = String.format("http://localhost:%d/test/delay?millis=%d", port, 600);
             restTemplateWithConnectReadTimeout.getForObject(url, String.class);
+        });
+
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Execution time: " + (endMillis - startMillis));
+
+        assertThat(throwable).hasRootCauseInstanceOf(SocketTimeoutException.class);
+    }
+
+    @Test
+    public void testReadTimeout2() {
+        long startMillis = System.currentTimeMillis();
+
+        Throwable throwable = catchThrowable(() -> {
+            String url = String.format("http://localhost:%d/test/delay?millis=%d", port, 600);
+            restTemplateWithConnectTimeout.getForObject(url, String.class);
         });
 
         long endMillis = System.currentTimeMillis();
