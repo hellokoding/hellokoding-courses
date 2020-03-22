@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class RestTemplateWithTimeoutTestApplication {
+public class RestTemplateReadTimeoutApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RestTemplateWithTimeoutTestApplication.class, args);
+        SpringApplication.run(RestTemplateReadTimeoutApplication.class, args);
     }
 
     @GetMapping("/test/delay")

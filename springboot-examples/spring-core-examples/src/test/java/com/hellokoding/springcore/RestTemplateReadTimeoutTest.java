@@ -9,35 +9,32 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.SocketTimeoutException;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.ThrowableAssert.catchThrowable;
 
 @SpringBootTest(
     webEnvironment = WebEnvironment.RANDOM_PORT,
-    classes = {RestTemplateWithTimeoutConfig.class, RestTemplateWithTimeoutTestApplication.class}
+    classes = {RestTemplateWithTimeoutConfig.class, RestTemplateReadTimeoutApplication.class}
 )
-public class RestTemplateWithTimeoutTest {
+public class RestTemplateReadTimeoutTest {
     @LocalServerPort
     private int port;
 
     @Autowired
     private RestTemplate restTemplateWithConnectReadTimeout;
 
-    @Autowired
-    private RestTemplate restTemplateWithConnectTimeout;
-
     @Test
-    public void testConnectTimeout() {
-        assertThatThrownBy(() -> {
-            String url = String.format("http://localhost:%d/test/delay?millis=%d", port, 600);
-            restTemplateWithConnectTimeout.getForObject(url, String.class);
-        }).hasRootCauseInstanceOf(SocketTimeoutException.class);
-    }
+    public void testReadTimeout() {
+        long startMillis = System.currentTimeMillis();
 
-    @Test
-    public void testConnectReadTimeout() {
-        assertThatThrownBy(() -> {
+        Throwable throwable = catchThrowable(() -> {
             String url = String.format("http://localhost:%d/test/delay?millis=%d", port, 600);
             restTemplateWithConnectReadTimeout.getForObject(url, String.class);
-        }).hasRootCauseInstanceOf(SocketTimeoutException.class);
+        });
+
+        long endMillis = System.currentTimeMillis();
+        System.out.println("Execution time: " + (endMillis - startMillis));
+
+        assertThat(throwable).hasRootCauseInstanceOf(SocketTimeoutException.class);
     }
 }
