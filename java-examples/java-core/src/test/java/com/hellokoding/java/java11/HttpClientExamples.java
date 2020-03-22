@@ -4,12 +4,14 @@ import org.junit.Test;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLParameters;
+import java.io.IOException;
 import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.NoSuchAlgorithmException;
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,12 +63,26 @@ public class HttpClientExamples {
             .uri(URI.create("https://example.com/"))
             .POST(HttpRequest.BodyPublishers.noBody())
             .version(HttpClient.Version.HTTP_2)
-            .header("key", "value")
+            .header("name", "value")
+            .timeout(Duration.ofMillis(500))
             .build();
     }
 
     @Test
-    public void retrieveAnHTTPResponse() {
+    public void retrieveAnHTTPResponseSynchronously() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("https://example.com/"))
+            .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(response.headers());
+    }
+
+    @Test
+    public void retrieveAnHTTPResponseAsynchronously() {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -74,7 +90,10 @@ public class HttpClientExamples {
             .POST(HttpRequest.BodyPublishers.ofString("ping!"))
             .build();
 
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        CompletableFuture<HttpResponse<String>> completableFutureResponse =
+            client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
+
+        completableFutureResponse
             .thenApplyAsync(HttpResponse::headers)
             .thenAcceptAsync(System.out::println)
             .join();
