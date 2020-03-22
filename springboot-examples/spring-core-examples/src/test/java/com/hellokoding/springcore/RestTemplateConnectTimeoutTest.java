@@ -20,7 +20,7 @@ public class RestTemplateConnectTimeoutTest {
     private RestTemplate restTemplateWithConnectTimeout;
 
     @ParameterizedTest
-    @ValueSource(strings = {"http://example.com:81", "http://10.255.255.1"})
+    @ValueSource(strings = {"http://example.com:81", "http://10.255.255.255"})
     public void testConnectTimeout(String url) {
         long startMillis = System.currentTimeMillis();
 
