@@ -1,5 +1,6 @@
 package com.hellokoding.java.java11;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.common.ConsoleNotifier;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
@@ -26,6 +27,8 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HttpClientExamples {
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     @ClassRule
     public static final WireMockClassRule wireMockRule = new WireMockClassRule(
         WireMockConfiguration.options()
@@ -40,7 +43,7 @@ public class HttpClientExamples {
             .willReturn(aResponse()
                 .withStatus(200)
                 .withHeader("Content-Type", "application/json")
-                .withBody("OK")));
+                .withBody("{\"id\":\"1\",\"title\":\"Java 11 HttpClient in practice\"}")));
 
         stubFor(any(urlEqualTo("/test/secure"))
             .withBasicAuth("user", "pass")
@@ -113,7 +116,6 @@ public class HttpClientExamples {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body()).isEqualTo("OK");
     }
 
     @Test
@@ -125,11 +127,11 @@ public class HttpClientExamples {
             .header("Accept", "application/json")
             .build();
 
-        String body = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-            .thenApplyAsync(HttpResponse::body)
+        int statusCode = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+            .thenApplyAsync(HttpResponse::statusCode)
             .join();
 
-        assertThat(body).isEqualTo("OK");
+        assertThat(statusCode).isEqualTo(200);
     }
 
     @Test
@@ -150,7 +152,26 @@ public class HttpClientExamples {
         HttpResponse<String> response = completableFuture.join();
 
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body()).isEqualTo("OK");
+    }
+
+    @Test
+    public void postJson() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        Book book = new Book(1, "Java HttpClient in practice");
+        String body = objectMapper.writeValueAsString(book);
+
+        HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create("http://localhost:8081/test/resource"))
+            .header("Accept", "application/json")
+            .header("Content-Type", "application/json")
+            .POST(HttpRequest.BodyPublishers.ofString(body))
+            .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        assertThat(response.statusCode()).isEqualTo(200);
+        assertThat(objectMapper.readValue(response.body(), Book.class).id).isEqualTo(1);
     }
 
     @Test
@@ -190,5 +211,19 @@ public class HttpClientExamples {
             .build();
         response = client.send(request, HttpResponse.BodyHandlers.ofString());
         assertThat(response.statusCode()).isEqualTo(200);
+    }
+
+    static class Book {
+        public int id;
+        public String title;
+
+        public Book() {
+
+        }
+
+        public Book(int id, String title) {
+            this.id = id;
+            this.title = title;
+        }
     }
 }
