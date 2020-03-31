@@ -1,12 +1,12 @@
 package com.hellokoding.algorithm;
 
-import com.hellokoding.datastructure.UndirectedGraphByAdjacencyList;
+import com.hellokoding.datastructure.GraphUndirectedByAdjacencyList;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
 public class BreadthFirstSearchOnGraph {
-    public void breadthFirstSearch(UndirectedGraphByAdjacencyList g, int startingVertex) {
+    public void breadthFirstSearch(GraphUndirectedByAdjacencyList g, int startingVertex) {
         boolean[] visited = new boolean[g.getV()];
         Queue<Integer> queue = new ArrayDeque<>();
 
@@ -27,7 +27,7 @@ public class BreadthFirstSearchOnGraph {
     }
 
     public static void main(String[] args) {
-        UndirectedGraphByAdjacencyList graph = new UndirectedGraphByAdjacencyList(5);
+        GraphUndirectedByAdjacencyList graph = new GraphUndirectedByAdjacencyList(5);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);

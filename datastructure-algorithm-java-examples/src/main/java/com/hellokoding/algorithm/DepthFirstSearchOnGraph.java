@@ -1,12 +1,12 @@
 package com.hellokoding.algorithm;
 
-import com.hellokoding.datastructure.UndirectedGraphByAdjacencyList;
+import com.hellokoding.datastructure.GraphUndirectedByAdjacencyList;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class DepthFirstSearchOnGraph {
-    public void depthFirstSearch(UndirectedGraphByAdjacencyList g, int startingVertex) {
+    public void depthFirstSearch(GraphUndirectedByAdjacencyList g, int startingVertex) {
         boolean[] visited = new boolean[g.getV()];
         Deque<Integer> stack = new ArrayDeque<>();
 
@@ -27,7 +27,7 @@ public class DepthFirstSearchOnGraph {
     }
 
     public static void main(String[] args) {
-        UndirectedGraphByAdjacencyList graph = new UndirectedGraphByAdjacencyList(5);
+        GraphUndirectedByAdjacencyList graph = new GraphUndirectedByAdjacencyList(5);
         graph.addEdge(0, 2);
         graph.addEdge(1, 2);
         graph.addEdge(1, 0);
