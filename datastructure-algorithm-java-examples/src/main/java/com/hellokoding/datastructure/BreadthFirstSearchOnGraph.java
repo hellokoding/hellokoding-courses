@@ -1,13 +1,15 @@
-package com.hellokoding.algorithm;
-
-import com.hellokoding.datastructure.GraphUndirectedByAdjacencyList;
+package com.hellokoding.datastructure;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class BreadthFirstSearchOnGraph {
-    public void breadthFirstSearch(GraphUndirectedByAdjacencyList g, int startingVertex) {
-        boolean[] visited = new boolean[g.getV()];
+public class BreadthFirstSearchOnGraph extends GraphUndirectedByAdjacencyList {
+    public BreadthFirstSearchOnGraph(int V) {
+        super(V);
+    }
+
+    public void breadthFirstSearch(int startingVertex) {
+        boolean[] visited = new boolean[V];
         Queue<Integer> queue = new ArrayDeque<>();
 
         visited[startingVertex] = true;
@@ -17,7 +19,7 @@ public class BreadthFirstSearchOnGraph {
             Integer currentVertex = queue.poll();
             System.out.printf("%d ", currentVertex);
 
-            for(Integer vertex : g.getAdjacencyList(currentVertex)) {
+            for(Integer vertex : adjacencyList.get(currentVertex)) {
                 if (!visited[vertex]) {
                     visited[vertex] = true;
                     queue.offer(vertex);
@@ -27,13 +29,13 @@ public class BreadthFirstSearchOnGraph {
     }
 
     public static void main(String[] args) {
-        GraphUndirectedByAdjacencyList graph = new GraphUndirectedByAdjacencyList(5);
+        BreadthFirstSearchOnGraph graph = new BreadthFirstSearchOnGraph(5);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);
         graph.addEdge(1, 3);
         graph.addEdge(2, 4);
 
-        new BreadthFirstSearchOnGraph().breadthFirstSearch(graph, 0);
+        graph.breadthFirstSearch(0);
     }
 }

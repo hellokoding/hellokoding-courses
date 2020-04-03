@@ -1,10 +1,9 @@
 package com.hellokoding.datastructure;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class GraphDirectedDetectCycle extends GraphDirectedByAdjacencyList {
-    public GraphDirectedDetectCycle(int V) {
+public class GraphDirectedDetectCycleByDFS extends GraphDirectedByAdjacencyList {
+    public GraphDirectedDetectCycleByDFS(int V) {
         super(V);
     }
 
@@ -40,7 +39,7 @@ public class GraphDirectedDetectCycle extends GraphDirectedByAdjacencyList {
     }
 
     public static void main(String[] args) {
-        GraphDirectedDetectCycle graph = new GraphDirectedDetectCycle(3);
+        GraphDirectedDetectCycleByDFS graph = new GraphDirectedDetectCycleByDFS(3);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);

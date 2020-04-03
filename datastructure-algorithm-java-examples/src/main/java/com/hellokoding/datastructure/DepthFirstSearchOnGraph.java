@@ -1,13 +1,15 @@
-package com.hellokoding.algorithm;
-
-import com.hellokoding.datastructure.GraphUndirectedByAdjacencyList;
+package com.hellokoding.datastructure;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class DepthFirstSearchOnGraph {
-    public void depthFirstSearch(GraphUndirectedByAdjacencyList g, int startingVertex) {
-        boolean[] visited = new boolean[g.getV()];
+public class DepthFirstSearchOnGraph extends GraphUndirectedByAdjacencyList {
+    public DepthFirstSearchOnGraph(int V) {
+        super(V);
+    }
+
+    public void depthFirstSearch(int startingVertex) {
+        boolean[] visited = new boolean[V];
         Deque<Integer> stack = new ArrayDeque<>();
 
         visited[startingVertex] = true;
@@ -17,7 +19,7 @@ public class DepthFirstSearchOnGraph {
             Integer currentVertex = stack.pop();
             System.out.printf("%d ", currentVertex);
 
-            for(Integer vertex : g.getAdjacencyList(currentVertex)) {
+            for(Integer vertex : adjacencyList.get(currentVertex)) {
                 if (!visited[vertex]) {
                     visited[vertex] = true;
                     stack.push(vertex);
@@ -27,13 +29,13 @@ public class DepthFirstSearchOnGraph {
     }
 
     public static void main(String[] args) {
-        GraphUndirectedByAdjacencyList graph = new GraphUndirectedByAdjacencyList(5);
+        DepthFirstSearchOnGraph graph = new DepthFirstSearchOnGraph(5);
         graph.addEdge(0, 2);
         graph.addEdge(1, 2);
         graph.addEdge(1, 0);
         graph.addEdge(1, 3);
         graph.addEdge(2, 4);
 
-        new DepthFirstSearchOnGraph().depthFirstSearch(graph, 0);
+        graph.depthFirstSearch(0);
     }
 }
