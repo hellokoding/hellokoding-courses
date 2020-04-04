@@ -1,0 +1,37 @@
+package com.hellokoding.datastructure;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class GraphDFSByIterative {
+    static void dfsByIterative(GraphUndirectedByAdjacencyList g, int v) {
+        boolean[] visited = new boolean[g.V];
+
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(v);
+
+        while (!stack.isEmpty()) {
+            v = stack.pop();
+
+            if (!visited[v]) {
+                visited[v] = true;
+                System.out.printf("%d ", v);
+
+                for(Integer w : g.adjacencyList.get(v)) {
+                    stack.push(w);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        GraphUndirectedByAdjacencyList g = new GraphUndirectedByAdjacencyList(5);
+        g.addEdge(0, 2);
+        g.addEdge(1, 2);
+        g.addEdge(1, 0);
+        g.addEdge(1, 3);
+        g.addEdge(2, 4);
+
+        dfsByIterative(g, 0);
+    }
+}
