@@ -1,6 +1,6 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
-public class GraphDFSByRecursive {
+public class DFSByRecursive {
 
     static void dfs(GraphUndirectedByAdjacencyList g, int v, boolean[] visited) {
         visited[v] = true;

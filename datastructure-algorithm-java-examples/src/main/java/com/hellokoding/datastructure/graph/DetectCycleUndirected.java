@@ -1,9 +1,9 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
 import java.util.List;
 
-public class GraphUndirectedDetectCycle extends GraphUndirectedByAdjacencyList {
-    public GraphUndirectedDetectCycle(int V) {
+public class DetectCycleUndirected extends GraphUndirectedByAdjacencyList {
+    public DetectCycleUndirected(int V) {
         super(V);
     }
 
@@ -35,7 +35,7 @@ public class GraphUndirectedDetectCycle extends GraphUndirectedByAdjacencyList {
     }
 
     public static void main(String[] args) {
-        GraphUndirectedDetectCycle graph = new GraphUndirectedDetectCycle(3);
+        DetectCycleUndirected graph = new DetectCycleUndirected(3);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);

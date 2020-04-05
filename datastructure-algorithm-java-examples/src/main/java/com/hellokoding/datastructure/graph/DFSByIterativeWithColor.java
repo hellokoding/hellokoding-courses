@@ -1,9 +1,9 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class GraphDFSByIterativeWithColor {
+public class DFSByIterativeWithColor {
     static final int WHITE = 0, GRAY = 1, BLACK = 2;
 
     static void dfsByIterativeWithColor(GraphUndirectedByAdjacencyList g, int v) {

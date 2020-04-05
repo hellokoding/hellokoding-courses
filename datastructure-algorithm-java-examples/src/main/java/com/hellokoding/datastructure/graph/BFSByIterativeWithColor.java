@@ -1,25 +1,28 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Queue;
 
-public class GraphBFSByIterative {
-    public static void bfsByIterative(GraphUndirectedByAdjacencyList g, int v) {
-        boolean[] visited = new boolean[g.V];
+public class BFSByIterativeWithColor {
+    static final int WHITE = 0, GRAY = 1, BLACK = 2;
+
+    public static void bfsByIterativeWithColor(GraphUndirectedByAdjacencyList g, int v) {
+        int[] color = new int[g.V];
         Deque<Integer> queue = new ArrayDeque<>();
         queue.offer(v);
 
         while (!queue.isEmpty()) {
             v = queue.poll();
 
-            if (!visited[v]) {
-                visited[v] = true;
+            if (color[v] == WHITE) {
+                color[v] = GRAY;
                 System.out.printf("%d ", v);
 
                 for (Integer w : g.adjacencyList.get(v)) {
                     queue.offer(w);
                 }
+
+                color[v] = BLACK;
             }
         }
     }
@@ -32,6 +35,6 @@ public class GraphBFSByIterative {
         g.addEdge(1, 3);
         g.addEdge(2, 4);
 
-        bfsByIterative(g, 0);
+        bfsByIterativeWithColor(g, 0);
     }
 }

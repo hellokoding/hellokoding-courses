@@ -1,6 +1,6 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
-public class GraphDFSByRecursiveWithColor {
+public class DFSByRecursiveWithColor {
     static final int WHITE = 0, GRAY = 1, BLACK = 2;
 
     static void dfsByRecursiveWithColor(GraphUndirectedByAdjacencyList g, int v, int[] color) {

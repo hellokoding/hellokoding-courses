@@ -1,13 +1,13 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphDirectedByAdjacencyList {
+public class GraphUndirectedByAdjacencyList {
     int V;
     List<List<Integer>> adjacencyList;
 
-    public GraphDirectedByAdjacencyList(int V) {
+    public GraphUndirectedByAdjacencyList(int V) {
         this.V = V;
 
         adjacencyList = new ArrayList<>(V);
@@ -18,6 +18,7 @@ public class GraphDirectedByAdjacencyList {
 
     public void addEdge(int source, int dest) {
         adjacencyList.get(source).add(dest);
+        adjacencyList.get(dest).add(source);
     }
 
     public void printAdjacencyList() {
@@ -28,7 +29,7 @@ public class GraphDirectedByAdjacencyList {
     }
 
     public static void main(String[] args) {
-        GraphDirectedByAdjacencyList graph = new GraphDirectedByAdjacencyList(3);
+        GraphUndirectedByAdjacencyList graph = new GraphUndirectedByAdjacencyList(3);
         graph.addEdge(0, 1);
         graph.addEdge(1, 2);
         graph.addEdge(2, 0);

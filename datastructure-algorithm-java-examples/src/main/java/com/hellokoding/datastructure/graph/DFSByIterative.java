@@ -1,9 +1,9 @@
-package com.hellokoding.datastructure;
+package com.hellokoding.datastructure.graph;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class GraphDFSByIterative {
+public class DFSByIterative {
     static void dfsByIterative(GraphUndirectedByAdjacencyList g, int v) {
         boolean[] visited = new boolean[g.V];
 
