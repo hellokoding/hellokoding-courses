@@ -44,7 +44,7 @@ public class TopologicalSortByDFSRecursiveColor {
         return hasCycle ? new ArrayList<>() : new ArrayList<>(stack);
     }
 
-    public static void printResult(List<Integer> sorted) {
+    static void printResult(List<Integer> sorted) {
         if (sorted.isEmpty()) {
             System.out.println("There are no topological orderings as the input graph is cyclic");
         } else {

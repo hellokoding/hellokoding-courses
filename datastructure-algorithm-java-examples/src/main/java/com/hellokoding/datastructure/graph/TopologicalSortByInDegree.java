@@ -5,8 +5,8 @@ import java.util.*;
 public class TopologicalSortByInDegree {
     static List<Integer> topologicalSortByInDegree(GraphDirectedByAdjacencyList g) {
         List<Integer> sorted = new ArrayList<>();
-        int[] inDegree = new int[g.V];
 
+        int[] inDegree = new int[g.V];
         for (int v = 0; v < g.V; v++) {
             for(int w : g.adjacencyList.get(v)) {
                 inDegree[w] += 1;
@@ -36,7 +36,7 @@ public class TopologicalSortByInDegree {
         return sorted.size() == g.V ? sorted : new ArrayList<>();
     }
 
-    public static void printResult(List<Integer> sorted) {
+    static void printResult(List<Integer> sorted) {
         if (sorted.isEmpty()) {
             System.out.println("There are no topological orderings as the input graph is cyclic");
         } else {
