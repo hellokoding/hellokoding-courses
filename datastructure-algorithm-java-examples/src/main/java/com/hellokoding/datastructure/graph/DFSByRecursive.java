@@ -6,7 +6,7 @@ public class DFSByRecursive {
         visited[v] = true;
         System.out.printf("%d ", v);
 
-        for (Integer w : g.adjacencyList.get(v)) {
+        for (Integer w : g.getAdjacencyList().get(v)) {
             if (!visited[w]) {
                 dfs(g, w, visited);
             }
@@ -14,9 +14,9 @@ public class DFSByRecursive {
     }
 
     static void traversal(GraphUndirectedByAdjacencyList g) {
-        boolean[] visited = new boolean[g.V];
+        boolean[] visited = new boolean[g.getV()];
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (!visited[i]) {
                 dfs(g, i, visited);
             }

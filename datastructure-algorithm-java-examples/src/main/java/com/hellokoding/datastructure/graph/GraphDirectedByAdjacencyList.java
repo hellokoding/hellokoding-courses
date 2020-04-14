@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GraphDirectedByAdjacencyList {
-    int V;
-    List<List<Integer>> adjacencyList;
+    private int V;
+    private List<List<Integer>> adjacencyList;
 
     public GraphDirectedByAdjacencyList(int V) {
         this.V = V;
@@ -14,6 +14,14 @@ public class GraphDirectedByAdjacencyList {
         for (int i = 0; i < V; i++) {
             adjacencyList.add(new ArrayList<>());
         }
+    }
+
+    public Integer getV() {
+        return this.V;
+    }
+
+    public List<List<Integer>> getAdjacencyList() {
+        return this.adjacencyList;
     }
 
     public void addEdge(int source, int dest) {

@@ -2,15 +2,14 @@ package com.hellokoding.datastructure.graph;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List;
 
 public class DetectCycleDirectedByDFSIterative {
     static boolean dfsByIterative(GraphDirectedByAdjacencyList g) {
-        boolean[] visited = new boolean[g.V];
-        boolean[] onStack = new boolean[g.V];
+        boolean[] visited = new boolean[g.getV()];
+        boolean[] onStack = new boolean[g.getV()];
         Deque<Integer> stack = new ArrayDeque<>();
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (visited[i]) continue;
             stack.push(i);
 
@@ -25,7 +24,7 @@ public class DetectCycleDirectedByDFSIterative {
                     stack.pop();
                 }
 
-                for (Integer w : g.adjacencyList.get(v)) {
+                for (Integer w : g.getAdjacencyList().get(v)) {
                     if (!visited[w]) {
                         stack.push(w);
                     } else if (onStack[w]) {

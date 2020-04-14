@@ -7,7 +7,7 @@ public class DFSByRecursiveWithColor {
         color[v] = GRAY;
         System.out.printf("%d ", v);
 
-        for (Integer w : g.adjacencyList.get(v)) {
+        for (Integer w : g.getAdjacencyList().get(v)) {
             if (color[w] == WHITE) {
                 dfsByRecursiveWithColor(g, w, color);
             }
@@ -16,9 +16,9 @@ public class DFSByRecursiveWithColor {
     }
 
     static void traversal(GraphUndirectedByAdjacencyList g) {
-        int[] color = new int[g.V];
+        int[] color = new int[g.getV()];
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (color[i] == WHITE) {
                 dfsByRecursiveWithColor(g, i, color);
             }

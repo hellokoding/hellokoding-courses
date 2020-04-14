@@ -10,7 +10,7 @@ public class DetectCycleUndirected extends GraphUndirectedByAdjacencyList {
     private boolean dfs(int v, boolean[] visited, int parent) {
         visited[v] = true;
 
-        List<Integer> children = adjacencyList.get(v);
+        List<Integer> children = getAdjacencyList().get(v);
         for (Integer c: children) {
             if (!visited[c] && dfs(c, visited, v)) {
                 return true;
@@ -23,9 +23,9 @@ public class DetectCycleUndirected extends GraphUndirectedByAdjacencyList {
     }
 
     public boolean hasCycle() {
-        boolean[] visited = new boolean[V];
+        boolean[] visited = new boolean[getV()];
 
-        for (int i = 0; i < V; i++) {
+        for (int i = 0; i < getV(); i++) {
             if (!visited[i] && dfs(i, visited, -1)) {
                 return true;
             }

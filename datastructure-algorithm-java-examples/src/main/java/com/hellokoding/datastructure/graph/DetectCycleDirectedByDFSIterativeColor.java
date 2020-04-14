@@ -7,10 +7,10 @@ public class DetectCycleDirectedByDFSIterativeColor {
     static final int WHITE = 0, GRAY = 1, BLACK = 2;
 
     static boolean dfsByIterativeWithColor(GraphDirectedByAdjacencyList g) {
-        int[] color = new int[g.V];
-        Deque<Integer> stack = new ArrayDeque<>(g.V);
+        int[] color = new int[g.getV()];
+        Deque<Integer> stack = new ArrayDeque<>(g.getV());
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (color[i] != WHITE) continue;
             stack.push(i);
 
@@ -24,7 +24,7 @@ public class DetectCycleDirectedByDFSIterativeColor {
                     stack.pop();
                 }
 
-                for (int w : g.adjacencyList.get(v)) {
+                for (int w : g.getAdjacencyList().get(v)) {
                     if (color[w] == GRAY) {
                         return true;
                     } else if (color[w] == WHITE) {

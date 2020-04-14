@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class DFSByIterative {
     static void dfsByIterative(GraphUndirectedByAdjacencyList g, int v) {
-        boolean[] visited = new boolean[g.V];
+        boolean[] visited = new boolean[g.getV()];
 
         Deque<Integer> stack = new ArrayDeque<>();
         stack.push(v);
@@ -17,7 +17,7 @@ public class DFSByIterative {
                 visited[v] = true;
                 System.out.printf("%d ", v);
 
-                for(Integer w : g.adjacencyList.get(v)) {
+                for(Integer w : g.getAdjacencyList().get(v)) {
                     stack.push(w);
                 }
             }

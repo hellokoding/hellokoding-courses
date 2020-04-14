@@ -6,7 +6,7 @@ public class DetectCycleDirectedByDFSRecursiveColor {
     static boolean dfsByRecursiveWithColor(GraphDirectedByAdjacencyList g, int v, int[] color) {
         color[v] = GRAY;
 
-        for (Integer w : g.adjacencyList.get(v)) {
+        for (Integer w : g.getAdjacencyList().get(v)) {
             if (color[w] == GRAY) {
                 return true;
             }
@@ -21,9 +21,9 @@ public class DetectCycleDirectedByDFSRecursiveColor {
     }
 
     static boolean hasCycle(GraphDirectedByAdjacencyList g) {
-        int[] color = new int[g.V];
+        int[] color = new int[g.getV()];
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (color[i] == WHITE && dfsByRecursiveWithColor(g, i, color)) {
                 return true;
             }

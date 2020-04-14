@@ -5,7 +5,7 @@ import java.util.Deque;
 
 public class BFSByIterative {
     public static void bfsByIterative(GraphUndirectedByAdjacencyList g, int v) {
-        boolean[] visited = new boolean[g.V];
+        boolean[] visited = new boolean[g.getV()];
         Deque<Integer> queue = new ArrayDeque<>();
         queue.offer(v);
 
@@ -16,7 +16,7 @@ public class BFSByIterative {
                 visited[v] = true;
                 System.out.printf("%d ", v);
 
-                for (Integer w : g.adjacencyList.get(v)) {
+                for (Integer w : g.getAdjacencyList().get(v)) {
                     queue.offer(w);
                 }
             }

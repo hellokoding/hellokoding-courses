@@ -10,7 +10,7 @@ public class DetectCycleDirectedByDFSRecursive {
         visited[v] = true;
         onStack[v] = true;
 
-        List<Integer> children = g.adjacencyList.get(v);
+        List<Integer> children = g.getAdjacencyList().get(v);
         for (Integer c: children) {
             if (dfsByRecursive(g, c, visited, onStack)) {
                 return true;
@@ -22,10 +22,10 @@ public class DetectCycleDirectedByDFSRecursive {
     }
 
     static boolean hasCycle(GraphDirectedByAdjacencyList g) {
-        boolean[] visited = new boolean[g.V];
-        boolean[] onStack = new boolean[g.V];
+        boolean[] visited = new boolean[g.getV()];
+        boolean[] onStack = new boolean[g.getV()];
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (dfsByRecursive(g, i, visited, onStack)) {
                 return true;
             }

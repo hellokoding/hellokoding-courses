@@ -65,6 +65,10 @@ public class MinHeapByArray {
         return heap[1];
     }
 
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
     public static void main(String[] args) {
         MinHeapByArray minHeap = new MinHeapByArray(5);
         minHeap.push(3);

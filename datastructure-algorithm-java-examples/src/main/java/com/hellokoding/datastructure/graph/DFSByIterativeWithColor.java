@@ -7,7 +7,7 @@ public class DFSByIterativeWithColor {
     static final int WHITE = 0, GRAY = 1, BLACK = 2;
 
     static void dfsByIterativeWithColor(GraphUndirectedByAdjacencyList g, int v) {
-        int[] color = new int[g.V];
+        int[] color = new int[g.getV()];
 
         Deque<Integer> stack = new ArrayDeque<>();
         stack.push(v);
@@ -19,7 +19,7 @@ public class DFSByIterativeWithColor {
                 color[v] = GRAY;
                 System.out.printf("%d ", v);
 
-                for(Integer w : g.adjacencyList.get(v)) {
+                for(Integer w : g.getAdjacencyList().get(v)) {
                     stack.push(w);
                 }
 

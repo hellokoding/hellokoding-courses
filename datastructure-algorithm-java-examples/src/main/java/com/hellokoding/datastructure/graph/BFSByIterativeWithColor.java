@@ -7,7 +7,7 @@ public class BFSByIterativeWithColor {
     static final int WHITE = 0, GRAY = 1, BLACK = 2;
 
     public static void bfsByIterativeWithColor(GraphUndirectedByAdjacencyList g, int v) {
-        int[] color = new int[g.V];
+        int[] color = new int[g.getV()];
         Deque<Integer> queue = new ArrayDeque<>();
         queue.offer(v);
 
@@ -18,7 +18,7 @@ public class BFSByIterativeWithColor {
                 color[v] = GRAY;
                 System.out.printf("%d ", v);
 
-                for (Integer w : g.adjacencyList.get(v)) {
+                for (Integer w : g.getAdjacencyList().get(v)) {
                     queue.offer(w);
                 }
 

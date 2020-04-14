@@ -6,15 +6,15 @@ public class TopologicalSortByInDegree {
     static List<Integer> topologicalSortByInDegree(GraphDirectedByAdjacencyList g) {
         List<Integer> sorted = new ArrayList<>();
 
-        int[] inDegree = new int[g.V];
-        for (int v = 0; v < g.V; v++) {
-            for(int w : g.adjacencyList.get(v)) {
+        int[] inDegree = new int[g.getV()];
+        for (int v = 0; v < g.getV(); v++) {
+            for(int w : g.getAdjacencyList().get(v)) {
                 inDegree[w] += 1;
             }
         }
 
         Queue<Integer> queue = new ArrayDeque<>();
-        for (int v = 0; v < g.V; v++) {
+        for (int v = 0; v < g.getV(); v++) {
             if (inDegree[v] == 0) {
                 queue.offer(v);
             }
@@ -24,7 +24,7 @@ public class TopologicalSortByInDegree {
             int v = queue.poll();
             sorted.add(v);
 
-            for (int w : g.adjacencyList.get(v)) {
+            for (int w : g.getAdjacencyList().get(v)) {
                 inDegree[w]--;
 
                 if (inDegree[w] == 0) {
@@ -33,7 +33,7 @@ public class TopologicalSortByInDegree {
             }
         }
 
-        return sorted.size() == g.V ? sorted : new ArrayList<>();
+        return sorted.size() == g.getV() ? sorted : new ArrayList<>();
     }
 
     static void printResult(List<Integer> sorted) {

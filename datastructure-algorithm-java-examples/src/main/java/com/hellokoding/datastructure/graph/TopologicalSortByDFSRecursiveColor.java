@@ -16,7 +16,7 @@ public class TopologicalSortByDFSRecursiveColor {
 
         color[v] = GRAY;
 
-        for (Integer w : g.adjacencyList.get(v)) {
+        for (Integer w : g.getAdjacencyList().get(v)) {
             if (color[w] == GRAY) {
                 hasCycle = true;
             }
@@ -31,11 +31,11 @@ public class TopologicalSortByDFSRecursiveColor {
     }
 
     static List<Integer> topologicalSort(GraphDirectedByAdjacencyList g) {
-        int[] color = new int[g.V];
+        int[] color = new int[g.getV()];
         Deque<Integer> stack = new ArrayDeque<>();
         hasCycle = false;
 
-        for (int i = 0; i < g.V; i++) {
+        for (int i = 0; i < g.getV(); i++) {
             if (color[i] == WHITE) {
                 topologicalSortByDFSRecursive(g, i, color, stack);
             }
