@@ -13,15 +13,12 @@ public class ShortestPathByDijkstraWithMinHeap {
         int[] predecessors = new int[g.getV()];
         PriorityQueue<WeightedVertex> minHeap = new PriorityQueue<>(g.getV(), Comparator.comparingInt(WeightedVertex::getWeight));
 
-        distances[source] = 0;
         for (int v = 0; v < g.getV(); v++) {
-            if (v != source) {
-                distances[v] = INFINITE;
-                predecessors[v] = UNDEFINED;
-            }
-
+            distances[v] = INFINITE;
+            predecessors[v] = UNDEFINED;
             minHeap.add(new WeightedVertex(v, distances[v]));
         }
+        distances[source] = 0;
 
         while (!minHeap.isEmpty()) {
             WeightedVertex v = minHeap.poll();
@@ -54,7 +51,7 @@ public class ShortestPathByDijkstraWithMinHeap {
             Deque<Integer> route = new ArrayDeque<>();
             route.push(v);
             int u = predecessors[v];
-            while (u > 0) {
+            while (u >= 0) {
                 route.push(u);
                 u =  predecessors[u];
             }
@@ -65,10 +62,10 @@ public class ShortestPathByDijkstraWithMinHeap {
 
     public static void main(String[] args) {
         GraphWeightedByAdjacencyList g = new GraphWeightedByAdjacencyList(4);
-        g.addEdge(0, 1, 19);
-        g.addEdge(2, 0, 15);
-        g.addEdge(2, 1, 17);
-        g.addEdge(3, 2, 12);
+        g.addEdge(0, 1, 2);
+        g.addEdge(2, 0, 1);
+        g.addEdge(2, 1, 5);
+        g.addEdge(3, 2, 4);
         printResult(shortestPathByDijkstra(g, 3));
         printResult(shortestPathByDijkstra(g, 2));
     }

@@ -17,7 +17,7 @@ public class ShortestPathByFloydWarshall {
                 }
 
                 if (distances[i][i] < 0) {
-                    System.out.println("Graph contains a negative-weight cycle");
+                    System.out.println("The input graph contains a negative-weight cycle");
                     return new int[][]{};
                 }
             }

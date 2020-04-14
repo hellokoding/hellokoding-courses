@@ -9,13 +9,12 @@ public class ShortestPathByBFS {
     public static Object[] shortestPathByBFS(GraphDirectedByAdjacencyList g, int source) {
         int[] distances = new int[g.getV()];
         int[] predecessors = new int[g.getV()];
-        distances[source] = 0;
+
         for (int v = 0; v < g.getV(); v++) {
-            if (v != source) {
-                distances[v] = INFINITE;
-                predecessors[v] = UNDEFINED;
-            }
+            distances[v] = INFINITE;
+            predecessors[v] = UNDEFINED;
         }
+        distances[source] = 0;
 
         boolean[] visited = new boolean[g.getV()];
         visited[source] = true;
@@ -53,7 +52,7 @@ public class ShortestPathByBFS {
             Deque<Integer> route = new ArrayDeque<>();
             route.push(v);
             int u = predecessorsOfSource[v];
-            while (u > 0) {
+            while (u >= 0) {
                 route.push(u);
                 u =  predecessorsOfSource[u];
             }

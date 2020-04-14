@@ -27,14 +27,12 @@ public class ShortestPathByDijkstra {
         int[] predecessors = new int[g.getV()];
         Queue<Integer> queue = new ArrayDeque<>();
 
-        distances[source] = 0;
         for (int v = 0; v < g.getV(); v++) {
-            if (v != source) {
-                distances[v] = INFINITE;
-                predecessors[v] = UNDEFINED;
-            }
+            distances[v] = INFINITE;
+            predecessors[v] = UNDEFINED;
             queue.offer(v);
         }
+        distances[source] = 0;
 
         while (!queue.isEmpty()) {
             int v = minVertex(queue, distances);
@@ -69,7 +67,7 @@ public class ShortestPathByDijkstra {
             Deque<Integer> route = new ArrayDeque<>();
             route.push(v);
             int u = predecessors[v];
-            while (u > 0) {
+            while (u >= 0) {
                 route.push(u);
                 u =  predecessors[u];
             }
@@ -80,10 +78,10 @@ public class ShortestPathByDijkstra {
 
     public static void main(String[] args) {
         GraphWeightedByAdjacencyList g = new GraphWeightedByAdjacencyList(4);
-        g.addEdge(0, 1, 19);
-        g.addEdge(2, 0, 15);
-        g.addEdge(2, 1, 17);
-        g.addEdge(3, 2, 12);
+        g.addEdge(0, 1, 2);
+        g.addEdge(2, 0, 1);
+        g.addEdge(2, 1, 5);
+        g.addEdge(3, 2, 4);
         printResult(shortestPathByDijkstra(g, 3));
         printResult(shortestPathByDijkstra(g, 2));
     }
