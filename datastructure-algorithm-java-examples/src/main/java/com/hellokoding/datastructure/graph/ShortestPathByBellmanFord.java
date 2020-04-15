@@ -17,23 +17,23 @@ public class ShortestPathByBellmanFord {
         distances[source] = 0;
 
         for (int i = 1; i < g.getV(); i++) {
-            for (int v = 0; v < g.getV(); v++) {
-                for (GraphWeightedByAdjacencyList.WeightedVertex w : g.getAdjacencyList().get(v)) {
-                    if (distances[v] == INFINITE) continue;
-                    int alt = distances[v] + w.weight;
-                    if (alt < distances[w.vertex]) {
-                        distances[w.vertex] = alt;
-                        predecessors[w.vertex] = v;
+            for (int u = 0; u < g.getV(); u++) {
+                for (GraphWeightedByAdjacencyList.WeightedVertex v : g.getAdjacencyList().get(u)) {
+                    if (distances[u] == INFINITE) continue;
+                    int alt = distances[u] + v.weight;
+                    if (alt < distances[v.vertex]) {
+                        distances[v.vertex] = alt;
+                        predecessors[v.vertex] = u;
                     }
                 }
             }
         }
 
-        for (int v = 0; v < g.getV(); v++) {
-            for (GraphWeightedByAdjacencyList.WeightedVertex w : g.getAdjacencyList().get(v)) {
-                if (distances[v] == INFINITE) continue;
-                int alt = distances[v] + w.weight;
-                if (alt < distances[w.vertex]) {
+        for (int u = 0; u < g.getV(); u++) {
+            for (GraphWeightedByAdjacencyList.WeightedVertex v : g.getAdjacencyList().get(u)) {
+                if (distances[u] == INFINITE) continue;
+                int alt = distances[u] + v.weight;
+                if (alt < distances[v.vertex]) {
                     System.out.println("The input graph contains a negative-weight cycle");
                     return new Object[]{};
                 }

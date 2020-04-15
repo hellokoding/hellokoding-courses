@@ -21,15 +21,15 @@ public class ShortestPathByDijkstraWithMinHeap {
         distances[source] = 0;
 
         while (!minHeap.isEmpty()) {
-            WeightedVertex v = minHeap.poll();
+            WeightedVertex u = minHeap.poll();
 
-            for (WeightedVertex w : g.getAdjacencyList().get(v.vertex)) {
-                if (distances[v.vertex] == INFINITE) continue;
+            for (WeightedVertex v : g.getAdjacencyList().get(u.vertex)) {
+                if (distances[u.vertex] == INFINITE) continue;
 
-                int alt = distances[v.vertex] + w.weight;
-                if (alt < distances[w.vertex]) {
-                    distances[w.vertex] = alt;
-                    predecessors[w.vertex] = v.vertex;
+                int alt = distances[u.vertex] + v.weight;
+                if (alt < distances[v.vertex]) {
+                    distances[v.vertex] = alt;
+                    predecessors[v.vertex] = u.vertex;
                 }
             }
         }

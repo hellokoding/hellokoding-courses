@@ -35,17 +35,17 @@ public class ShortestPathByDijkstra {
         distances[source] = 0;
 
         while (!queue.isEmpty()) {
-            int v = minVertex(queue, distances);
-            if (v == UNDEFINED)  break;
-            queue.remove(v);
+            int u = minVertex(queue, distances);
+            if (u == UNDEFINED)  break;
+            queue.remove(u);
 
-            for (WeightedVertex w : g.getAdjacencyList().get(v)) {
-                if (distances[v] == INFINITE) continue;
+            for (WeightedVertex v : g.getAdjacencyList().get(u)) {
+                if (distances[u] == INFINITE) continue;
 
-                int alt = distances[v] + w.weight;
-                if (alt < distances[w.vertex]) {
-                    distances[w.vertex] = alt;
-                    predecessors[w.vertex] = v;
+                int alt = distances[u] + v.weight;
+                if (alt < distances[v.vertex]) {
+                    distances[v.vertex] = alt;
+                    predecessors[v.vertex] = u;
                 }
             }
         }

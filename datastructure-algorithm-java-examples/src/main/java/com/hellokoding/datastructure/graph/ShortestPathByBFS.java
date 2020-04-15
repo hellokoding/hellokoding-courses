@@ -23,14 +23,14 @@ public class ShortestPathByBFS {
         queue.offer(source);
 
         while (!queue.isEmpty()) {
-            int v = queue.poll();
+            int u = queue.poll();
 
-            for (int w : g.getAdjacencyList().get(v)) {
-                if (!visited[w]) {
-                    visited[w] = true;
-                    distances[w] = distances[v] + 1;
-                    predecessors[w] = v;
-                    queue.offer(w);
+            for (int v : g.getAdjacencyList().get(u)) {
+                if (!visited[v]) {
+                    visited[v] = true;
+                    distances[v] = distances[u] + 1;
+                    predecessors[v] = u;
+                    queue.offer(v);
                 }
             }
         }
