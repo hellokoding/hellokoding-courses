@@ -15,5 +15,5 @@ public interface BookRepository extends JpaRepository<Book, Integer>{
     @Query("DELETE FROM Book b WHERE b.bookCategory.id = ?1")
     void deleteInBulkByCategoryId(int categoryId);
 
-    void deleteByCategoryId(int categoryId);
+    void deleteByBookCategoryId(int categoryId);
 }

@@ -16,7 +16,7 @@ public class BookCategory {
 
     @OneToMany(
         mappedBy = "bookCategory",
-        cascade = CascadeType.ALL,
+        cascade = CascadeType.PERSIST,
         fetch = FetchType.LAZY
     )
     private Set<Book> books;
