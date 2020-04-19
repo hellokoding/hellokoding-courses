@@ -1,13 +1,11 @@
 package com.hellokoding.jpa.book;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Transactional
 public class BookService {
     private final BookCategoryRepository bookCategoryRepository;
     private final BookRepository bookRepository;
