@@ -1,30 +1,59 @@
 package com.hellokoding.jpa.book;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-@Data
-@EqualsAndHashCode(exclude = "books")
-
-@Entity
+@Entity(name = "book_category")
+@Table(name = "book_category")
 public class BookCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "bookCategory", cascade = CascadeType.ALL)
+    @OneToMany(
+        mappedBy = "bookCategory",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
     private Set<Book> books;
 
-    public BookCategory(String name, Book... books) {
+    public BookCategory() {
+        books = new HashSet<>();
+    }
+
+    public BookCategory(String name) {
         this.name = name;
-        this.books = Stream.of(books).collect(Collectors.toSet());
-        this.books.forEach(x -> x.setBookCategory(this));
+        books = new HashSet<>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+        for (Book book : books) {
+            book.setBookCategory(this);
+        }
     }
 }
