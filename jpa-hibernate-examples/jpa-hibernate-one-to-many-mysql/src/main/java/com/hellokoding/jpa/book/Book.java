@@ -11,7 +11,7 @@ public class Book {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "book_category_id", referencedColumnName = "id")
     private BookCategory bookCategory;
 
     public Book() {

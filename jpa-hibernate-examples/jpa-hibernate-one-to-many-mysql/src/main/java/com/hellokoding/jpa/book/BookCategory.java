@@ -4,14 +4,14 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "book_category")
+@Entity(name = "BookCategory")
 @Table(name = "book_category")
 public class BookCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "category_name")
     private String name;
 
     @OneToMany(
