@@ -1,3 +1,5 @@
-# HelloKoding's Practical Coding Courses, Tutorials and Examples Series
+# HelloKoding - Practical Coding Guides
 
-https://hellokoding.com/tag/courses/
+HelloKoding gives you practical coding guides series of Spring Boot, Java, Golang, Algorithms and more
+
+https://hellokoding.com
