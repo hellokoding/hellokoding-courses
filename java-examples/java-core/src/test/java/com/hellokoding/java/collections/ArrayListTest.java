@@ -160,6 +160,8 @@ public class ArrayListTest {
         String getTitle() {
             return title;
         }
+
+
     }
 
     @Test
@@ -175,20 +177,24 @@ public class ArrayListTest {
     }
 
     static class BookFixed {
-        int id;
-        String title;
+        private int id;
+        private String title;
 
-        BookFixed(int id, String title) {
+        public BookFixed(int id, String title) {
             this.id = id;
             this.title = title;
         }
 
-        int getId() {
+        public int getId() {
             return id;
         }
 
-        String getTitle() {
+        public String getTitle() {
             return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
         }
 
         @Override
@@ -197,7 +203,12 @@ public class ArrayListTest {
             if (o == null || getClass() != o.getClass()) return false;
             BookFixed bookFixed = (BookFixed) o;
             return id == bookFixed.id &&
-                    Objects.equals(title, bookFixed.title);
+                Objects.equals(title, bookFixed.title);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, title);
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.hellokoding.jpa;
 
 import com.hellokoding.jpa.book.*;
-import com.hellokoding.springboot.jpa.book.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
