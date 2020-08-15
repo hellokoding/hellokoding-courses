@@ -9,3 +9,5 @@ target
 dump.rdb
 Test.java
 *.log
+config
+.env
