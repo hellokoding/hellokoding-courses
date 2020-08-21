@@ -7,9 +7,66 @@
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width"/>
     <base href="/"/>
+    <style>
+        body {
+            margin: 50px 50px;
+        }
+
+        a {
+            display: block;
+            line-height: 40px;
+        }
+
+        #error {
+            color: red
+        }
+    </style>
 </head>
 <body>
-    <h1>Demo</h1>
-    <div class="container"></div>
+    <h1>Login with OAuth2 / OpenId Connect</h1>
+    <div class="container">
+        <div id="login" style="display:block">
+            <a href="/oauth2/authorization/github">Login with Github</a>
+            <a href="/oauth2/authorization/google">Login with Google</a>
+            <a href="/oauth2/authorization/facebook">Login with Facebook</a>
+            <a href="/oauth2/authorization/okta">Login with Okta</a>
+        </div>
+        <div id="welcome" style="display:none">
+            Welcome <span id="name"></span> | <button onClick="logout()">Logout</button>
+        </div>
+    </div>
+    <script>
+        fetch('/user')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('name').innerText = data.name;
+                document.getElementById('login').style.display = 'none';
+                document.getElementById('welcome').style.display = 'block';
+            })
+            .catch((error) => {
+                console.error('Error: ', error);
+            });
+
+        function logout() {
+            fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
+                    }
+                })
+                .then(() => {
+                    document.getElementById('login').style.display = 'block';
+                    document.getElementById('welcome').style.display = 'none';
+                })
+                .catch((error) => {
+                    console.error('Error: ', error);
+                });
+        }
+
+        function getCookie(name) {
+            var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+            return v ? v[2] : null;
+        }
+    </script>
 </body>
 </html>

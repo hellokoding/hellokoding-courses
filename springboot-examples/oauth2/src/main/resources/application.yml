@@ -1,0 +1,34 @@
+server:
+  port: 8081
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: ${GITHUB_CLIENT_ID}
+            clientSecret: ${GITHUB_CLIENT_SECRET}
+
+          google:
+            clientId: ${GOOGLE_CLIENT_ID}
+            clientSecret: ${GOOGLE_CLIENT_SECRET}
+
+          facebook:
+            clientId: ${FACEBOOK_CLIENT_ID}
+            clientSecret: ${FACEBOOK_CLIENT_SECRET}
+
+          okta:
+            clientId: ${OKTA_CLIENT_ID}
+            clientSecret: ${OKTA_CLIENT_SECRET}
+            clientName: Okta
+
+        provider:
+          okta:
+            issuerUri: ${OKTA_ISSUER_URI}
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
