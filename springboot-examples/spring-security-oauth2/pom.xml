@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hellokoding.springboot</groupId>
-    <artifactId>oauth2</artifactId>
+    <artifactId>spring-security-oauth2</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
