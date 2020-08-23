@@ -23,9 +23,23 @@ spring:
             clientSecret: ${OKTA_CLIENT_SECRET}
             clientName: Okta
 
+          linkedin:
+            clientId: ${LINKEDIN_CLIENT_ID}
+            clientSecret: ${LINKEDIN_CLIENT_SECRET}
+            clientName: LinkedIn
+            authorizationGrantType: authorization_code
+            redirectUri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: r_liteprofile, r_emailaddress
+
         provider:
           okta:
             issuerUri: https://${YOUR_OKTA_SUBDOMAIN:example}.okta.com/oauth2/default
+
+          linkedin:
+            authorizationUri: https://www.linkedin.com/oauth/v2/authorization
+            tokenUri: https://www.linkedin.com/oauth/v2/accessToken
+            userInfoUri: https://api.linkedin.com/v2/me
+            userNameAttribute: id
 
 logging:
   level:
