@@ -40,9 +40,3 @@ spring:
             tokenUri: https://www.linkedin.com/oauth/v2/accessToken
             userInfoUri: https://api.linkedin.com/v2/me
             userNameAttribute: id
-
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
