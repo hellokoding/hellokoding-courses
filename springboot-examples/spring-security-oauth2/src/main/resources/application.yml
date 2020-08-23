@@ -25,7 +25,7 @@ spring:
 
         provider:
           okta:
-            issuerUri: ${OKTA_ISSUER_URI}
+            issuerUri: https://${YOUR_OKTA_SUBDOMAIN:example}.okta.com/oauth2/default
 
 logging:
   level:
