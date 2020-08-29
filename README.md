@@ -1,5 +1,5 @@
 # HelloKoding - Practical Coding Guides
 
-HelloKoding gives you practical coding guides series of Spring Boot, Java, Golang, Algorithms and more
+HelloKoding provides practical coding guides series of Spring Boot, Java, Algorithms and other topics on software engineering
 
 https://hellokoding.com
