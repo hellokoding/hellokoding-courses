@@ -1,0 +1,18 @@
+server:
+  port: 8081
+
+oauth2:
+  client:
+    registration:
+      google:
+        clientId: 913721443262-aefsgfa8s4f31q97kia2kftmklv0bvk3.apps.googleusercontent.com
+        clientSecret: -r3PFhYXtAH6yppGosXyeOfl
+        redirectUri: http://localhost:8081/login/oauth2/code/google
+        scope: email
+        authorizationGrantType: code
+
+    provider:
+      google:
+        authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+        tokenUri: https://oauth2.googleapis.com/token
+        userInfoUri: https://openidconnect.googleapis.com/v1/userinfo
