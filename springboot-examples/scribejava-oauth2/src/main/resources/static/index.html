@@ -22,42 +22,54 @@
                 <a href="/oauth2/authorization/facebook">Login with Facebook</a>
                 <a href="/oauth2/authorization/okta">Login with Okta</a>
                 <a href="/oauth2/authorization/linkedin">Login with LinkedIn</a>
+                <a href="/oauth2/authorization/discord">Login with Discord</a>
             </div>
             <div id="welcome" style="display:none">
                 Welcome <span id="name"></span> | <button onClick="logout()">Logout</button>
             </div>
         </div>
         <script>
-            fetch('/user').then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Something went wrong');
-                }
-            })
-            .then((responseJson) => {
-                document.getElementById('name').innerText = data.name;
-                document.getElementById('login').style.display = 'none';
-                document.getElementById('welcome').style.display = 'block';
-            })
-            .catch((error) => {
-                console.error('Error: ', error);
-            });
+            myFetch('/user')
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong');
+                    }
+                })
+                .then((responseJson) => {
+                    document.getElementById('name').innerText = responseJson.username;
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('welcome').style.display = 'block';
+                })
+                .catch((error) => {
+                    console.error('Error: ', error);
+                });
 
             function logout() {
-                fetch('/logout', {
+                myFetch('/logout', {
                         method: 'POST',
-                        headers: {
-                            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
-                        }
                     })
-                    .then(() => {
-                        document.getElementById('login').style.display = 'block';
-                        document.getElementById('welcome').style.display = 'none';
+                    .then((response) => {
+                        if (response.ok) {
+                            document.getElementById('login').style.display = 'block';
+                            document.getElementById('welcome').style.display = 'none';
+                        } else {
+                            throw new Error('Something went wrong');
+                        }
                     })
                     .catch((error) => {
                         console.error('Error: ', error);
                     });
+            }
+
+            function myFetch(url, options) {
+                var options = {...options};
+                options.headers = {
+                    ...options.headers,
+                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
+                }
+                return fetch(url, options);
             }
 
             function getCookie(name) {

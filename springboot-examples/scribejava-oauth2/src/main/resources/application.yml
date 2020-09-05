@@ -4,15 +4,81 @@ server:
 oauth2:
   client:
     registration:
+      github:
+        clientId: ${GITHUB_CLIENT_ID}
+        clientSecret: ${GITHUB_CLIENT_SECRET}
+        redirectUri: http://localhost:8081/login/oauth2/code/github
+        scope: read:user
+
       google:
-        clientId: 913721443262-aefsgfa8s4f31q97kia2kftmklv0bvk3.apps.googleusercontent.com
-        clientSecret: -r3PFhYXtAH6yppGosXyeOfl
+        clientId: ${GOOGLE_CLIENT_ID}
+        clientSecret: ${GOOGLE_CLIENT_SECRET}
         redirectUri: http://localhost:8081/login/oauth2/code/google
-        scope: email
-        authorizationGrantType: code
+        scope: email profile
+
+      facebook:
+        clientId: ${FACEBOOK_CLIENT_ID}
+        clientSecret: ${FACEBOOK_CLIENT_SECRET}
+        redirectUri: http://localhost:8081/login/oauth2/code/facebook
+        scope: email public_profile
+
+      okta:
+        clientId: ${OKTA_CLIENT_ID}
+        clientSecret: ${OKTA_CLIENT_SECRET}
+        redirectUri: http://localhost:8081/login/oauth2/code/okta
+        scope: openid profile email
+
+      linkedin:
+        clientId: ${LINKEDIN_CLIENT_ID}
+        clientSecret: ${LINKEDIN_CLIENT_SECRET}
+        redirectUri: http://localhost:8081/login/oauth2/code/linkedin
+        scope: r_liteprofile r_emailaddress
+
+      discord:
+        clientId: ${DISCORD_CLIENT_ID}
+        clientSecret: ${DISCORD_CLIENT_SECRET}
+        redirectUri: http://localhost:8081/login/oauth2/code/discord
+        scope: identify email
 
     provider:
+      github:
+        name: github
+        authorizationUri: https://github.com/login/oauth/authorize
+        tokenUri: https://github.com/login/oauth/access_token
+        userInfoUri: https://api.github.com/user
+
       google:
+        name: google
         authorizationUri: https://accounts.google.com/o/oauth2/v2/auth
         tokenUri: https://oauth2.googleapis.com/token
         userInfoUri: https://openidconnect.googleapis.com/v1/userinfo
+        revokeTokenUri: https://oauth2.googleapis.com/revoke
+
+      facebook:
+        name: facebook
+        authorizationUri: https://graph.facebook.com/oauth/authorize
+        tokenUri: https://graph.facebook.com/oauth/access_token
+        userInfoUri: https://graph.facebook.com/me?fields=id,name,email
+        revokePermissionUri: https://graph.facebook.com/{user-id}/permissions
+
+      okta:
+        name: okta
+        authorizationUri: https://${OKTA_SUBDOMAIN}.okta.com/oauth2/default/v1/authorize
+        tokenUri: https://${OKTA_SUBDOMAIN}.okta.com/oauth2/default/v1/token
+        userInfoUri: https://${OKTA_SUBDOMAIN}.okta.com/oauth2/default/v1/userinfo
+        revokeTokenUri: https://${OKTA_SUBDOMAIN}.okta.com/oauth2/default/v1/revoke
+
+      linkedin:
+        name: linkedin
+        authorizationUri: https://www.linkedin.com/oauth/v2/authorization
+        tokenUri: https://www.linkedin.com/oauth/v2/accessToken
+        userInfoUri: https://api.linkedin.com/v2/me
+        userNameAttribute: localizedFirstName
+
+      discord:
+        name: discord
+        authorizationUri: https://discord.com/api/oauth2/authorize
+        tokenUri: https://discord.com/api/oauth2/token
+        userInfoUri: https://discord.com/api/users/@me
+        revokeTokenUri: https://discord.com/api/oauth2/token/revoke
+        userNameAttribute: username

@@ -1,12 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>Login with OAuth2 / OpenId Connect</title>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width"/>
-    <base href="/"/>
     <style>
         body {
             margin: 50px 50px;
@@ -15,10 +10,6 @@
         a {
             display: block;
             line-height: 40px;
-        }
-
-        #error {
-            color: red
         }
     </style>
 </head>
@@ -38,7 +29,13 @@
     </div>
     <script>
         fetch('/user')
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong');
+                }
+            })
             .then(data => {
                 document.getElementById('name').innerText = data.name;
                 document.getElementById('login').style.display = 'none';
@@ -55,9 +52,13 @@
                         'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
                     }
                 })
-                .then(() => {
-                    document.getElementById('login').style.display = 'block';
-                    document.getElementById('welcome').style.display = 'none';
+                .then((response) => {
+                    if (response.ok) {
+                        document.getElementById('login').style.display = 'block';
+                        document.getElementById('welcome').style.display = 'none';
+                    } else {
+                        throw new Error('Something went wrong');
+                    }
                 })
                 .catch((error) => {
                     console.error('Error: ', error);
