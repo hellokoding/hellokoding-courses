@@ -13,27 +13,23 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class UserSessionInRedis implements UserSession {
+public class UserSessionInRedis {
     private final RedisTemplate<String, Object> redisTemplate;
     private final HttpServletRequest httpServletRequest;
     private final HttpServletResponse httpServletResponse;
 
-    @Override
     public void put(String key, Object value, Duration timeout) {
         redisTemplate.opsForValue().set(buildSessionKey(key), value, timeout);
     }
 
-    @Override
     public void put(String key, Object value) {
         redisTemplate.opsForValue().set(buildSessionKey(key), value);
     }
 
-    @Override
     public Object get(String key) {
         return redisTemplate.opsForValue().get(buildSessionKey(key));
     }
 
-    @Override
     public void invalidate() {
         Set<String> keys = redisTemplate.keys(httpServletRequest.getSession().getId().concat("*"));
         for (String key : keys) {

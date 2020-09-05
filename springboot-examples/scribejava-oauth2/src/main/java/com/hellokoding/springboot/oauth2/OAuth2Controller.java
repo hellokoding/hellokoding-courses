@@ -28,7 +28,7 @@ import java.util.concurrent.ExecutionException;
 public class OAuth2Controller {
     private final OAuth2ServiceFactory oAuth2ServiceFactory;
     private final ObjectMapper objectMapper;
-    private final UserSession userSession;
+    private final UserSessionInRedis userSession;
     private final HttpServletResponse httpServletResponse;
 
     private static final String KEY_USER = "user";
