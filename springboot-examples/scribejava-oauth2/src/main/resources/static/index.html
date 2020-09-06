@@ -29,7 +29,7 @@
             </div>
         </div>
         <script>
-            myFetch('/user')
+            fetch('/user')
                 .then((response) => {
                     if (response.ok) {
                         return response.json();
@@ -47,8 +47,11 @@
                 });
 
             function logout() {
-                myFetch('/logout', {
+                fetch('/logout', {
                         method: 'POST',
+                        headers: {
+                            'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
+                        }
                     })
                     .then((response) => {
                         if (response.ok) {
@@ -61,15 +64,6 @@
                     .catch((error) => {
                         console.error('Error: ', error);
                     });
-            }
-
-            function myFetch(url, options) {
-                var options = {...options};
-                options.headers = {
-                    ...options.headers,
-                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
-                }
-                return fetch(url, options);
             }
 
             function getCookie(name) {
