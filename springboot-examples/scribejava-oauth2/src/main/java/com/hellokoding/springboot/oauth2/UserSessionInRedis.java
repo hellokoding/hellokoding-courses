@@ -22,10 +22,6 @@ public class UserSessionInRedis {
         redisTemplate.opsForValue().set(buildSessionKey(key), value, timeout);
     }
 
-    public void put(String key, Object value) {
-        redisTemplate.opsForValue().set(buildSessionKey(key), value);
-    }
-
     public Object get(String key) {
         return redisTemplate.opsForValue().get(buildSessionKey(key));
     }
