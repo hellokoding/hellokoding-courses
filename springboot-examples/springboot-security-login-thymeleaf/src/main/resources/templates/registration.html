@@ -13,18 +13,18 @@
 
         <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/registration}">
             <h2 class="form-signin-heading">Create your account</h2>
-            <div class="form-group ${status.error ? 'has-error' : ''}">
+            <div class="form-group">
                 <input type="text" th:field="*{username}" class="form-control" placeholder="Username"
                        autofocus="true">
                 <span class="has-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
             </div>
 
-            <div class="form-group ${status.error ? 'has-error' : ''}">
+            <div class="form-group">
                 <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
                 <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
             </div>
 
-            <div class="form-group ${status.error ? 'has-error' : ''}">
+            <div class="form-group">
                 <input type="password" th:field="*{passwordConfirm}" class="form-control"
                             placeholder="Confirm your password">
                 <span class="has-error" th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}"></span>
