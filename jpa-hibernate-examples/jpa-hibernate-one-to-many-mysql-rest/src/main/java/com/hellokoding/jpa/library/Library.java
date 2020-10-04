@@ -1,6 +1,6 @@
 package com.hellokoding.jpa.library;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hellokoding.jpa.book.Book;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ public class Library {
     private String name;
 
     @OneToMany(mappedBy = "library")
-    @JsonIgnoreProperties("library")
+    @JsonIgnore
     private Set<Book> books;
 
     public Library() {
