@@ -1,5 +1,6 @@
 package com.hellokoding.jpa.book;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.hellokoding.jpa.library.Library;
 
 import javax.persistence.*;
@@ -17,8 +18,9 @@ public class Book {
     private String name;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "library_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Library library;
 
     public Book() {
