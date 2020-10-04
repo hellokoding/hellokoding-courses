@@ -7,8 +7,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.Optional;
 
 @RestController
@@ -32,7 +34,11 @@ public class BookController {
 
         book.setLibrary(optionalLibrary.get());
 
-        return ResponseEntity.ok(bookRepository.save(book));
+        Book savedBook = bookRepository.save(book);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+            .buildAndExpand(savedBook.getId()).toUri();
+
+        return ResponseEntity.created(location).body(savedBook);
     }
 
     @PutMapping("/{id}")
@@ -50,7 +56,7 @@ public class BookController {
         book.setLibrary(optionalLibrary.get());
         book.setId(optionalBook.get().getId());
 
-        return ResponseEntity.ok(bookRepository.save(book));
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
@@ -66,7 +72,7 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> get(@PathVariable Integer id) {
+    public ResponseEntity<Book> getById(@PathVariable Integer id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
         if (!optionalBook.isPresent()) {
             return ResponseEntity.unprocessableEntity().build();

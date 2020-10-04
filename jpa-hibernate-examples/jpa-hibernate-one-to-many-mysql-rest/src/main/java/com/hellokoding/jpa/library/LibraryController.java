@@ -1,25 +1,36 @@
 package com.hellokoding.jpa.library;
 
+import com.hellokoding.jpa.book.Book;
+import com.hellokoding.jpa.book.BookRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/libraries")
 public class LibraryController {
     private final LibraryRepository libraryRepository;
+    private final BookRepository bookRepository;
 
-    public LibraryController(LibraryRepository libraryRepository) {
+    public LibraryController(LibraryRepository libraryRepository, BookRepository bookRepository) {
         this.libraryRepository = libraryRepository;
+        this.bookRepository = bookRepository;
     }
 
     @PostMapping("/")
     public ResponseEntity<Library> create(@Valid @RequestBody Library library) {
-        return ResponseEntity.ok(libraryRepository.save(library));
+        Library savedLibrary = libraryRepository.save(library);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+            .buildAndExpand(savedLibrary.getId()).toUri();
+
+        return ResponseEntity.created(location).body(savedLibrary);
     }
 
     @PutMapping("/{id}")
@@ -31,7 +42,7 @@ public class LibraryController {
 
         library.setId(optionalLibrary.get().getId());
 
-        return ResponseEntity.ok(libraryRepository.save(library));
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
@@ -47,13 +58,18 @@ public class LibraryController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Library> get(@PathVariable Integer id) {
+    public ResponseEntity<Library> getById(@PathVariable Integer id) {
         Optional<Library> optionalLibrary = libraryRepository.findById(id);
         if (!optionalLibrary.isPresent()) {
             return ResponseEntity.unprocessableEntity().build();
         }
 
         return ResponseEntity.ok(optionalLibrary.get());
+    }
+
+    @GetMapping("/{id}/books")
+    public ResponseEntity<List<Book>> getAllBooksById(@PathVariable Integer id, Pageable pageable) {
+        return ResponseEntity.ok(bookRepository.findByLibraryId(id, pageable));
     }
 
     @GetMapping("/")

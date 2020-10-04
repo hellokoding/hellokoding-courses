@@ -1,23 +1,24 @@
 package com.hellokoding.jpa.book;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hellokoding.jpa.library.Library;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotNull
+    @Column(name = "name")
     private String name;
 
     @NotNull
     @ManyToOne
-    @JsonIgnoreProperties("books")
+    @JoinColumn(name = "library_id")
     private Library library;
 
     public Book() {
@@ -49,6 +50,5 @@ public class Book {
 
     public void setLibrary(Library library) {
         this.library = library;
-        library.getBooks().add(this);
     }
 }
