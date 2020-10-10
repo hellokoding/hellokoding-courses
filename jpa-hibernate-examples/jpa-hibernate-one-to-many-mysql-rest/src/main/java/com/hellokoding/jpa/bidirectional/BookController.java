@@ -1,7 +1,5 @@
-package com.hellokoding.jpa.book;
+package com.hellokoding.jpa.bidirectional;
 
-import com.hellokoding.jpa.library.Library;
-import com.hellokoding.jpa.library.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +23,7 @@ public class BookController {
         this.libraryRepository = libraryRepository;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Book> create(@RequestBody @Valid Book book) {
         Optional<Library> optionalLibrary = libraryRepository.findById(book.getLibrary().getId());
         if (!optionalLibrary.isPresent()) {
@@ -55,6 +53,7 @@ public class BookController {
 
         book.setLibrary(optionalLibrary.get());
         book.setId(optionalBook.get().getId());
+        bookRepository.save(book);
 
         return ResponseEntity.noContent().build();
     }
@@ -71,6 +70,11 @@ public class BookController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping
+    public ResponseEntity<Page<Book>> getAll(Pageable pageable) {
+        return ResponseEntity.ok(bookRepository.findAll(pageable));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Book> getById(@PathVariable Integer id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
@@ -79,10 +83,5 @@ public class BookController {
         }
 
         return ResponseEntity.ok(optionalBook.get());
-    }
-
-    @GetMapping("/")
-    public ResponseEntity<Page<Book>> getAll(Pageable pageable) {
-        return ResponseEntity.ok(bookRepository.findAll(pageable));
     }
 }

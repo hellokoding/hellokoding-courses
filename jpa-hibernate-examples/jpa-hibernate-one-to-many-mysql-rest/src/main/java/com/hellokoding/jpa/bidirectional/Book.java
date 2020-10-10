@@ -1,13 +1,11 @@
-package com.hellokoding.jpa.book;
+package com.hellokoding.jpa.bidirectional;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.hellokoding.jpa.library.Library;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,18 +15,10 @@ public class Book {
     @Column(name = "name")
     private String name;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "library_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Library library;
-
-    public Book() {
-    }
-
-    public Book(String name) {
-        this.name = name;
-    }
 
     public int getId() {
         return id;

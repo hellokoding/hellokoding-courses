@@ -1,4 +1,4 @@
-package com.hellokoding.jpa.library;
+package com.hellokoding.jpa.unidirectional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.hellokoding.jpa.library;
+package com.hellokoding.jpa.unidirectional;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
