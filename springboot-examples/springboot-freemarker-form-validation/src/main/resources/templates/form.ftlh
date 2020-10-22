@@ -8,9 +8,7 @@
         <link href="/css/main.css" rel="stylesheet">
     </head>
     <body>
-        <h2>Form Data Binding and Validation</h2>
-
-        <@spring.bind "user"/>
+        <h1>Form Data Validation and Binding</h1>
         <#if user?? && noErrors??>
             Your submitted data<br>
             First name: ${user.firstName}<br>
