@@ -8,7 +8,7 @@ import java.util.Set;
 public class Book{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     private String name;
 
@@ -23,11 +23,11 @@ public class Book{
         bookPublishers = new HashSet<>();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

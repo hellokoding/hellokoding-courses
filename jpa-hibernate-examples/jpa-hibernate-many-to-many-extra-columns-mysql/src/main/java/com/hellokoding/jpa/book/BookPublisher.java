@@ -12,15 +12,17 @@ import java.util.Objects;
 @NoArgsConstructor
 
 @Entity
-public class BookPublisher implements Serializable {
+public class BookPublisher {
     @Id
-    @ManyToOne
-    @JoinColumn
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "book_id")
     private Book book;
 
-    @Id
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
     private Date publishedDate;
