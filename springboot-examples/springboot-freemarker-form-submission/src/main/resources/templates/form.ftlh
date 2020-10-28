@@ -2,25 +2,26 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Form example with Java, Spring Boot, FreeMarker</title>
+        <title>Spring Boot Form Submission</title>
         <link href="/css/main.css" rel="stylesheet">
     </head>
     <body>
-        <h2>Handling Form Submission example with Java, Spring Boot, FreeMarker</h2>
+        <h1>Spring Boot Form Submission</h1>
         <#if user?? >
-        Your submitted data<br>
-        First name: ${user.firstName}<br>
-        Last name: ${user.lastName}<br>
+            Your submitted data<br>
+            Name: ${user.name}<br>
+            Message: ${user.message}<br>
         <#else>
-        <form action="/form" method="post">
-            First name:<br>
-            <input type="text" name="firstName">
-            <br><br>
-            Last name:<br>
-            <input type="text" name="lastName">
-            <br><br>
-            <input type="submit" value="Submit">
-        </form>
+            <form action="/form" method="post">
+                <div>Name:</div>
+                <input type="text" name="name"/>
+                <br/><br/>
+                <div>Message:</div>
+                <textarea rows="2" name="message"></textarea>
+                <br/><br/>
+                <input type="submit" value="Submit"/>
+                <input type="reset" value="Reset"/>
+            </form>
         </#if>
         <script src="/js/main.js"></script>
     </body>
