@@ -20,6 +20,7 @@ public class DP_LongestCommonSubsequence {
     }
 
     public static void main(String[] args) {
+        System.out.println(lengthOfLongestCommonSubsequence("ABCD", "ACBAD"));
         System.out.println(lengthOfLongestCommonSubsequence("XMJYAUZ", "MZJAWXU"));
     }
 }

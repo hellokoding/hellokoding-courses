@@ -55,9 +55,14 @@ public class MyDoublyLinkedList {
         myLinkedList.addFirst(9);
         myLinkedList.traversal();
 
+        System.out.println("Traverse all elements");
+        myLinkedList.traversal();
+
+        System.out.println("Remove first node");
         myLinkedList.removeFirst();
         myLinkedList.traversal();
 
+        System.out.println("Remove last node");
         myLinkedList.removeLast();
         myLinkedList.traversal();
     }

@@ -5,13 +5,13 @@ import com.hellokoding.datastructure.BSTByLinkedList;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
-public class TreeBreadthFirstTraversal extends BSTByLinkedList {
-    void breadthFirstTraversal(Node root) {
-        Queue<Node> queue = new ArrayDeque<>();
+public class TreeBreadthFirstTraversal {
+    static void breadthFirstTraversal(BSTByLinkedList.Node root) {
+        Queue<BSTByLinkedList.Node> queue = new ArrayDeque<>();
         queue.offer(root);
 
         while (!queue.isEmpty()) {
-            Node currentNode = queue.poll();
+            BSTByLinkedList.Node currentNode = queue.poll();
             System.out.println(currentNode);
 
             if (currentNode.left != null)
@@ -23,13 +23,13 @@ public class TreeBreadthFirstTraversal extends BSTByLinkedList {
     }
 
     public static void main(String[] args) {
-        TreeBreadthFirstTraversal tree = new TreeBreadthFirstTraversal();
+        BSTByLinkedList tree = new BSTByLinkedList();
         tree.insert(7);
         tree.insert(2);
         tree.insert(3);
         tree.insert(1);
         tree.insert(9);
 
-        tree.breadthFirstTraversal(tree.root);
+        breadthFirstTraversal(tree.root);
     }
 }

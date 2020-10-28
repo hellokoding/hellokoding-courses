@@ -1,22 +1,22 @@
 package com.hellokoding.algorithm;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class AnagramsByHistogramming {
     static boolean areAnagrams(String s, String t) {
         if (s.length() != t.length()) {
             return false;
         }
 
-        s = s.replaceAll("\\s", "");
-        t = t.replaceAll("\\s", "");
-
-        int[] frequencies = new int[26];
+        Map<Character, Integer> histogram = new HashMap<>();
 
         for (int i = 0; i < s.length(); i++) {
-            frequencies[s.charAt(i) - 'a']++;
-            frequencies[t.charAt(i) - 'a']--;
+            histogram.compute(s.charAt(i), (k,v) -> (v == null ? 0 : v) + 1);
+            histogram.compute(t.charAt(i), (k,v) -> (v == null ? 0 : v) - 1);
         }
 
-        for (int count : frequencies) {
+        for (int count : histogram.values()) {
             if (count != 0) {
                 return false;
             }

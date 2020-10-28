@@ -66,11 +66,15 @@ public class MyLinkedList {
         myLinkedList.addLast(2);
         myLinkedList.addLast(6);
         myLinkedList.addFirst(9);
+
+        System.out.println("Traverse all elements");
         myLinkedList.traversal();
 
+        System.out.println("Remove first node");
         myLinkedList.removeFirst();
         myLinkedList.traversal();
 
+        System.out.println("Remove last node");
         myLinkedList.removeLast();
         myLinkedList.traversal();
     }
