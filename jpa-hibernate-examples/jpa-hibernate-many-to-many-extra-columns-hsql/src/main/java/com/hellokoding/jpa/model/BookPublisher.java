@@ -1,47 +1,36 @@
 package com.hellokoding.jpa.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
+@Getter @Setter @NoArgsConstructor
 @Entity
 @Table(name = "book_publisher")
-public class BookPublisher implements Serializable{
-    @Id
+public class BookPublisher {
+    @EmbeddedId
+    private BookPublisherId id;
+
     @ManyToOne
+    @MapsId("bookId")
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Id
     @ManyToOne
+    @MapsId("publisherId")
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
     @Column(name = "published_date")
     private Date publishedDate;
 
-    public Book getBook() {
-        return book;
-    }
-
-    public void setBook(Book book) {
+    public BookPublisher(Book book, Publisher publisher, Date publishedDate) {
+        this.id = new BookPublisherId(book.getId(), publisher.getId());
         this.book = book;
-    }
-
-
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
-    }
-
-    public Date getPublishedDate() {
-        return publishedDate;
-    }
-
-    public void setPublishedDate(Date publishedDate) {
         this.publishedDate = publishedDate;
     }
 }

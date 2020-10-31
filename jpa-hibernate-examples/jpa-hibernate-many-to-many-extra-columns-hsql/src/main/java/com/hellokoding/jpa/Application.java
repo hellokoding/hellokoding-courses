@@ -3,27 +3,24 @@ package com.hellokoding.jpa;
 import com.hellokoding.jpa.model.Book;
 import com.hellokoding.jpa.model.BookPublisher;
 import com.hellokoding.jpa.model.Publisher;
+import com.hellokoding.jpa.repository.BookPublisherRepository;
 import com.hellokoding.jpa.repository.BookRepository;
 import com.hellokoding.jpa.repository.PublisherRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.Date;
 
+@RequiredArgsConstructor
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
-    @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
-    private PublisherRepository publisherRepository;
+    private final BookRepository bookRepository;
+    private final PublisherRepository publisherRepository;
+    private final BookPublisherRepository bookPublisherRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -32,28 +29,18 @@ public class Application implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... strings) throws Exception {
-        // create new
-        Book bookA = new Book("Book A");
-        Publisher publisherA = new Publisher("Publisher A");
+        Book b1 = new Book("Spring Boot");
+        Book b2 = new Book("Spring Data JPA");
+        bookRepository.saveAll(Arrays.asList(b1, b2));
 
-        BookPublisher bookPublisher = new BookPublisher();
-        bookPublisher.setBook(bookA);
-        bookPublisher.setPublisher(publisherA);
-        bookPublisher.setPublishedDate(new Date());
+        Publisher p1 = new Publisher("HelloKoding 1");
+        Publisher p2 = new Publisher("HelloKoding 2");
+        publisherRepository.saveAll(Arrays.asList(p1, p2));
 
-        bookA.getBookPublishers().add(bookPublisher);
-
-        publisherRepository.save(publisherA);
-        bookRepository.save(bookA);
-
-        // test
-        System.out.println(bookA.getBookPublishers().size());
-
-        // update
-        bookA.getBookPublishers().remove(bookPublisher);
-        bookRepository.save(bookA);
-
-        // test
-        System.out.println(bookA.getBookPublishers().size());
+        BookPublisher bp1 = new BookPublisher(b1, p1, new Date());
+        BookPublisher bp2 = new BookPublisher(b1, p2, new Date());
+        BookPublisher bp3 = new BookPublisher(b2, p1, new Date());
+        BookPublisher bp4 = new BookPublisher(b2, p2, new Date());
+        bookPublisherRepository.saveAll(Arrays.asList(bp1, bp2, bp3, bp4));
     }
 }
