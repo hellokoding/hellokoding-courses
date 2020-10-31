@@ -1,41 +1,37 @@
 package com.hellokoding.jpa;
 
-import com.hellokoding.jpa.model.Book;
-import com.hellokoding.jpa.model.BookDetail;
-import com.hellokoding.jpa.repository.BookRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.hellokoding.jpa.model.IDCard;
+import com.hellokoding.jpa.model.Person;
+import com.hellokoding.jpa.repository.IDCardRepository;
+import com.hellokoding.jpa.repository.PersonRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
+import java.util.Arrays;
 
+@RequiredArgsConstructor
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
-    @Autowired
-    private BookRepository bookRepository;
+    private final IDCardRepository idCardRepository;
+    private final PersonRepository personRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Override
-    public void run(String... strings) throws Exception {
-        // save a couple of books
-        List<Book> books = new ArrayList<>();
-        books.add(new Book("Book A", new BookDetail(49)));
-        books.add(new Book("Book B", new BookDetail(59)));
-        books.add(new Book("Book C", new BookDetail(69)));
-        bookRepository.saveAll(books);
+    @Transactional
+    public void run(String... strings) {
+        Person p1 = new Person("Tom");
+        Person p2 = new Person("Daisy");
+        Person p3 = new Person("Alex");
+        personRepository.saveAll(Arrays.asList(p1, p2, p3));
 
-        // fetch all books
-        for (Book book : bookRepository.findAll()) {
-            logger.info(book.toString());
-        }
+        idCardRepository.save(new IDCard(p1));
+        idCardRepository.save(new IDCard(p2));
+        idCardRepository.save(new IDCard(p3));
     }
 }

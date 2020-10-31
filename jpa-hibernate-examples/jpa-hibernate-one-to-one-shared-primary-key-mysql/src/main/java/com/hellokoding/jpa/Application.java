@@ -17,7 +17,7 @@ public class Application implements CommandLineRunner {
     private PersonRepository personRepository;
 
     public static void main(String[] args) {
-        SpringApplication.run(com.hellokoding.jpa.Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
     @Override
