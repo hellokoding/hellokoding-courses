@@ -31,16 +31,17 @@ public class DeletingDataTest {
     }
 
     @Test
-    public void whenDeleteByJPQL_thenSuccess() {
+    public void whenDeleteAssociatedEntitiesByCascadeType_thenSuccess() {
         // when
-        bookRepository.deleteByCategoryId(givenCategoryId);
+        Category category = categoryRepository.findById(givenCategoryId).get();
+        categoryRepository.delete(category);
 
         // then
         assertThat(bookRepository.findByCategoryId(givenCategoryId)).hasSize(0);
     }
 
     @Test
-    public void whenDeleteByOrphanRemoval_thenSuccess() {
+    public void whenDeleteAssociatedEntitiesByOrphanRemoval_thenSuccess() {
         // when
         Category category = categoryRepository.findById(givenCategoryId).get();
         Book book = category.getBooks().iterator().next();
@@ -53,10 +54,9 @@ public class DeletingDataTest {
     }
 
     @Test
-    public void whenDeleteByCascadeType_thenSuccess() {
+    public void whenDeleteAssociatedEntitiesByJPQL_thenSuccess() {
         // when
-        Category category = categoryRepository.findById(givenCategoryId).get();
-        categoryRepository.delete(category);
+        bookRepository.deleteByCategoryId(givenCategoryId);
 
         // then
         assertThat(bookRepository.findByCategoryId(givenCategoryId)).hasSize(0);
