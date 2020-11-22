@@ -3,11 +3,14 @@ package com.hellokoding.jpa.customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Getter @Setter @NoArgsConstructor
@@ -26,6 +29,12 @@ public class Card {
     private Customer customer;
 
     private Boolean deleted;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public Card(Integer cardNumber, String type) {
         this.cardNumber = cardNumber;
