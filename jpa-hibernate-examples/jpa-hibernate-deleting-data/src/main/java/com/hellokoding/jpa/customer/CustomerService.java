@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,5 +38,13 @@ public class CustomerService {
 
     public void deleteByIdWithJPQL(Integer id) {
         customerRepository.deleteByIdWithJPQL(id);
+    }
+
+    public List<Customer> findTop10() {
+        List<Customer> customerIds = customerRepository.findTop10By();
+
+        return customerRepository.findAllByIdIsIn(
+            customerIds.stream().map(Customer::getId).collect(Collectors.toList())
+        );
     }
 }

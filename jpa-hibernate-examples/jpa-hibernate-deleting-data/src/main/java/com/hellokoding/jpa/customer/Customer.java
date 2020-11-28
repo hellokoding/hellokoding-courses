@@ -3,8 +3,11 @@ package com.hellokoding.jpa.customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,7 +16,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Getter @Setter @NoArgsConstructor
+@Getter @Setter @NoArgsConstructor @ToString(exclude = "cards")
+@SQLDelete(sql = "UPDATE Customer SET deleted = 1 WHERE id = ?")
+@Where(clause = "deleted = 0")
 @Entity
 public class Customer {
     @Id

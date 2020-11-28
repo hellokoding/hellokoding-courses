@@ -10,6 +10,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 import static com.hellokoding.jpa.customer.Card.MASTER;
 import static com.hellokoding.jpa.customer.Card.VISA;
 
@@ -23,10 +26,10 @@ public class JpaApplication {
     @Bean
     public CommandLineRunner runner(CustomerService customerService, CardService cardService) {
         return r -> {
-            log.info("Soft deleting...");
+            log.info("Soft deleting manually...");
             Customer custA = customerService.save(new Customer("A",
-                new Card(123, VISA),
-                new Card(213, MASTER)));
+            new Card(123, VISA),
+            new Card(213, MASTER)));
             customerService.softDelete(custA.getId());
 
             log.info("Deleting data with CascadeType...");
@@ -53,6 +56,20 @@ public class JpaApplication {
                 new Card(217, MASTER)));
             cardService.deleteByCustomerId(custE.getId());
             customerService.deleteByIdWithJPQL(custE.getId());
+
+            customerService.save(new Customer("F",
+                new Card(128, VISA),
+                new Card(218, MASTER)));
+
+            log.info("Find top 10 customers");
+            List<Customer> customers = customerService.findTop10();
+            for (Customer customer : customers) {
+                log.info(customer.toString());
+
+                for (Card card : customer.getCards()) {
+                    log.info(card.toString());
+                }
+            }
         };
     }
 }
