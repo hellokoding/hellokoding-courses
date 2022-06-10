@@ -1,25 +1,30 @@
 package com.hellokoding.algorithm;
 
 import com.hellokoding.datastructure.BSTByLinkedList;
-
-import java.util.ArrayDeque;
-import java.util.Queue;
+import java.util.*;
 
 public class TreeBreadthFirstTraversal {
-    static void breadthFirstTraversal(BSTByLinkedList.Node root) {
-        Queue<BSTByLinkedList.Node> queue = new ArrayDeque<>();
+    List<List<Integer>> res = new ArrayList<>();
+    public List<List<Integer>> levelOrderTraversal(BSTByLinkedList.Node root) {
+        if (root == null) return res;
+
+        Deque<BSTByLinkedList.Node> queue = new ArrayDeque<>();
         queue.offer(root);
 
         while (!queue.isEmpty()) {
-            BSTByLinkedList.Node currentNode = queue.poll();
-            System.out.println(currentNode);
+            List<Integer> level = new ArrayList<>();
 
-            if (currentNode.left != null)
-                queue.offer(currentNode.left);
+            int size = queue.size();
+            for (int i=0; i<size; i++) {
+                root = queue.remove(); level.add(root.data);
+                if (root.left != null) queue.add(root.left);
+                if (root.right != null) queue.add(root.right);
+            }
 
-            if (currentNode.right != null)
-                queue.offer(currentNode.right);
+            res.add(level);
         }
+
+        return res;
     }
 
     public static void main(String[] args) {
@@ -29,7 +34,7 @@ public class TreeBreadthFirstTraversal {
         tree.insert(3);
         tree.insert(1);
         tree.insert(9);
-
-        breadthFirstTraversal(tree.root);
+        List<List<Integer>> result = new TreeBreadthFirstTraversal().levelOrderTraversal(tree.root);
+        System.out.println(Arrays.deepToString(result.toArray()));
     }
 }
