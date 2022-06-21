@@ -14,7 +14,7 @@
         <io.prometheus.simpleclient.version>0.6.0</io.prometheus.simpleclient.version>
         <com.github.strengthened.version>1.0.0</com.github.strengthened.version>
         <org.eclipse.jetty.version>8.1.7.v20120910</org.eclipse.jetty.version>
-        <mysql.version>5.1.47</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <maven.complier.version>3.1</maven.complier.version>
     </properties>
 
